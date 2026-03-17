@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>M@jestiOS — Chat</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body style="height: 100vh; display: flex; flex-direction: column;">
+    <div class="aura"></div>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo-text">M@jest<span class="ios-highlight">iOS</span></a>
+            <a href="pricing.html" style="color: #aaa; text-decoration: none;">Améliorer mon plan</a>
+        </div>
+    </nav>
+    <div id="chat-display" style="flex: 1; padding: 100px 20px 120px; max-width: 800px; margin: 0 auto; width: 100%; overflow-y: auto;">
+        <div class="card" style="text-align: center; color: #9ca3af; margin-bottom: 20px;">
+            Comment puis-je vous aider aujourd'hui ?
+        </div>
+    </div>
+    <div style="position: fixed; bottom: 30px; width: 100%; padding: 0 20px; box-sizing: border-box;">
+        <div style="max-width: 800px; margin: 0 auto; background: #1a1a1a; border: 1px solid #333; border-radius: 15px; padding: 10px 20px; display: flex; align-items: center;">
+            <input type="text" id="user-input" placeholder="Posez votre question..." style="flex: 1; background: transparent; border: none; color: white; outline: none; font-size: 1rem; padding: 10px;">
+            <button id="send-btn" style="background: var(--primary); border: none; color: white; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: bold;">➔</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

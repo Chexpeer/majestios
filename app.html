@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>M@jestiOS – Chat multi‑IA</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .app-shell {
+      display: grid;
+      grid-template-columns: 260px minmax(0, 1fr);
+      gap: 16px;
+      margin-top: 24px;
+    }
+    .sidebar {
+      background: var(--card);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .sidebar-section-title {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+    .model-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .model-item {
+      padding: 8px 10px;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      font-size: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+    }
+    .model-item.active {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+    }
+    .model-item span {
+      color: var(--muted);
+    }
+    .workspace-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 12px;
+    }
+    .workspace-item {
+      padding: 7px 9px;
+      border-radius: 9px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      cursor: pointer;
+    }
+    .workspace-item.active {
+      border-color: var(--accent);
+      background: rgba(123, 92, 255, 0.12);
+    }
+    .chat-panel {
+      background: var(--card);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      min-height: 70vh;
+    }
+    .chat-header {
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+    }
+    .chat-header-left {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .chat-header-title {
+      font-weight: 500;
+    }
+    .chat-header-sub {
+      font-size: 11px;
+      color: var(--muted);
+    }
+    .chat-header-tags {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .chat-messages {
+      flex: 1;
+      padding: 14px;
+      overflow-y: auto;
+      font-size: 13px;
+    }
+    .msg {
+      margin-bottom: 10px;
+      max-width: 80%;
+    }
+    .msg-user {
+      margin-left: auto;
+      text-align: right;
+    }
+    .msg-bubble {
+      display: inline-block;
+      padding: 8px 10px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.06);
+    }
+    .msg-user .msg-bubble {
+      background: linear-gradient(135deg, #7b5cff, #a88bff);
+    }
+    .msg-meta {
+      font-size: 10px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+    .chat-input {
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 10px 12px;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .chat-input textarea {
+      flex: 1;
+      resize: none;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(5, 5, 16, 0.9);
+      color: var(--text);
+      font-family: var(--font-sans);
+      font-size: 13px;
+      padding: 8px 10px;
+      min-height: 40px;
+      max-height: 120px;
+    }
+    .chat-input button {
+      white-space: nowrap;
+    }
+    @media (max-width: 900px) {
+      .app-shell {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="nav-left">
+      <div class="logo-mark"></div>
+      <div class="logo-text">
+        <div class="logo-title">M@jestiOS</div>
+        <div class="logo-sub">Chat multi‑IA</div>
+      </div>
+    </div>
+    <nav class="main-nav">
+      <a href="index.html">Accueil</a>
+      <a href="features.html">Fonctionnalités</a>
+      <a href="pricing.html">Tarifs</a>
+      <a href="about.html">À propos</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="support.html" class="btn btn-outline">Support</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <h1 class="page-title">Chat multi‑IA</h1>
+      <p class="page-subtitle">
+        Interface de démonstration.  
+        Ici, vous orchestrerez GPT‑4, Claude, Gemini, Mistral dans un seul espace.
+      </p>
+    </section>
+
+    <section class="app-shell">
+      <aside class="sidebar">
+        <div>
+          <div class="sidebar-section-title">IA</div>
+          <div class="model-list">
+            <div class="model-item active">
+              <span>GPT‑4</span>
+              <span>Analyse</span>
+            </div>
+            <div class="model-item">
+              <span>Claude</span>
+              <span>Rédaction</span>
+            </div>
+            <div class="model-item">
+              <span>Gemini</span>
+              <span>Recherche</span>
+            </div>
+            <div class="model-item">
+              <span>Mistral</span>
+              <span>Rapide</span>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="sidebar-section-title">Workspaces</div>
+          <div class="workspace-list">
+            <div class="workspace-item active">Lancement produit</div>
+            <div class="workspace-item">Branding & naming</div>
+            <div class="workspace-item">Architecture technique</div>
+            <div class="workspace-item">Formation interne</div>
+          </div>
+        </div>
+      </aside>
+
+      <section class="chat-panel">
+        <div class="chat-header">
+          <div class="chat-header-left">
+            <div class="chat-header-title">Session multi‑IA</div>
+            <div class="chat-header-sub">Orchestrez plusieurs intelligences dans un seul flux.</div>
+          </div>
+          <div class="chat-header-tags">
+            <span class="tag">Mode Expert</span>
+            <span class="tag">Workspace : Lancement produit</span>
+          </div>
+        </div>
+        <div class="chat-messages">
+          <div class="msg">
+            <div class="msg-bubble">
+              Bonjour, je suis M@jestiOS.  
+              Décrivez-moi votre projet, et nous choisirons ensemble quelles IA mobiliser.
+            </div>
+            <div class="msg-meta">Système • Multi‑IA</div>
+          </div>
+          <div class="msg msg-user">
+            <div class="msg-bubble">
+              Je veux lancer un nouveau produit digital et structurer toute la stratégie avec l’IA.
+            </div>
+            <div class="msg-meta">Vous</div>
+          </div>
+        </div>
+        <div class="chat-input">
+          <textarea placeholder="Écrivez votre message, votre idée, votre problème…"></textarea>
+          <button class="btn btn-primary">Envoyer</button>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div>© M@jestiOS.</div>
+    <div class="footer-links">
+      <a href="support.html">Support</a>
+      <a href="faq.html">FAQ</a>
+    </div>
+  </footer>
+</body>
+</html>
