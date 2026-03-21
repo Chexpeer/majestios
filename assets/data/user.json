@@ -1,0 +1,8 @@
+{
+  "user": {
+    "id": "local-user",
+    "name": "Utilisateur",
+    "email": "",
+    "plan": "free"
+  }
+}

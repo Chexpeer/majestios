@@ -1,0 +1,10 @@
+{
+  "workspaces": [
+    {
+      "id": "default",
+      "name": "Personnel",
+      "members": 1,
+      "history": []
+    }
+  ]
+}

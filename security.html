@@ -1,116 +1,256 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
-<head>
-  <meta charset="UTF-8" />
-  <title>Sécurité & Confidentialité – M@jestiOS</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <header class="site-header">
-    <div class="nav-left">
-      <div class="logo-mark"></div>
-      <div class="logo-text">
-        <div class="logo-title">M@jestiOS</div>
-        <div class="logo-sub">OS d’intelligences unifiées</div>
-      </div>
+  <head>
+    <meta charset="utf-8" />
+    <title>Sécurité – M@jestiOS</title>
+    <meta
+      name="description"
+      content="Sécurité, confidentialité et gouvernance de M@jestiOS : un OS multi‑IA conçu pour protéger vos données et vos équipes."
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="assets/css/theme.css" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <link rel="stylesheet" href="assets/css/layout.css" />
+    <link rel="stylesheet" href="assets/css/components.css" />
+    <link rel="stylesheet" href="assets/css/responsive.css" />
+  </head>
+
+  <body>
+    <div class="app-shell">
+      <header class="app-header">
+        <div class="app-header-inner">
+          <a href="index.html" class="brand">
+            <div class="brand-mark">M</div>
+            <div class="brand-text">
+              <div class="brand-name">M@jestiOS</div>
+              <div class="brand-tagline">L’OS d’intelligences unifiées</div>
+            </div>
+          </a>
+          <nav class="nav">
+            <div class="nav-links">
+              <a href="index.html" class="nav-link"><span>Accueil</span></a>
+              <a href="features.html" class="nav-link"><span>Fonctionnalités</span></a>
+              <a href="pricing.html" class="nav-link"><span>Tarifs</span></a>
+              <a href="about.html" class="nav-link"><span>À propos</span></a>
+              <a href="security.html" class="nav-link nav-link-active"><span>Sécurité</span></a>
+              <a href="faq.html" class="nav-link"><span>FAQ</span></a>
+              <a href="blog.html" class="nav-link"><span>Ressources</span></a>
+              <a href="support.html" class="nav-link"><span>Support</span></a>
+            </div>
+            <div class="nav-cta">
+              <a href="login.html" class="btn btn-outline">Connexion</a>
+              <a href="app.html" class="btn btn-primary">Ouvrir le chat</a>
+            </div>
+            <button class="menu-toggle btn-icon">☰</button>
+          </nav>
+        </div>
+      </header>
+
+      <main class="app-main">
+        <section class="hero">
+          <div class="container">
+            <div class="hero-header" style="max-width: 720px; margin: 0 auto; text-align: center">
+              <div class="hero-badges" style="justify-content: center">
+                <div class="badge">
+                  <span class="badge-dot"></span>
+                  <span>Sécurité &amp; gouvernance</span>
+                </div>
+                <div class="chip">
+                  <span class="chip-pill">OS d’intelligences</span>
+                  <span>Contrôle total</span>
+                </div>
+              </div>
+              <h1 class="hero-title">
+                La sécurité d’un OS,
+                <span>la simplicité d’un chat</span>.
+              </h1>
+              <p class="hero-subtitle" style="margin: 0 auto">
+                M@jestiOS applique une isolation stricte, une gouvernance claire et une confidentialité renforcée
+                pour protéger vos données, vos équipes et vos clients.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="container">
+            <div class="section-header">
+              <div class="section-eyebrow">Architecture</div>
+              <h2 class="section-title">Pensé comme un OS, pas comme un simple outil.</h2>
+              <p class="section-subtitle">
+                Chaque workspace, chaque conversation et chaque modèle est isolé pour garantir une séparation
+                stricte des données.
+              </p>
+            </div>
+
+            <div class="grid-2">
+              <div class="card">
+                <div class="card-title">Isolation par workspace</div>
+                <p class="card-subtitle">
+                  Chaque workspace possède ses propres clés, historiques et permissions.
+                </p>
+                <div class="list">
+                  <div class="list-item">
+                    <div class="list-bullet">✓</div>
+                    <div>Données séparées par équipe, client ou projet.</div>
+                  </div>
+                  <div class="list-item">
+                    <div class="list-bullet">✓</div>
+                    <div>Accès restreint aux modèles sensibles.</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="card-title">Chiffrement &amp; stockage</div>
+                <p class="card-subtitle">
+                  Les données sont chiffrées en transit et au repos, avec une politique stricte de conservation.
+                </p>
+                <div class="list">
+                  <div class="list-item">
+                    <div class="list-bullet">•</div>
+                    <div>Chiffrement TLS 1.2+ en transit.</div>
+                  </div>
+                  <div class="list-item">
+                    <div class="list-bullet">•</div>
+                    <div>Chiffrement AES‑256 au repos.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="container">
+            <div class="section-header">
+              <div class="section-eyebrow">Gouvernance</div>
+              <h2 class="section-title">Contrôle, permissions et audit.</h2>
+              <p class="section-subtitle">
+                Une gouvernance claire pour les équipes, les organisations et les environnements sensibles.
+              </p>
+            </div>
+
+            <div class="grid-2">
+              <div class="card">
+                <div class="card-title">Permissions &amp; rôles</div>
+                <p class="card-subtitle">
+                  Définissez qui peut utiliser quels modèles et accéder à quels historiques.
+                </p>
+                <div class="list">
+                  <div class="list-item">
+                    <div class="list-bullet">✓</div>
+                    <div>Rôles simples et granulaires.</div>
+                  </div>
+                  <div class="list-item">
+                    <div class="list-bullet">✓</div>
+                    <div>Restriction des modèles coûteux ou sensibles.</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="card-title">Logs &amp; audit</div>
+                <p class="card-subtitle">
+                  Une visibilité complète sur l’usage des modèles et des workspaces.
+                </p>
+                <div class="list">
+                  <div class="list-item">
+                    <div class="list-bullet">•</div>
+                    <div>Historique unifié, exportable.</div>
+                  </div>
+                  <div class="list-item">
+                    <div class="list-bullet">•</div>
+                    <div>Suivi des actions par utilisateur.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 30px">
+              <a href="roadmap.html" class="btn btn-primary">Voir la roadmap sécurité</a>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="container">
+            <div class="section-header">
+              <div class="section-eyebrow">Confidentialité</div>
+              <h2 class="section-title">Vos données restent vos données.</h2>
+              <p class="section-subtitle">
+                M@jestiOS applique une politique stricte de confidentialité et ne revend ni ne exploite vos
+                données.
+              </p>
+            </div>
+
+            <div class="grid-2">
+              <div class="card">
+                <div class="card-title">Aucune exploitation des données</div>
+                <p class="card-subtitle">
+                  Vos conversations ne sont jamais revendues, réutilisées ou analysées à des fins commerciales.
+                </p>
+                <div class="list">
+                  <div class="list-item">
+                    <div class="list-bullet">✓</div>
+                    <div>Pas de revente, pas de publicité.</div>
+                  </div>
+                  <div class="list-item">
+                    <div class="list-bullet">✓</div>
+                    <div>Pas d’entraînement sur vos données.</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="card-title">Transparence totale</div>
+                <p class="card-subtitle">
+                  Une documentation claire et une roadmap publique sur la sécurité et la confidentialité.
+                </p>
+                <div class="list">
+                  <div class="list-item">
+                    <div class="list-bullet">•</div>
+                    <div>Politique de confidentialité détaillée.</div>
+                  </div>
+                  <div class="list-item">
+                    <div class="list-bullet">•</div>
+                    <div>Roadmap mise à jour régulièrement.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 30px">
+              <a href="privacy.html" class="btn btn-outline">Voir la politique de confidentialité</a>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="app-footer">
+        <div class="app-footer-inner">
+          <div>© M@jestiOS – L’OS d’intelligences unifiées.</div>
+          <div class="footer-links">
+            <a href="about.html" class="footer-link">À propos</a>
+            <a href="security.html" class="footer-link">Sécurité</a>
+            <a href="comparison.html" class="footer-link">Comparaison</a>
+            <a href="roadmap.html" class="footer-link">Roadmap</a>
+            <a href="support.html" class="footer-link">Support</a>
+            <a href="faq.html" class="footer-link">FAQ</a>
+            <a href="blog.html" class="footer-link">Ressources</a>
+            <a href="mentions-legales.html" class="footer-link">Mentions légales</a>
+            <a href="privacy.html" class="footer-link">Confidentialité</a>
+            <a href="cookies.html" class="footer-link">Cookies</a>
+            <a href="cgu.html" class="footer-link">CGU</a>
+            <a href="cgv.html" class="footer-link">CGV</a>
+          </div>
+        </div>
+      </footer>
     </div>
-    <nav class="main-nav">
-      <a href="index.html">Accueil</a>
-      <a href="features.html">Fonctionnalités</a>
-      <a href="pricing.html">Tarifs</a>
-      <a href="about.html">À propos</a>
-      <a href="security.html">Sécurité</a>
-      <a href="faq.html">FAQ</a>
-      <a href="blog.html">Ressources</a>
-    </nav>
-    <div class="nav-cta">
-      <a href="support.html" class="btn btn-outline">Support</a>
-      <a href="app.html" class="btn btn-primary">Ouvrir le Chat</a>
-    </div>
-  </header>
 
-  <main>
-    <section class="page-hero">
-      <h1 class="page-title">Sécurité & Confidentialité</h1>
-      <p class="page-subtitle">
-        Votre intelligence reste votre propriété.  
-        Nous concevons M@jestiOS pour ceux qui prennent leurs données au sérieux.
-      </p>
-    </section>
-
-    <section class="section">
-      <div class="section-header">
-        <div>
-          <div class="section-kicker">Principes</div>
-          <h2 class="section-title">Ce que nous faisons. Ce que nous ne faisons pas.</h2>
-        </div>
-        <p class="section-subtitle">
-          Pas de zones grises, pas de jargon.  
-          Une politique simple, lisible, assumée.
-        </p>
-      </div>
-      <div class="grid-3">
-        <div class="card card-soft">
-          <div class="card-title">Pas de revente de données</div>
-          <div class="card-body">
-            Vos prompts, vos contenus, vos projets ne sont pas revendus à des tiers.  
-            Point final.
-          </div>
-        </div>
-        <div class="card card-soft">
-          <div class="card-title">Pas d’entraînement sur vos prompts</div>
-          <div class="card-body">
-            Vos échanges ne servent pas à entraîner les modèles.  
-            Ce que vous créez reste à vous.
-          </div>
-        </div>
-        <div class="card card-soft">
-          <div class="card-title">Transparence</div>
-          <div class="card-body">
-            Nous expliquons clairement comment vos données sont traitées, stockées, protégées.  
-            Pas de clauses cachées.
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="section-header">
-        <div>
-          <div class="section-kicker">Technique</div>
-          <h2 class="section-title">Infrastructure & bonnes pratiques.</h2>
-        </div>
-        <p class="section-subtitle">
-          M@jestiOS s’appuie sur une infrastructure moderne, sécurisée, et des bonnes pratiques de développement.
-        </p>
-      </div>
-      <div class="grid-2">
-        <div class="card">
-          <div class="card-title">Chiffrement</div>
-          <div class="card-body">
-            Connexions sécurisées (HTTPS), chiffrement des échanges entre votre navigateur et nos serveurs.  
-            Les communications avec les modèles IA suivent les standards de sécurité des fournisseurs.
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-title">Séparation des environnements</div>
-          <div class="card-body">
-            Environnements de développement, de test et de production séparés.  
-            Accès restreints, journaux d’activité, bonnes pratiques de déploiement.
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="footer">
-    <div>© M@jestiOS.</div>
-    <div class="footer-links">
-      <a href="about.html">À propos</a>
-      <a href="support.html">Support</a>
-      <a href="faq.html">FAQ</a>
-    </div>
-  </footer>
-</body>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/ui.js"></script>
+    <script src="assets/js/theme.js"></script>
+    <script src="assets/js/analytics.js"></script>
+  </body>
 </html>

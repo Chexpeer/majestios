@@ -1,0 +1,8 @@
+{
+  "models": [
+    { "id": "gpt-4", "name": "GPT‑4", "provider": "OpenAI", "strength": "reasoning" },
+    { "id": "claude-3", "name": "Claude 3", "provider": "Anthropic", "strength": "clarity" },
+    { "id": "gemini-2", "name": "Gemini 2", "provider": "Google", "strength": "speed" },
+    { "id": "mistral-large", "name": "Mistral Large", "provider": "Mistral AI", "strength": "cost" }
+  ]
+}

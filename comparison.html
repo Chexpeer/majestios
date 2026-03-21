@@ -1,96 +1,242 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
-<head>
-  <meta charset="UTF-8" />
-  <title>Comparaison – M@jestiOS vs autres outils IA</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <header class="site-header">
-    <div class="nav-left">
-      <div class="logo-mark"></div>
-      <div class="logo-text">
-        <div class="logo-title">M@jestiOS</div>
-        <div class="logo-sub">OS d’intelligences unifiées</div>
-      </div>
-    </div>
-    <nav class="main-nav">
-      <a href="index.html">Accueil</a>
-      <a href="features.html">Fonctionnalités</a>
-      <a href="pricing.html">Tarifs</a>
-      <a href="about.html">À propos</a>
-      <a href="security.html">Sécurité</a>
-      <a href="faq.html">FAQ</a>
-      <a href="blog.html">Ressources</a>
-    </nav>
-    <div class="nav-cta">
-      <a href="support.html" class="btn btn-outline">Support</a>
-      <a href="app.html" class="btn btn-primary">Ouvrir le Chat</a>
-    </div>
-  </header>
+  <head>
+    <meta charset="utf-8" />
+    <title>Comparaison – M@jestiOS</title>
+    <meta
+      name="description"
+      content="Comparaison M@jestiOS : un OS multi‑IA qui remplace plusieurs abonnements GPT‑4, Claude, Gemini et Mistral dans une interface unifiée."
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="assets/css/theme.css" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <link rel="stylesheet" href="assets/css/layout.css" />
+    <link rel="stylesheet" href="assets/css/components.css" />
+    <link rel="stylesheet" href="assets/css/responsive.css" />
+  </head>
 
-  <main>
-    <section class="page-hero">
-      <h1 class="page-title">Comparaison</h1>
-      <p class="page-subtitle">
-        M@jestiOS vs ChatGPT, Poe, Perplexity : ce qui change quand vous passez d’un outil à un OS multi‑IA.
-      </p>
-    </section>
+  <body>
+    <div class="app-shell">
 
-    <section class="section">
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Critère</th>
-            <th>M@jestiOS</th>
-            <th>ChatGPT</th>
-            <th>Poe / Perplexity</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Nombre d’IA</td>
-            <td><span class="badge-compare">Multi‑IA (GPT‑4, Claude, Gemini, Mistral)</span></td>
-            <td>Principalement GPT‑4 / GPT‑4.1</td>
-            <td>Plusieurs modèles, mais orientés “chat”</td>
-          </tr>
-          <tr>
-            <td>Approche</td>
-            <td>OS d’intelligences unifiées</td>
-            <td>Outil de chat IA</td>
-            <td>Plateforme de chat / recherche IA</td>
-          </tr>
-          <tr>
-            <td>Workspaces</td>
-            <td>Oui, par projet / client / idée</td>
-            <td>Historique de chats</td>
-            <td>Historique de chats</td>
-          </tr>
-          <tr>
-            <td>Modes (Expert, Créatif, Technique)</td>
-            <td>Oui</td>
-            <td>Non (prompts manuels)</td>
-            <td>Non (prompts manuels)</td>
-          </tr>
-          <tr>
-            <td>Positionnement</td>
-            <td>OS pour créateurs, devs, entrepreneurs</td>
-            <td>Assistant IA généraliste</td>
-            <td>Chat / recherche IA</td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
-  </main>
+      <header class="app-header">
+        <div class="app-header-inner">
 
-  <footer class="footer">
-    <div>© M@jestiOS.</div>
-    <div class="footer-links">
-      <a href="about.html">À propos</a>
-      <a href="pricing.html">Tarifs</a>
-      <a href="support.html">Support</a>
+          <a href="index.html" class="brand">
+            <div class="brand-mark">M</div>
+            <div class="brand-text">
+              <div class="brand-name">M@jestiOS</div>
+              <div class="brand-tagline">L’OS d’intelligences unifiées</div>
+            </div>
+          </a>
+
+          <nav class="nav">
+            <div class="nav-links">
+              <a href="index.html" class="nav-link"><span>Accueil</span></a>
+              <a href="features.html" class="nav-link"><span>Fonctionnalités</span></a>
+              <a href="pricing.html" class="nav-link"><span>Tarifs</span></a>
+              <a href="about.html" class="nav-link"><span>À propos</span></a>
+              <a href="security.html" class="nav-link"><span>Sécurité</span></a>
+              <a href="faq.html" class="nav-link"><span>FAQ</span></a>
+              <a href="blog.html" class="nav-link"><span>Ressources</span></a>
+              <a href="support.html" class="nav-link"><span>Support</span></a>
+            </div>
+
+            <div class="nav-cta">
+              <a href="dashboard.html" class="btn btn-outline">Dashboard</a>
+              <a href="app.html" class="btn btn-primary">Chat</a>
+            </div>
+
+            <button class="menu-toggle btn-icon">☰</button>
+          </nav>
+
+        </div>
+      </header>
+
+      <main class="app-main">
+
+        <section class="hero">
+          <div class="container">
+            <div class="hero-header" style="max-width: 760px; margin: 0 auto; text-align: center">
+
+              <div class="hero-badges" style="justify-content: center">
+                <div class="badge">
+                  <span class="badge-dot"></span>
+                  <span>Comparaison détaillée</span>
+                </div>
+                <div class="chip">
+                  <span class="chip-pill">Clarté</span>
+                  <span>Rapport qualité‑prix</span>
+                </div>
+              </div>
+
+              <h1 class="hero-title">
+                M@jestiOS vs abonnements individuels,
+                <span>le match est clair</span>.
+              </h1>
+
+              <p class="hero-subtitle" style="margin: 0 auto">
+                Découvrez comment l’OS unifié remplace plusieurs abonnements tout en offrant plus de fonctionnalités.
+              </p>
+
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="container">
+
+            <div class="section-header">
+              <div class="section-eyebrow">Vue globale</div>
+              <h2 class="section-title">Un seul OS, plusieurs IA premium.</h2>
+              <p class="section-subtitle">
+                M@jestiOS mutualise GPT‑4, Claude, Gemini et Mistral dans une interface unifiée.
+              </p>
+            </div>
+
+            <div class="card" style="padding: 0; overflow: hidden">
+
+              <div style="display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid rgba(15,23,42,1)">
+                <div style="padding: 20px; border-right: 1px solid rgba(15,23,42,1)">
+                  <div class="card-title">Sans M@jestiOS</div>
+                  <p class="card-subtitle">4 abonnements séparés, 4 interfaces, 4 historiques.</p>
+                  <div class="list">
+                    <div class="list-item"><div class="list-bullet">•</div><div>GPT‑4 : 20–25 €/mois</div></div>
+                    <div class="list-item"><div class="list-bullet">•</div><div>Claude : 20–25 €/mois</div></div>
+                    <div class="list-item"><div class="list-bullet">•</div><div>Gemini : 20–25 €/mois</div></div>
+                    <div class="list-item"><div class="list-bullet">•</div><div>Mistral : 20–25 €/mois</div></div>
+                  </div>
+                </div>
+
+                <div style="padding: 20px">
+                  <div class="card-title">Avec M@jestiOS</div>
+                  <p class="card-subtitle">Un seul abonnement, une seule interface, un historique unifié.</p>
+                  <div class="list">
+                    <div class="list-item"><div class="list-bullet">✓</div><div>Accès aux 4 modèles premium</div></div>
+                    <div class="list-item"><div class="list-bullet">✓</div><div>Comparaison instantanée</div></div>
+                    <div class="list-item"><div class="list-bullet">✓</div><div>Routage intelligent</div></div>
+                    <div class="list-item"><div class="list-bullet">✓</div><div>Workspaces & gouvernance</div></div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="container">
+
+            <div class="section-header">
+              <div class="section-eyebrow">Coûts</div>
+              <h2 class="section-title">Une économie évidente.</h2>
+              <p class="section-subtitle">
+                M@jestiOS mutualise les coûts pour réduire drastiquement vos dépenses mensuelles.
+              </p>
+            </div>
+
+            <div class="grid-2">
+
+              <div class="card">
+                <div class="card-title">Coût total sans M@jestiOS</div>
+                <p class="card-subtitle">4 abonnements séparés.</p>
+                <div class="list">
+                  <div class="list-item"><div class="list-bullet">•</div><div>80 à 100 € / mois</div></div>
+                  <div class="list-item"><div class="list-bullet">•</div><div>Interfaces différentes</div></div>
+                  <div class="list-item"><div class="list-bullet">•</div><div>Aucun routage intelligent</div></div>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="card-title">Coût avec M@jestiOS</div>
+                <p class="card-subtitle">Un seul abonnement.</p>
+                <div class="list">
+                  <div class="list-item"><div class="list-bullet">✓</div><div>29 € (Solo)</div></div>
+                  <div class="list-item"><div class="list-bullet">✓</div><div>79 € (Équipe)</div></div>
+                  <div class="list-item"><div class="list-bullet">✓</div><div>Workspaces inclus</div></div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="container">
+
+            <div class="section-header">
+              <div class="section-eyebrow">Fonctionnalités</div>
+              <h2 class="section-title">Plus qu’un simple agrégateur.</h2>
+              <p class="section-subtitle">
+                M@jestiOS apporte des fonctionnalités que les abonnements individuels n’offrent pas.
+              </p>
+            </div>
+
+            <div class="grid-2">
+
+              <div class="card">
+                <div class="card-title">Sans M@jestiOS</div>
+                <p class="card-subtitle">Limites des abonnements individuels.</p>
+                <div class="list">
+                  <div class="list-item"><div class="list-bullet">•</div><div>Pas de comparaison multi‑IA</div></div>
+                  <div class="list-item"><div class="list-bullet">•</div><div>Pas de routage intelligent</div></div>
+                  <div class="list-item"><div class="list-bullet">•</div><div>Pas de workspaces</div></div>
+                  <div class="list-item"><div class="list-bullet">•</div><div>Pas de gouvernance</div></div>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="card-title">Avec M@jestiOS</div>
+                <p class="card-subtitle">Un OS complet.</p>
+                <div class="list">
+                  <div class="list-item"><div class="list-bullet">✓</div><div>Comparaison instantanée</div></div>
+                  <div class="list-item"><div class="list-bullet">✓</div><div>Routage intelligent</div></div>
+                  <div class="list-item"><div class="list-bullet">✓</div><div>Workspaces & permissions</div></div>
+                  <div class="list-item"><div class="list-bullet">✓</div><div>Historique unifié</div></div>
+                </div>
+              </div>
+
+            </div>
+
+            <div style="text-align: center; margin-top: 40px">
+              <a href="pricing.html" class="btn btn-primary">Voir les tarifs</a>
+            </div>
+
+          </div>
+        </section>
+
+      </main>
+
+      <footer class="app-footer">
+        <div class="app-footer-inner">
+
+          <div>© M@jestiOS – L’OS d’intelligences unifiées.</div>
+
+          <div class="footer-links">
+            <a href="about.html" class="footer-link">À propos</a>
+            <a href="security.html" class="footer-link">Sécurité</a>
+            <a href="comparison.html" class="footer-link">Comparaison</a>
+            <a href="roadmap.html" class="footer-link">Roadmap</a>
+            <a href="support.html" class="footer-link">Support</a>
+            <a href="faq.html" class="footer-link">FAQ</a>
+            <a href="blog.html" class="footer-link">Ressources</a>
+            <a href="mentions-legales.html" class="footer-link">Mentions légales</a>
+            <a href="privacy.html" class="footer-link">Confidentialité</a>
+            <a href="cookies.html" class="footer-link">Cookies</a>
+            <a href="cgu.html" class="footer-link">CGU</a>
+            <a href="cgv.html" class="footer-link">CGV</a>
+          </div>
+
+        </div>
+      </footer>
+
     </div>
-  </footer>
-</body>
+
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/ui.js"></script>
+    <script src="assets/js/theme.js"></script>
+    <script src="assets/js/analytics.js"></script>
+
+  </body>
 </html>
