@@ -1,0 +1,6 @@
+{
+  "theme": "auto",
+  "language": "fr",
+  "analytics": false,
+  "defaultModel": "gpt-4"
+}

@@ -1,81 +1,231 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
-<head>
-  <meta charset="UTF-8" />
-  <title>Roadmap – M@jestiOS</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <header class="site-header">
-    <div class="nav-left">
-      <div class="logo-mark"></div>
-      <div class="logo-text">
-        <div class="logo-title">M@jestiOS</div>
-        <div class="logo-sub">OS d’intelligences unifiées</div>
-      </div>
-    </div>
-    <nav class="main-nav">
-      <a href="index.html">Accueil</a>
-      <a href="features.html">Fonctionnalités</a>
-      <a href="pricing.html">Tarifs</a>
-      <a href="about.html">À propos</a>
-      <a href="security.html">Sécurité</a>
-      <a href="faq.html">FAQ</a>
-      <a href="blog.html">Ressources</a>
-    </nav>
-    <div class="nav-cta">
-      <a href="support.html" class="btn btn-outline">Support</a>
-      <a href="app.html" class="btn btn-primary">Ouvrir le Chat</a>
-    </div>
-  </header>
+  <head>
+    <meta charset="utf-8" />
+    <title>Roadmap – M@jestiOS</title>
+    <meta
+      name="description"
+      content="Roadmap M@jestiOS : évolutions prévues, modèles IA, sécurité, gouvernance et nouvelles fonctionnalités."
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="assets/css/theme.css" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <link rel="stylesheet" href="assets/css/layout.css" />
+    <link rel="stylesheet" href="assets/css/components.css" />
+    <link rel="stylesheet" href="assets/css/responsive.css" />
+  </head>
 
-  <main>
-    <section class="page-hero">
-      <h1 class="page-title">Roadmap</h1>
-      <p class="page-subtitle">
-        Ce que nous construisons, dans quel ordre, et pourquoi.  
-        Une vision claire de l’OS que vous utilisez.
-      </p>
-    </section>
+  <body>
+    <div class="app-shell">
 
-    <section class="section">
-      <div class="section-header">
-        <div>
-          <div class="section-kicker">Étapes</div>
-          <h2 class="section-title">De la v1 à l’OS complet.</h2>
-        </div>
-        <p class="section-subtitle">
-          M@jestiOS évolue en continu. Voici les grandes étapes prévues.
-        </p>
-      </div>
-      <div class="timeline">
-        <div class="timeline-item">
-          <div class="timeline-title">v1 – OS multi‑IA (actuel)</div>
-          <div class="timeline-meta">Chat multi‑IA, workspaces, modes Expert / Créatif / Technique.</div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-title">v1.5 – MajestiStore</div>
-          <div class="timeline-meta">Bibliothèque de workflows, prompts, templates, packs métiers.</div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-title">v2 – MajestiCloud</div>
-          <div class="timeline-meta">Sauvegardes avancées, espaces partagés, collaboration.</div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-title">v2.5 – Intégrations</div>
-          <div class="timeline-meta">Connexion à vos outils (Notion, Slack, CRM, etc.).</div>
-        </div>
-      </div>
-    </section>
-  </main>
+      <header class="app-header">
+        <div class="app-header-inner">
 
-  <footer class="footer">
-    <div>© M@jestiOS.</div>
-    <div class="footer-links">
-      <a href="about.html">À propos</a>
-      <a href="support.html">Support</a>
+          <a href="index.html" class="brand">
+            <div class="brand-mark">M</div>
+            <div class="brand-text">
+              <div class="brand-name">M@jestiOS</div>
+              <div class="brand-tagline">L’OS d’intelligences unifiées</div>
+            </div>
+          </a>
+
+          <nav class="nav">
+            <div class="nav-links">
+              <a href="index.html" class="nav-link"><span>Accueil</span></a>
+              <a href="features.html" class="nav-link"><span>Fonctionnalités</span></a>
+              <a href="pricing.html" class="nav-link"><span>Tarifs</span></a>
+              <a href="about.html" class="nav-link"><span>À propos</span></a>
+              <a href="security.html" class="nav-link"><span>Sécurité</span></a>
+              <a href="faq.html" class="nav-link"><span>FAQ</span></a>
+              <a href="blog.html" class="nav-link"><span>Ressources</span></a>
+              <a href="support.html" class="nav-link"><span>Support</span></a>
+            </div>
+
+            <div class="nav-cta">
+              <a href="dashboard.html" class="btn btn-outline">Dashboard</a>
+              <a href="app.html" class="btn btn-primary">Chat</a>
+            </div>
+
+            <button class="menu-toggle btn-icon">☰</button>
+          </nav>
+
+        </div>
+      </header>
+
+      <main class="app-main">
+
+        <section class="hero">
+          <div class="container">
+            <div class="hero-header" style="max-width: 720px; margin: 0 auto; text-align: center">
+
+              <div class="hero-badges" style="justify-content: center">
+                <div class="badge">
+                  <span class="badge-dot"></span>
+                  <span>Roadmap publique</span>
+                </div>
+                <div class="chip">
+                  <span class="chip-pill">Transparence</span>
+                  <span>Évolutions à venir</span>
+                </div>
+              </div>
+
+              <h1 class="hero-title">
+                L’évolution de M@jestiOS,
+                <span>en toute transparence</span>.
+              </h1>
+
+              <p class="hero-subtitle" style="margin: 0 auto">
+                Découvrez les fonctionnalités en cours, les prochaines étapes et la vision long terme de l’OS.
+              </p>
+
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="container">
+
+            <div class="section-header">
+              <div class="section-eyebrow">En cours</div>
+              <h2 class="section-title">Développement actif.</h2>
+              <p class="section-subtitle">
+                Les fonctionnalités actuellement en construction ou en phase de test.
+              </p>
+            </div>
+
+            <div class="grid-2">
+
+              <div class="card">
+                <div class="card-title">Comparaison multi‑IA avancée</div>
+                <p class="card-subtitle">Vue côte‑à‑côte enrichie.</p>
+                <div class="list">
+                  <div class="list-item"><div class="list-bullet">•</div><div>Analyse automatique des différences</div></div>
+                  <div class="list-item"><div class="list-bullet">•</div><div>Notation qualité / coût</div></div>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="card-title">Amélioration du routage intelligent</div>
+                <p class="card-subtitle">Optimisation qualité / coût / vitesse.</p>
+                <div class="list">
+                  <div class="list-item"><div class="list-bullet">✓</div><div>Profilage automatique des requêtes</div></div>
+                  <div class="list-item"><div class="list-bullet">✓</div><div>Stratégies personnalisées par workspace</div></div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="container">
+
+            <div class="section-header">
+              <div class="section-eyebrow">Prochaines étapes</div>
+              <h2 class="section-title">À venir très bientôt.</h2>
+              <p class="section-subtitle">
+                Les fonctionnalités planifiées pour les prochaines versions.
+              </p>
+            </div>
+
+            <div class="grid-2">
+
+              <div class="card">
+                <div class="card-title">Intégrations externes</div>
+                <p class="card-subtitle">Connectez M@jestiOS à vos outils.</p>
+                <div class="list">
+                  <div class="list-item"><div class="list-bullet">•</div><div>Slack</div></div>
+                  <div class="list-item"><div class="list-bullet">•</div><div>Notion</div></div>
+                  <div class="list-item"><div class="list-bullet">•</div><div>Google Drive</div></div>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="card-title">Mode “Focus”</div>
+                <p class="card-subtitle">Interface ultra‑minimaliste pour la rédaction.</p>
+                <div class="list">
+                  <div class="list-item"><div class="list-bullet">✓</div><div>Masquage automatique des panneaux</div></div>
+                  <div class="list-item"><div class="list-bullet">✓</div><div>Mode plein écran</div></div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="container">
+
+            <div class="section-header">
+              <div class="section-eyebrow">Long terme</div>
+              <h2 class="section-title">La vision future.</h2>
+              <p class="section-subtitle">
+                Les évolutions structurelles prévues pour faire de M@jestiOS un OS complet.
+              </p>
+            </div>
+
+            <div class="grid-2">
+
+              <div class="card">
+                <div class="card-title">Agents autonomes</div>
+                <p class="card-subtitle">Automatisation avancée multi‑IA.</p>
+                <div class="list">
+                  <div class="list-item"><div class="list-bullet">•</div><div>Agents spécialisés par tâche</div></div>
+                  <div class="list-item"><div class="list-bullet">•</div><div>Coordination multi‑modèles</div></div>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="card-title">API M@jestiOS</div>
+                <p class="card-subtitle">Intégration dans vos propres outils.</p>
+                <div class="list">
+                  <div class="list-item"><div class="list-bullet">✓</div><div>Endpoints unifiés</div></div>
+                  <div class="list-item"><div class="list-bullet">✓</div><div>Gestion des workspaces via API</div></div>
+                </div>
+              </div>
+
+            </div>
+
+            <div style="text-align: center; margin-top: 40px">
+              <a href="support.html" class="btn btn-outline">Suggérer une fonctionnalité</a>
+            </div>
+
+          </div>
+        </section>
+
+      </main>
+
+      <footer class="app-footer">
+        <div class="app-footer-inner">
+
+          <div>© M@jestiOS – L’OS d’intelligences unifiées.</div>
+
+          <div class="footer-links">
+            <a href="about.html" class="footer-link">À propos</a>
+            <a href="security.html" class="footer-link">Sécurité</a>
+            <a href="comparison.html" class="footer-link">Comparaison</a>
+            <a href="roadmap.html" class="footer-link">Roadmap</a>
+            <a href="support.html" class="footer-link">Support</a>
+            <a href="faq.html" class="footer-link">FAQ</a>
+            <a href="blog.html" class="footer-link">Ressources</a>
+            <a href="mentions-legales.html" class="footer-link">Mentions légales</a>
+            <a href="privacy.html" class="footer-link">Confidentialité</a>
+            <a href="cookies.html" class="footer-link">Cookies</a>
+            <a href="cgu.html" class="footer-link">CGU</a>
+            <a href="cgv.html" class="footer-link">CGV</a>
+          </div>
+
+        </div>
+      </footer>
+
     </div>
-  </footer>
-</body>
+
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/ui.js"></script>
+    <script src="assets/js/theme.js"></script>
+    <script src="assets/js/analytics.js"></script>
+
+  </body>
 </html>
