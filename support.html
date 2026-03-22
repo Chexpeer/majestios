@@ -8,6 +8,7 @@
       content="Support M@jestiOS : assistance, contact, demandes de fonctionnalités, problèmes techniques et aide à la prise en main."
     />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <link rel="stylesheet" href="assets/css/theme.css" />
     <link rel="stylesheet" href="assets/css/main.css" />
     <link rel="stylesheet" href="assets/css/layout.css" />
@@ -42,8 +43,8 @@
             </div>
 
             <div class="nav-cta">
-              <a href="dashboard.html" class="btn btn-outline">Dashboard</a>
-              <a href="app.html" class="btn btn-primary">Chat</a>
+              <span id="userEmail" style="margin-right: 12px; opacity: 0.8"></span>
+              <button onclick="logout()" class="btn btn-outline">Déconnexion</button>
             </div>
 
             <button class="menu-toggle btn-icon">☰</button>
@@ -196,7 +197,42 @@
     <script src="assets/js/main.js"></script>
     <script src="assets/js/ui.js"></script>
     <script src="assets/js/theme.js"></script>
-    <script src="assets/js/analytics.js"></script>
+
+    <!-- AUTH PROTECTION + AFFICHAGE UTILISATEUR -->
+    <script>
+      async function checkAuth() {
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+          window.location.href = "login.html";
+          return;
+        }
+
+        const response = await fetch("http://localhost:4000/auth/me", {
+          method: "GET",
+          headers: {
+            "Authorization": "Bearer " + token
+          }
+        });
+
+        const data = await response.json();
+
+        if (data.error) {
+          localStorage.removeItem("token");
+          window.location.href = "login.html";
+          return;
+        }
+
+        document.getElementById("userEmail").innerText = data.user.email;
+      }
+
+      function logout() {
+        localStorage.removeItem("token");
+        window.location.href = "login.html";
+      }
+
+      checkAuth();
+    </script>
 
   </body>
 </html>

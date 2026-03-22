@@ -40,8 +40,8 @@
             </div>
 
             <div class="nav-cta">
-              <a href="dashboard.html" class="btn btn-outline">Dashboard</a>
-              <a href="app.html" class="btn btn-primary">Chat</a>
+              <span id="userEmail" style="margin-right: 12px; opacity: 0.8"></span>
+              <button onclick="logout()" class="btn btn-outline">Déconnexion</button>
             </div>
 
             <button class="menu-toggle btn-icon">☰</button>
@@ -73,7 +73,7 @@
 
                   <div class="list-item">
                     <div class="list-bullet">•</div>
-                    <div>Email : utilisateur@exemple.com</div>
+                    <div>Email : <span id="profileEmail">Chargement...</span></div>
                   </div>
 
                   <div class="list-item">
@@ -92,20 +92,9 @@
                 <p class="card-subtitle">Gérez vos accès et votre authentification.</p>
 
                 <div class="list">
-                  <div class="list-item">
-                    <div class="list-bullet">✓</div>
-                    <div>Authentification par email</div>
-                  </div>
-
-                  <div class="list-item">
-                    <div class="list-bullet">✓</div>
-                    <div>Sessions actives : 2 appareils</div>
-                  </div>
-
-                  <div class="list-item">
-                    <div class="list-bullet">✓</div>
-                    <div>Clés API personnelles</div>
-                  </div>
+                  <div class="list-item"><div class="list-bullet">✓</div><div>Authentification par email</div></div>
+                  <div class="list-item"><div class="list-bullet">✓</div><div>Sessions actives : 2 appareils</div></div>
+                  <div class="list-item"><div class="list-bullet">✓</div><div>Clés API personnelles</div></div>
                 </div>
 
                 <div class="pricing-cta" style="margin-top: 14px">
@@ -120,20 +109,9 @@
                 <p class="card-subtitle">Vos accès aux différents espaces.</p>
 
                 <div class="list">
-                  <div class="list-item">
-                    <div class="list-bullet">•</div>
-                    <div>Général (Admin)</div>
-                  </div>
-
-                  <div class="list-item">
-                    <div class="list-bullet">•</div>
-                    <div>Équipe Produit (Éditeur)</div>
-                  </div>
-
-                  <div class="list-item">
-                    <div class="list-bullet">•</div>
-                    <div>Client A (Lecture seule)</div>
-                  </div>
+                  <div class="list-item"><div class="list-bullet">•</div><div>Général (Admin)</div></div>
+                  <div class="list-item"><div class="list-bullet">•</div><div>Équipe Produit (Éditeur)</div></div>
+                  <div class="list-item"><div class="list-bullet">•</div><div>Client A (Lecture seule)</div></div>
                 </div>
 
                 <div class="pricing-cta" style="margin-top: 14px">
@@ -146,20 +124,9 @@
                 <p class="card-subtitle">Personnalisez votre expérience.</p>
 
                 <div class="list">
-                  <div class="list-item">
-                    <div class="list-bullet">✓</div>
-                    <div>Mode sombre activé</div>
-                  </div>
-
-                  <div class="list-item">
-                    <div class="list-bullet">✓</div>
-                    <div>Notifications activées</div>
-                  </div>
-
-                  <div class="list-item">
-                    <div class="list-bullet">✓</div>
-                    <div>Langue : Français</div>
-                  </div>
+                  <div class="list-item"><div class="list-bullet">✓</div><div>Mode sombre activé</div></div>
+                  <div class="list-item"><div class="list-bullet">✓</div><div>Notifications activées</div></div>
+                  <div class="list-item"><div class="list-bullet">✓</div><div>Langue : Français</div></div>
                 </div>
 
                 <div class="pricing-cta" style="margin-top: 14px">
@@ -200,6 +167,46 @@
     <script src="assets/js/main.js"></script>
     <script src="assets/js/ui.js"></script>
     <script src="assets/js/theme.js"></script>
-    <script src="assets/js/analytics.js"></script>
+
+    <!-- AUTH PROTECTION + AFFICHAGE UTILISATEUR -->
+    <script>
+      async function checkAuth() {
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+          window.location.href = "login.html";
+          return;
+        }
+
+        const response = await fetch("http://localhost:4000/auth/me", {
+          method: "GET",
+          headers: {
+            "Authorization": "Bearer " + token
+          }
+        });
+
+        const data = await response.json();
+
+        if (data.error) {
+          localStorage.removeItem("token");
+          window.location.href = "login.html";
+          return;
+        }
+
+        // Affichage dans le header
+        document.getElementById("userEmail").innerText = data.user.email;
+
+        // Affichage dans la section "Informations personnelles"
+        document.getElementById("profileEmail").innerText = data.user.email;
+      }
+
+      function logout() {
+        localStorage.removeItem("token");
+        window.location.href = "login.html";
+      }
+
+      checkAuth();
+    </script>
+
   </body>
 </html>

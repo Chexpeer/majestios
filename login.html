@@ -5,7 +5,7 @@
     <title>Connexion – M@jestiOS</title>
     <meta
       name="description"
-      content="Connexion à M@jestiOS : accédez à votre espace multi‑IA sécurisé."
+      content="Connexion à M@jestiOS – Accédez à votre OS d’intelligences unifiées."
     />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -14,53 +14,6 @@
     <link rel="stylesheet" href="assets/css/layout.css" />
     <link rel="stylesheet" href="assets/css/components.css" />
     <link rel="stylesheet" href="assets/css/responsive.css" />
-
-    <style>
-      .auth-container {
-        max-width: 420px;
-        margin: 0 auto;
-        padding: 40px 0;
-      }
-      .auth-card {
-        background: rgba(255,255,255,0.02);
-        border: 1px solid rgba(255,255,255,0.08);
-        border-radius: 12px;
-        padding: 32px;
-      }
-      .auth-title {
-        font-size: 28px;
-        font-weight: 600;
-        margin-bottom: 6px;
-        text-align: center;
-      }
-      .auth-subtitle {
-        text-align: center;
-        opacity: 0.7;
-        margin-bottom: 26px;
-      }
-      .auth-input {
-        width: 100%;
-        padding: 12px 14px;
-        border-radius: 8px;
-        border: 1px solid rgba(255,255,255,0.12);
-        background: rgba(255,255,255,0.03);
-        color: white;
-        margin-bottom: 16px;
-      }
-      .auth-input:focus {
-        outline: none;
-        border-color: rgba(255,255,255,0.3);
-      }
-      .auth-footer {
-        text-align: center;
-        margin-top: 20px;
-        opacity: 0.7;
-      }
-      .auth-footer a {
-        color: #fff;
-        text-decoration: underline;
-      }
-    </style>
   </head>
 
   <body>
@@ -80,49 +33,46 @@
 
       <main class="app-main">
 
-        <section class="section">
-          <div class="container">
+        <section class="section" style="padding-top: 60px">
+          <div class="container" style="max-width: 420px; margin: 0 auto">
 
-            <div class="auth-container">
+            <div class="card" style="padding: 30px">
 
-              <div class="auth-card">
+              <h1 class="section-title" style="text-align: center; margin-bottom: 20px">
+                Connexion
+              </h1>
 
-                <h1 class="auth-title">Connexion</h1>
-                <p class="auth-subtitle">Accédez à votre espace multi‑IA.</p>
+              <p class="section-subtitle" style="text-align: center; margin-bottom: 30px">
+                Accédez à votre espace M@jestiOS.
+              </p>
 
-                <form>
+              <div id="errorBox" style="
+                display: none;
+                background: rgba(255,0,0,0.1);
+                color: #ff4d4d;
+                padding: 10px 14px;
+                border-radius: 6px;
+                margin-bottom: 16px;
+                font-size: 14px;
+              "></div>
 
-                  <input
-                    type="email"
-                    class="auth-input"
-                    placeholder="Adresse email"
-                    required
-                  />
+              <form id="loginForm" class="form">
 
-                  <input
-                    type="password"
-                    class="auth-input"
-                    placeholder="Mot de passe"
-                    required
-                  />
-
-                  <button class="btn btn-primary" style="width: 100%; margin-top: 6px">
-                    Se connecter
-                  </button>
-
-                </form>
-
-                <div class="auth-footer" style="margin-top: 22px">
-                  <div>
-                    <a href="#">Mot de passe oublié</a>
-                  </div>
-                  <div style="margin-top: 8px">
-                    Pas encore de compte ?
-                    <a href="register.html">Créer un compte</a>
-                  </div>
+                <div class="form-group">
+                  <label>Email</label>
+                  <input type="email" id="email" required placeholder="vous@exemple.com" />
                 </div>
 
-              </div>
+                <div class="form-group" style="margin-top: 14px">
+                  <label>Mot de passe</label>
+                  <input type="password" id="password" required placeholder="••••••••" />
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 20px">
+                  Se connecter
+                </button>
+
+              </form>
 
             </div>
 
@@ -132,22 +82,14 @@
       </main>
 
       <footer class="app-footer">
-        <div class="app-footer-inner">
-          <div>© M@jestiOS – L’OS d’intelligences unifiées.</div>
-          <div class="footer-links">
-            <a href="mentions-legales.html" class="footer-link">Mentions légales</a>
-            <a href="privacy.html" class="footer-link">Confidentialité</a>
-            <a href="cookies.html" class="footer-link">Cookies</a>
-            <a href="cgu.html" class="footer-link">CGU</a>
-            <a href="cgv.html" class="footer-link">CGV</a>
-          </div>
+        <div class="app-footer-inner" style="text-align: center">
+          © M@jestiOS – L’OS d’intelligences unifiées.
         </div>
       </footer>
 
     </div>
 
-    <script src="assets/js/main.js"></script>
-    <script src="assets/js/ui.js"></script>
-    <script src="assets/js/theme.js"></script>
+    <script src="assets/js/auth.js"></script>
   </body>
 </html>
+
