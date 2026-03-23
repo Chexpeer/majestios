@@ -5,9 +5,10 @@
     <title>Historique – M@jestiOS</title>
     <meta
       name="description"
-      content="Historique M@jestiOS : toutes vos conversations multi‑IA centralisées, exportables et organisées par workspace."
+      content="Historique M@jestiOS : toutes vos conversations multi‑IA centralisées, filtrables et exportables."
     />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <link rel="stylesheet" href="assets/css/theme.css" />
     <link rel="stylesheet" href="assets/css/main.css" />
     <link rel="stylesheet" href="assets/css/layout.css" />
@@ -42,8 +43,8 @@
             </div>
 
             <div class="nav-cta">
-              <a href="dashboard.html" class="btn btn-outline">Dashboard</a>
-              <a href="app.html" class="btn btn-primary">Chat</a>
+              <span id="userEmail" style="margin-right: 12px; opacity: 0.8"></span>
+              <button onclick="logout()" class="btn btn-outline">Déconnexion</button>
             </div>
 
             <button class="menu-toggle btn-icon">☰</button>
@@ -57,147 +58,73 @@
         <section class="section" style="padding-top: 40px">
           <div class="container">
 
-            <div class="section-header" style="text-align: center; max-width: 720px; margin: 0 auto 40px">
+            <div class="section-header" style="text-align: center; max-width: 760px; margin: 0 auto 40px">
               <div class="section-eyebrow">Historique</div>
               <h1 class="section-title">Toutes vos conversations, centralisées.</h1>
               <p class="section-subtitle">
-                Un historique unifié multi‑IA, organisé par workspace, exportable en un clic.
+                Un historique unifié multi‑IA, exportable et organisé par workspace.
               </p>
             </div>
 
-            <div class="grid-2">
+            <div class="card" style="padding: 20px">
 
-              <div class="card">
-                <div class="card-title">Workspace : Général</div>
-                <p class="card-subtitle">Conversations transverses et analyses globales.</p>
-
-                <div class="list">
-
-                  <div class="list-item">
-                    <div class="list-bullet">•</div>
-                    <div>
-                      <strong>Plan d’action équipe produit</strong><br />
-                      GPT‑4, Claude, Gemini, Mistral
-                    </div>
-                  </div>
-
-                  <div class="list-item">
-                    <div class="list-bullet">•</div>
-                    <div>
-                      <strong>Résumé de document client</strong><br />
-                      GPT‑4, Claude
-                    </div>
-                  </div>
-
-                  <div class="list-item">
-                    <div class="list-bullet">•</div>
-                    <div>
-                      <strong>Analyse concurrentielle</strong><br />
-                      Gemini, Mistral
-                    </div>
-                  </div>
-
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px">
+                <div class="chip">
+                  <span class="chip-pill">Workspace</span>
+                  <span>Général</span>
                 </div>
 
-                <div class="pricing-cta" style="margin-top: 14px">
-                  <a href="app.html" class="btn btn-outline">Ouvrir dans le chat</a>
-                </div>
+                <button class="btn-outline btn">Exporter l’historique</button>
               </div>
 
-              <div class="card">
-                <div class="card-title">Workspace : Client A</div>
-                <p class="card-subtitle">Conversations isolées pour un client spécifique.</p>
+              <div class="list" style="margin-top: 10px">
 
-                <div class="list">
-
-                  <div class="list-item">
-                    <div class="list-bullet">✓</div>
-                    <div>
-                      <strong>Script vidéo</strong><br />
-                      Claude
-                    </div>
+                <div class="list-item">
+                  <div class="list-bullet">•</div>
+                  <div>
+                    <strong>Vous :</strong> Comment améliorer la productivité d’une équipe produit ?
+                    <div style="opacity: 0.6; font-size: 12px; margin-top: 4px">Il y a 2 jours</div>
                   </div>
-
-                  <div class="list-item">
-                    <div class="list-bullet">✓</div>
-                    <div>
-                      <strong>Pitch commercial</strong><br />
-                      GPT‑4
-                    </div>
-                  </div>
-
                 </div>
 
-                <div class="pricing-cta" style="margin-top: 14px">
-                  <a href="app.html" class="btn btn-outline">Ouvrir dans le chat</a>
-                </div>
-              </div>
-
-            </div>
-
-            <div class="grid-2" style="margin-top: 26px">
-
-              <div class="card">
-                <div class="card-title">Workspace : Équipe Produit</div>
-                <p class="card-subtitle">Specs, code, analyses techniques.</p>
-
-                <div class="list">
-
-                  <div class="list-item">
-                    <div class="list-bullet">•</div>
-                    <div>
-                      <strong>Refactorisation module API</strong><br />
-                      GPT‑4, Mistral
-                    </div>
+                <div class="list-item">
+                  <div class="list-bullet">✓</div>
+                  <div>
+                    <strong>GPT‑4 :</strong> Analyse structurée en 5 axes, priorisation et risques.
+                    <div style="opacity: 0.6; font-size: 12px; margin-top: 4px">Il y a 2 jours</div>
                   </div>
-
-                  <div class="list-item">
-                    <div class="list-bullet">•</div>
-                    <div>
-                      <strong>Analyse UX</strong><br />
-                      Claude, Gemini
-                    </div>
-                  </div>
-
                 </div>
 
-                <div class="pricing-cta" style="margin-top: 14px">
-                  <a href="app.html" class="btn btn-outline">Ouvrir dans le chat</a>
-                </div>
-              </div>
-
-              <div class="card">
-                <div class="card-title">Exports</div>
-                <p class="card-subtitle">Téléchargez vos conversations.</p>
-
-                <div class="list">
-
-                  <div class="list-item">
-                    <div class="list-bullet">⇩</div>
-                    <div>Export PDF</div>
+                <div class="list-item">
+                  <div class="list-bullet">✓</div>
+                  <div>
+                    <strong>Claude :</strong> Version orientée communication interne, prête à partager.
+                    <div style="opacity: 0.6; font-size: 12px; margin-top: 4px">Il y a 2 jours</div>
                   </div>
-
-                  <div class="list-item">
-                    <div class="list-bullet">⇩</div>
-                    <div>Export Markdown</div>
-                  </div>
-
-                  <div class="list-item">
-                    <div class="list-bullet">⇩</div>
-                    <div>Export JSON</div>
-                  </div>
-
                 </div>
 
-                <div class="pricing-cta" style="margin-top: 14px">
-                  <a href="#" class="btn btn-primary">Exporter tout</a>
+                <div class="list-item">
+                  <div class="list-bullet">✓</div>
+                  <div>
+                    <strong>Gemini :</strong> Suggestions d’automatisation et intégrations possibles.
+                    <div style="opacity: 0.6; font-size: 12px; margin-top: 4px">Il y a 2 jours</div>
+                  </div>
                 </div>
+
+                <div class="list-item">
+                  <div class="list-bullet">✓</div>
+                  <div>
+                    <strong>Mistral :</strong> Synthèse courte optimisée pour Slack.
+                    <div style="opacity: 0.6; font-size: 12px; margin-top: 4px">Il y a 2 jours</div>
+                  </div>
+                </div>
+
               </div>
 
             </div>
 
             <div style="text-align: center; margin-top: 40px">
-              <a href="dashboard.html" class="btn btn-primary">Retour au dashboard</a>
+              <a href="dashboard.html" class="btn btn-outline">Retour au dashboard</a>
             </div>
 
           </div>
@@ -207,24 +134,7 @@
 
       <footer class="app-footer">
         <div class="app-footer-inner">
-
           <div>© M@jestiOS – L’OS d’intelligences unifiées.</div>
-
-          <div class="footer-links">
-            <a href="about.html" class="footer-link">À propos</a>
-            <a href="security.html" class="footer-link">Sécurité</a>
-            <a href="comparison.html" class="footer-link">Comparaison</a>
-            <a href="roadmap.html" class="footer-link">Roadmap</a>
-            <a href="support.html" class="footer-link">Support</a>
-            <a href="faq.html" class="footer-link">FAQ</a>
-            <a href="blog.html" class="footer-link">Ressources</a>
-            <a href="mentions-legales.html" class="footer-link">Mentions légales</a>
-            <a href="privacy.html" class="footer-link">Confidentialité</a>
-            <a href="cookies.html" class="footer-link">Cookies</a>
-            <a href="cgu.html" class="footer-link">CGU</a>
-            <a href="cgv.html" class="footer-link">CGV</a>
-          </div>
-
         </div>
       </footer>
 
@@ -233,7 +143,43 @@
     <script src="assets/js/main.js"></script>
     <script src="assets/js/ui.js"></script>
     <script src="assets/js/theme.js"></script>
-    <script src="assets/js/analytics.js"></script>
+
+    <!-- AUTH PROTECTION + AFFICHAGE UTILISATEUR -->
+    <script>
+      async function checkAuth() {
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+          window.location.href = "login.html";
+          return;
+        }
+
+        const response = await fetch("http://localhost:4000/auth/me", {
+          method: "GET",
+          headers: {
+            "Authorization": "Bearer " + token
+          }
+        });
+
+        const data = await response.json();
+
+        if (data.error) {
+          localStorage.removeItem("token");
+          window.location.href = "login.html";
+          return;
+        }
+
+        // Header
+        document.getElementById("userEmail").innerText = data.user.email;
+      }
+
+      function logout() {
+        localStorage.removeItem("token");
+        window.location.href = "login.html";
+      }
+
+      checkAuth();
+    </script>
 
   </body>
 </html>

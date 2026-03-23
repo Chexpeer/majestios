@@ -8,6 +8,7 @@
       content="Notifications M@jestiOS : alertes, événements, sécurité, workspaces et gouvernance."
     />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <link rel="stylesheet" href="assets/css/theme.css" />
     <link rel="stylesheet" href="assets/css/main.css" />
     <link rel="stylesheet" href="assets/css/layout.css" />
@@ -17,8 +18,10 @@
 
   <body>
     <div class="app-shell">
+
       <header class="app-header">
         <div class="app-header-inner">
+
           <a href="index.html" class="brand">
             <div class="brand-mark">M</div>
             <div class="brand-text">
@@ -27,7 +30,7 @@
             </div>
           </a>
 
-        <nav class="nav">
+          <nav class="nav">
             <div class="nav-links">
               <a href="index.html" class="nav-link"><span>Accueil</span></a>
               <a href="features.html" class="nav-link"><span>Fonctionnalités</span></a>
@@ -40,16 +43,18 @@
             </div>
 
             <div class="nav-cta">
-              <a href="dashboard.html" class="btn btn-outline">Dashboard</a>
-              <a href="app.html" class="btn btn-primary">Chat</a>
+              <span id="userEmail" style="margin-right: 12px; opacity: 0.8"></span>
+              <button onclick="logout()" class="btn btn-outline">Déconnexion</button>
             </div>
 
             <button class="menu-toggle btn-icon">☰</button>
-        </nav>
+          </nav>
+
         </div>
       </header>
 
       <main class="app-main">
+
         <section class="section" style="padding-top: 40px">
           <div class="container">
 
@@ -68,22 +73,9 @@
                 <p class="card-subtitle">Événements liés à la sécurité et aux accès.</p>
 
                 <div class="list">
-
-                  <div class="list-item">
-                    <div class="list-bullet">•</div>
-                    <div>Nouvelle connexion détectée (Paris, France)</div>
-                  </div>
-
-                  <div class="list-item">
-                    <div class="list-bullet">•</div>
-                    <div>Clé API régénérée avec succès</div>
-                  </div>
-
-                  <div class="list-item">
-                    <div class="list-bullet">•</div>
-                    <div>Tentative d’accès refusée (workspace Client A)</div>
-                  </div>
-
+                  <div class="list-item"><div class="list-bullet">•</div><div>Nouvelle connexion détectée (Paris, France)</div></div>
+                  <div class="list-item"><div class="list-bullet">•</div><div>Clé API régénérée avec succès</div></div>
+                  <div class="list-item"><div class="list-bullet">•</div><div>Tentative d’accès refusée (workspace Client A)</div></div>
                 </div>
 
                 <div class="pricing-cta" style="margin-top: 14px">
@@ -96,22 +88,9 @@
                 <p class="card-subtitle">Activité des équipes et des projets.</p>
 
                 <div class="list">
-
-                  <div class="list-item">
-                    <div class="list-bullet">✓</div>
-                    <div>Nouveau membre ajouté au workspace Équipe Produit</div>
-                  </div>
-
-                  <div class="list-item">
-                    <div class="list-bullet">✓</div>
-                    <div>Modèle Gemini activé dans workspace Général</div>
-                  </div>
-
-                  <div class="list-item">
-                    <div class="list-bullet">✓</div>
-                    <div>Permissions mises à jour pour Client A</div>
-                  </div>
-
+                  <div class="list-item"><div class="list-bullet">✓</div><div>Nouveau membre ajouté au workspace Équipe Produit</div></div>
+                  <div class="list-item"><div class="list-bullet">✓</div><div>Modèle Gemini activé dans workspace Général</div></div>
+                  <div class="list-item"><div class="list-bullet">✓</div><div>Permissions mises à jour pour Client A</div></div>
                 </div>
 
                 <div class="pricing-cta" style="margin-top: 14px">
@@ -128,22 +107,9 @@
                 <p class="card-subtitle">Mises à jour et améliorations de l’OS.</p>
 
                 <div class="list">
-
-                  <div class="list-item">
-                    <div class="list-bullet">•</div>
-                    <div>Mise à jour du routage intelligent</div>
-                  </div>
-
-                  <div class="list-item">
-                    <div class="list-bullet">•</div>
-                    <div>Optimisation des performances du chat multi‑IA</div>
-                  </div>
-
-                  <div class="list-item">
-                    <div class="list-bullet">•</div>
-                    <div>Amélioration du mode sombre</div>
-                  </div>
-
+                  <div class="list-item"><div class="list-bullet">•</div><div>Mise à jour du routage intelligent</div></div>
+                  <div class="list-item"><div class="list-bullet">•</div><div>Optimisation des performances du chat multi‑IA</div></div>
+                  <div class="list-item"><div class="list-bullet">•</div><div>Amélioration du mode sombre</div></div>
                 </div>
 
                 <div class="pricing-cta" style="margin-top: 14px">
@@ -156,17 +122,8 @@
                 <p class="card-subtitle">Alertes liées à votre abonnement.</p>
 
                 <div class="list">
-
-                  <div class="list-item">
-                    <div class="list-bullet">•</div>
-                    <div>Facture disponible (79 €)</div>
-                  </div>
-
-                  <div class="list-item">
-                    <div class="list-bullet">•</div>
-                    <div>Renouvellement automatique confirmé</div>
-                  </div>
-
+                  <div class="list-item"><div class="list-bullet">•</div><div>Facture disponible (79 €)</div></div>
+                  <div class="list-item"><div class="list-bullet">•</div><div>Renouvellement automatique confirmé</div></div>
                 </div>
 
                 <div class="pricing-cta" style="margin-top: 14px">
@@ -182,6 +139,7 @@
 
           </div>
         </section>
+
       </main>
 
       <footer class="app-footer">
@@ -205,11 +163,49 @@
 
         </div>
       </footer>
+
     </div>
 
     <script src="assets/js/main.js"></script>
     <script src="assets/js/ui.js"></script>
     <script src="assets/js/theme.js"></script>
-    <script src="assets/js/analytics.js"></script>
+
+    <!-- AUTH PROTECTION + AFFICHAGE UTILISATEUR -->
+    <script>
+      async function checkAuth() {
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+          window.location.href = "login.html";
+          return;
+        }
+
+        const response = await fetch("http://localhost:4000/auth/me", {
+          method: "GET",
+          headers: {
+            "Authorization": "Bearer " + token
+          }
+        });
+
+        const data = await response.json();
+
+        if (data.error) {
+          localStorage.removeItem("token");
+          window.location.href = "login.html";
+          return;
+        }
+
+        document.getElementById("userEmail").innerText = data.user.email;
+      }
+
+      function logout() {
+        localStorage.removeItem("token");
+        window.location.href = "login.html";
+      }
+
+      checkAuth();
+    </script>
+
   </body>
 </html>
+

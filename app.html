@@ -8,6 +8,7 @@
       content="Chat multi‑IA de M@jestiOS : GPT‑4, Claude, Gemini et Mistral dans une interface unifiée, minimaliste et productive."
     />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <link rel="stylesheet" href="assets/css/theme.css" />
     <link rel="stylesheet" href="assets/css/main.css" />
     <link rel="stylesheet" href="assets/css/layout.css" />
@@ -17,8 +18,10 @@
 
   <body>
     <div class="app-shell">
+
       <header class="app-header">
         <div class="app-header-inner">
+
           <a href="index.html" class="brand">
             <div class="brand-mark">M</div>
             <div class="brand-text">
@@ -26,6 +29,7 @@
               <div class="brand-tagline">L’OS d’intelligences unifiées</div>
             </div>
           </a>
+
           <nav class="nav">
             <div class="nav-links">
               <a href="index.html" class="nav-link"><span>Accueil</span></a>
@@ -37,18 +41,23 @@
               <a href="blog.html" class="nav-link"><span>Ressources</span></a>
               <a href="support.html" class="nav-link"><span>Support</span></a>
             </div>
+
             <div class="nav-cta">
-              <a href="dashboard.html" class="btn btn-outline">Dashboard</a>
-              <a href="profile.html" class="btn btn-primary">Profil</a>
+              <span id="userEmail" style="margin-right: 12px; opacity: 0.8"></span>
+              <button onclick="logout()" class="btn btn-outline">Déconnexion</button>
             </div>
+
             <button class="menu-toggle btn-icon">☰</button>
           </nav>
+
         </div>
       </header>
 
       <main class="app-main">
+
         <section class="section" style="padding-top: 40px">
           <div class="container">
+
             <div class="section-header" style="text-align: center; max-width: 720px; margin: 0 auto 40px">
               <div class="section-eyebrow">Chat multi‑IA</div>
               <h1 class="section-title">Votre cockpit d’intelligences unifiées.</h1>
@@ -59,6 +68,7 @@
             </div>
 
             <div class="card" style="padding: 0; overflow: hidden">
+
               <div
                 style="
                   padding: 14px 18px;
@@ -98,79 +108,3 @@
                   style="
                     border-right: 1px solid rgba(15, 23, 42, 1);
                     padding: 14px;
-                    display: flex;
-                    flex-direction: column;
-                    gap: 10px;
-                  "
-                >
-                  <div class="card-title" style="font-size: 13px; margin-bottom: 6px">Modèles</div>
-
-                  <button class="btn-ghost" style="justify-content: flex-start; width: 100%">
-                    GPT‑4
-                  </button>
-                  <button class="btn-ghost" style="justify-content: flex-start; width: 100%">
-                    Claude
-                  </button>
-                  <button class="btn-ghost" style="justify-content: flex-start; width: 100%">
-                    Gemini
-                  </button>
-                  <button class="btn-ghost" style="justify-content: flex-start; width: 100%">
-                    Mistral
-                  </button>
-
-                  <div style="margin-top: 14px; font-size: 12px; color: var(--color-text-muted)">
-                    Routage intelligent activé
-                  </div>
-                </div>
-
-                <div style="padding: 14px; display: flex; flex-direction: column; height: 600px">
-                  <div
-                    id="chat-messages"
-                    style="
-                      flex: 1;
-                      overflow-y: auto;
-                      display: flex;
-                      flex-direction: column;
-                      gap: 10px;
-                      padding-right: 6px;
-                    "
-                  >
-                    <div class="hero-msg hero-msg-user" style="font-size: 12px">
-                      Donne-moi un plan d’action pour améliorer la productivité d’une équipe produit.
-                    </div>
-
-                    <div class="hero-msg hero-msg-ai" style="font-size: 12px">
-                      GPT‑4 : Analyse structurée en 5 axes, priorisation et risques.
-                    </div>
-
-                    <div class="hero-msg hero-msg-ai" style="font-size: 12px">
-                      Claude : Version orientée communication interne, prête à partager.
-                    </div>
-
-                    <div class="hero-msg hero-msg-ai" style="font-size: 12px">
-                      Gemini : Suggestions d’automatisation et intégrations possibles.
-                    </div>
-
-                    <div class="hero-msg hero-msg-ai" style="font-size: 12px">
-                      Mistral : Synthèse courte optimisée pour Slack.
-                    </div>
-                  </div>
-
-                  <div class="hero-chat-input" style="margin-top: 12px">
-                    <input
-                      type="text"
-                      placeholder="Posez une question, M@jestiOS orchestre les meilleures IA pour vous…"
-                    />
-                    <button class="btn-icon">⮞</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div style="text-align: center; margin-top: 30px">
-              <a href="dashboard.html" class="btn btn-outline">Accéder au dashboard</a>
-            </div>
-          </div>
-        </section>
-      </main>
-

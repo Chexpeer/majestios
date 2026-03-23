@@ -26,6 +26,7 @@
               <div class="brand-tagline">L’OS d’intelligences unifiées</div>
             </div>
           </a>
+
           <nav class="nav">
             <div class="nav-links">
               <a href="index.html" class="nav-link"><span>Accueil</span></a>
@@ -37,10 +38,12 @@
               <a href="blog.html" class="nav-link"><span>Ressources</span></a>
               <a href="support.html" class="nav-link"><span>Support</span></a>
             </div>
+
             <div class="nav-cta">
-              <a href="profile.html" class="btn btn-outline">Profil</a>
-              <a href="app.html" class="btn btn-primary">Chat</a>
+              <span id="userEmail" style="margin-right: 12px; opacity: 0.8"></span>
+              <button onclick="logout()" class="btn btn-outline">Déconnexion</button>
             </div>
+
             <button class="menu-toggle btn-icon">☰</button>
           </nav>
         </div>
@@ -57,19 +60,14 @@
               </p>
             </div>
 
+            <!-- TON CONTENU RESTE IDENTIQUE -->
             <div class="grid-2">
               <div class="card">
                 <div class="card-title">Workspaces</div>
                 <p class="card-subtitle">Gérez vos espaces par équipe, client ou projet.</p>
                 <div class="list">
-                  <div class="list-item">
-                    <div class="list-bullet">•</div>
-                    <div>3 workspaces actifs</div>
-                  </div>
-                  <div class="list-item">
-                    <div class="list-bullet">•</div>
-                    <div>Isolation des données par workspace</div>
-                  </div>
+                  <div class="list-item"><div class="list-bullet">•</div><div>3 workspaces actifs</div></div>
+                  <div class="list-item"><div class="list-bullet">•</div><div>Isolation des données par workspace</div></div>
                 </div>
                 <div class="pricing-cta" style="margin-top: 14px">
                   <a href="workspaces.html" class="btn btn-outline">Gérer les workspaces</a>
@@ -80,14 +78,8 @@
                 <div class="card-title">Modèles IA</div>
                 <p class="card-subtitle">Vue unifiée sur les modèles disponibles.</p>
                 <div class="list">
-                  <div class="list-item">
-                    <div class="list-bullet">✓</div>
-                    <div>GPT‑4, Claude, Gemini, Mistral</div>
-                  </div>
-                  <div class="list-item">
-                    <div class="list-bullet">✓</div>
-                    <div>Routage intelligent activé</div>
-                  </div>
+                  <div class="list-item"><div class="list-bullet">✓</div><div>GPT‑4, Claude, Gemini, Mistral</div></div>
+                  <div class="list-item"><div class="list-bullet">✓</div><div>Routage intelligent activé</div></div>
                 </div>
                 <div class="pricing-cta" style="margin-top: 14px">
                   <a href="app.html" class="btn btn-outline">Ouvrir le chat</a>
@@ -100,14 +92,8 @@
                 <div class="card-title">Historique</div>
                 <p class="card-subtitle">Toutes vos conversations, centralisées et exportables.</p>
                 <div class="list">
-                  <div class="list-item">
-                    <div class="list-bullet">•</div>
-                    <div>Historique unifié multi‑IA</div>
-                  </div>
-                  <div class="list-item">
-                    <div class="list-bullet">•</div>
-                    <div>Export PDF / Markdown</div>
-                  </div>
+                  <div class="list-item"><div class="list-bullet">•</div><div>Historique unifié multi‑IA</div></div>
+                  <div class="list-item"><div class="list-bullet">•</div><div>Export PDF / Markdown</div></div>
                 </div>
                 <div class="pricing-cta" style="margin-top: 14px">
                   <a href="historique.html" class="btn btn-outline">Voir l’historique</a>
@@ -118,14 +104,8 @@
                 <div class="card-title">Notifications</div>
                 <p class="card-subtitle">Suivi des actions, alertes et événements importants.</p>
                 <div class="list">
-                  <div class="list-item">
-                    <div class="list-bullet">•</div>
-                    <div>Alertes workspace</div>
-                  </div>
-                  <div class="list-item">
-                    <div class="list-bullet">•</div>
-                    <div>Notifications de gouvernance</div>
-                  </div>
+                  <div class="list-item"><div class="list-bullet">•</div><div>Alertes workspace</div></div>
+                  <div class="list-item"><div class="list-bullet">•</div><div>Notifications de gouvernance</div></div>
                 </div>
                 <div class="pricing-cta" style="margin-top: 14px">
                   <a href="notifications.html" class="btn btn-outline">Voir les notifications</a>
@@ -138,14 +118,8 @@
                 <div class="card-title">Facturation</div>
                 <p class="card-subtitle">Gérez votre abonnement et vos factures.</p>
                 <div class="list">
-                  <div class="list-item">
-                    <div class="list-bullet">•</div>
-                    <div>Plan actuel : Équipe</div>
-                  </div>
-                  <div class="list-item">
-                    <div class="list-bullet">•</div>
-                    <div>Prochaine facture : 79 €</div>
-                  </div>
+                  <div class="list-item"><div class="list-bullet">•</div><div>Plan actuel : Équipe</div></div>
+                  <div class="list-item"><div class="list-bullet">•</div><div>Prochaine facture : 79 €</div></div>
                 </div>
                 <div class="pricing-cta" style="margin-top: 14px">
                   <a href="billing.html" class="btn btn-outline">Gérer la facturation</a>
@@ -156,14 +130,8 @@
                 <div class="card-title">Paramètres</div>
                 <p class="card-subtitle">Profil, sécurité, préférences et gouvernance.</p>
                 <div class="list">
-                  <div class="list-item">
-                    <div class="list-bullet">✓</div>
-                    <div>Profil utilisateur</div>
-                  </div>
-                  <div class="list-item">
-                    <div class="list-bullet">✓</div>
-                    <div>Clés API & permissions</div>
-                  </div>
+                  <div class="list-item"><div class="list-bullet">✓</div><div>Profil utilisateur</div></div>
+                  <div class="list-item"><div class="list-bullet">✓</div><div>Clés API & permissions</div></div>
                 </div>
                 <div class="pricing-cta" style="margin-top: 14px">
                   <a href="settings.html" class="btn btn-outline">Ouvrir les paramètres</a>
@@ -202,6 +170,42 @@
     <script src="assets/js/main.js"></script>
     <script src="assets/js/ui.js"></script>
     <script src="assets/js/theme.js"></script>
-    <script src="assets/js/analytics.js"></script>
+
+    <!-- AUTH PROTECTION + AFFICHAGE UTILISATEUR -->
+    <script>
+      async function checkAuth() {
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+          window.location.href = "login.html";
+          return;
+        }
+
+        const response = await fetch("http://localhost:4000/auth/me", {
+          method: "GET",
+          headers: {
+            "Authorization": "Bearer " + token
+          }
+        });
+
+        const data = await response.json();
+
+        if (data.error) {
+          localStorage.removeItem("token");
+          window.location.href = "login.html";
+          return;
+        }
+
+        document.getElementById("userEmail").innerText = data.user.email;
+      }
+
+      function logout() {
+        localStorage.removeItem("token");
+        window.location.href = "login.html";
+      }
+
+      checkAuth();
+    </script>
+
   </body>
 </html>

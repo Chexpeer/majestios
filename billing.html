@@ -5,9 +5,10 @@
     <title>Facturation – M@jestiOS</title>
     <meta
       name="description"
-      content="Facturation M@jestiOS : abonnement, paiements, factures, plan actuel et gestion de la méthode de paiement."
+      content="Facturation M@jestiOS : abonnement, paiements, historique des factures et gestion du plan."
     />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <link rel="stylesheet" href="assets/css/theme.css" />
     <link rel="stylesheet" href="assets/css/main.css" />
     <link rel="stylesheet" href="assets/css/layout.css" />
@@ -42,8 +43,8 @@
             </div>
 
             <div class="nav-cta">
-              <a href="dashboard.html" class="btn btn-outline">Dashboard</a>
-              <a href="app.html" class="btn btn-primary">Chat</a>
+              <span id="userEmail" style="margin-right: 12px; opacity: 0.8"></span>
+              <button onclick="logout()" class="btn btn-outline">Déconnexion</button>
             </div>
 
             <button class="menu-toggle btn-icon">☰</button>
@@ -61,118 +62,40 @@
               <div class="section-eyebrow">Facturation</div>
               <h1 class="section-title">Gérez votre abonnement.</h1>
               <p class="section-subtitle">
-                Plan actuel, paiements, factures et méthode de paiement : tout est centralisé ici.
+                Plan actuel, factures, paiements et gestion de votre compte.
               </p>
             </div>
 
             <div class="grid-2">
 
               <div class="card">
-                <div class="card-title">Plan actuel</div>
-                <p class="card-subtitle">Votre abonnement en cours.</p>
+                <div class="card-title">Votre abonnement</div>
+                <p class="card-subtitle">Informations sur votre plan actuel.</p>
 
                 <div class="list">
-
-                  <div class="list-item">
-                    <div class="list-bullet">✓</div>
-                    <div>Plan : <strong>Équipe</strong></div>
-                  </div>
-
-                  <div class="list-item">
-                    <div class="list-bullet">✓</div>
-                    <div>Prix : 79 € / mois</div>
-                  </div>
-
-                  <div class="list-item">
-                    <div class="list-bullet">✓</div>
-                    <div>Renouvellement automatique activé</div>
-                  </div>
-
+                  <div class="list-item"><div class="list-bullet">•</div><div>Plan : Équipe</div></div>
+                  <div class="list-item"><div class="list-bullet">•</div><div>Prochaine facture : 79 €</div></div>
+                  <div class="list-item"><div class="list-bullet">•</div><div>Renouvellement automatique activé</div></div>
                 </div>
 
                 <div class="pricing-cta" style="margin-top: 14px">
-                  <a href="pricing.html" class="btn btn-outline">Changer de plan</a>
+                  <a href="#" class="btn btn-outline">Changer de plan</a>
                 </div>
               </div>
 
               <div class="card">
-                <div class="card-title">Méthode de paiement</div>
-                <p class="card-subtitle">Gérez votre carte ou votre mode de paiement.</p>
+                <div class="card-title">Historique des paiements</div>
+                <p class="card-subtitle">Vos factures précédentes.</p>
 
                 <div class="list">
-
-                  <div class="list-item">
-                    <div class="list-bullet">•</div>
-                    <div>Carte enregistrée : **** **** **** 4218</div>
-                  </div>
-
-                  <div class="list-item">
-                    <div class="list-bullet">•</div>
-                    <div>Expiration : 08/27</div>
-                  </div>
-
+                  <div class="list-item"><div class="list-bullet">✓</div><div>Facture #2024‑11 — 79 € — Payée</div></div>
+                  <div class="list-item"><div class="list-bullet">✓</div><div>Facture #2024‑10 — 79 € — Payée</div></div>
+                  <div class="list-item"><div class="list-bullet">✓</div><div>Facture #2024‑09 — 79 € — Payée</div></div>
                 </div>
 
                 <div class="pricing-cta" style="margin-top: 14px">
-                  <a href="#" class="btn btn-outline">Mettre à jour la carte</a>
+                  <a href="#" class="btn btn-outline">Télécharger les factures</a>
                 </div>
-              </div>
-
-            </div>
-
-            <div class="grid-2" style="margin-top: 26px">
-
-              <div class="card">
-                <div class="card-title">Factures</div>
-                <p class="card-subtitle">Téléchargez vos factures précédentes.</p>
-
-                <div class="list">
-
-                  <div class="list-item">
-                    <div class="list-bullet">⇩</div>
-                    <div>Facture #2026‑03 — 79 €</div>
-                  </div>
-
-                  <div class="list-item">
-                    <div class="list-bullet">⇩</div>
-                    <div>Facture #2026‑02 — 79 €</div>
-                  </div>
-
-                  <div class="list-item">
-                    <div class="list-bullet">⇩</div>
-                    <div>Facture #2026‑01 — 79 €</div>
-                  </div>
-
-                </div>
-
-                <div class="pricing-cta" style="margin-top: 14px">
-                  <a href="#" class="btn btn-primary">Télécharger tout</a>
-                </div>
-              </div>
-
-              <div class="card">
-                <div class="card-title">Historique de paiement</div>
-                <p class="card-subtitle">Suivi des paiements récents.</p>
-
-                <div class="list">
-
-                  <div class="list-item">
-                    <div class="list-bullet">✓</div>
-                    <div>Paiement réussi — 79 € — 03/03/2026</div>
-                  </div>
-
-                  <div class="list-item">
-                    <div class="list-bullet">✓</div>
-                    <div>Paiement réussi — 79 € — 03/02/2026</div>
-                  </div>
-
-                  <div class="list-item">
-                    <div class="list-bullet">✓</div>
-                    <div>Paiement réussi — 79 € — 03/01/2026</div>
-                  </div>
-
-                </div>
-
               </div>
 
             </div>
@@ -188,7 +111,6 @@
 
       <footer class="app-footer">
         <div class="app-footer-inner">
-
           <div>© M@jestiOS – L’OS d’intelligences unifiées.</div>
 
           <div class="footer-links">
@@ -214,7 +136,40 @@
     <script src="assets/js/main.js"></script>
     <script src="assets/js/ui.js"></script>
     <script src="assets/js/theme.js"></script>
-    <script src="assets/js/analytics.js"></script>
+
+    <!-- AUTH PROTECTION + AFFICHAGE UTILISATEUR -->
+    <script>
+      async function checkAuth() {
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+          window.location.href = "login.html";
+          return;
+        }
+
+        const response = await fetch("http://localhost:4000/auth/me", {
+          method: "GET",
+          headers: { "Authorization": "Bearer " + token }
+        });
+
+        const data = await response.json();
+
+        if (data.error) {
+          localStorage.removeItem("token");
+          window.location.href = "login.html";
+          return;
+        }
+
+        document.getElementById("userEmail").innerText = data.user.email;
+      }
+
+      function logout() {
+        localStorage.removeItem("token");
+        window.location.href = "login.html";
+      }
+
+      checkAuth();
+    </script>
 
   </body>
 </html>
