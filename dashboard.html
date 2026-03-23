@@ -1,100 +1,62 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard – M@jestiOS</title>
-
+  <meta charset="UTF-8" />
+  <title>Majestios — Dashboard</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: "Inter", sans-serif;
-    }
-
-    body {
-      background: #0d0d0d;
-      color: #fff;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-
-    /* HEADER */
-    header {
-      width: 100%;
-      padding: 20px;
-      background: #111;
-      border-bottom: 1px solid #222;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .logo {
-      font-size: 22px;
-      font-weight: 700;
-      color: #8a7bff;
-    }
-
-    .user-info {
-      font-size: 14px;
-      opacity: 0.8;
-    }
-
-    .logout-btn {
-      margin-left: 20px;
-      padding: 8px 14px;
-      background: #ff4d4d;
-      border: none;
-      border-radius: 6px;
-      color: #fff;
-      cursor: pointer;
-      font-size: 14px;
-      transition: 0.2s;
-    }
-
-    .logout-btn:hover {
-      opacity: 0.8;
-    }
-
-    /* CONTENT */
-    .content {
-      padding: 40px;
-      text-align: center;
-    }
-
-    h1 {
-      font-size: 32px;
-      margin-bottom: 20px;
-    }
-
-    p {
-      font-size: 16px;
-      opacity: 0.7;
-    }
+    body { font-family: Arial; background: #0d0d0d; color: white; padding: 40px; }
+    .box { background: #1a1a1a; padding: 30px; border-radius: 10px; max-width: 600px; margin: auto; }
+    button { padding: 10px 20px; background: #ff0044; border: none; color: white; border-radius: 6px; cursor: pointer; margin-top: 20px; }
   </style>
 </head>
 
-<body onload="checkAuth()">
+<body>
 
-  <header>
-    <div class="logo">M@jestiOS</div>
+  <div class="box">
+    <h1>Bienvenue sur Majestios</h1>
+    <p id="userInfo">Chargement...</p>
 
-    <div class="user-info">
-      Connecté en tant que : <span id="userEmail">Chargement...</span>
-      <button class="logout-btn" onclick="logout()">Déconnexion</button>
-    </div>
-  </header>
-
-  <div class="content">
-    <h1>Bienvenue sur votre Dashboard</h1>
-    <p>Votre espace personnel est maintenant accessible.</p>
+    <button id="logout">Se déconnecter</button>
   </div>
 
-  <script src="assets/js/auth.js"></script>
+  <script>
+    const API_URL = "http://localhost:5000/api/auth/me";
+
+    async function loadUser() {
+      const token = localStorage.getItem("token");
+
+      if (!token) {
+        window.location.href = "/login.html";
+        return;
+      }
+
+      const res = await fetch(API_URL, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+
+      const data = await res.json();
+
+      if (!data || !data.email) {
+        window.location.href = "/login.html";
+        return;
+      }
+
+      document.getElementById("userInfo").innerText =
+        "Connecté en tant que : " + data.email;
+    }
+
+    document.getElementById("logout").addEventListener("click", () => {
+      localStorage.removeItem("token");
+      window.location.href = "/login.html";
+    });
+
+    loadUser();
+  </script>
 
 </body>
 </html>
+
 
