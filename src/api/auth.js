@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:5000/api/auth";
+const API_URL = "https://majestios-backend.onrender.com/api/auth";
 
 export async function register(email, password) {
   const res = await fetch(`${API_URL}/register`, {
