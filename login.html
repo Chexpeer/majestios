@@ -1,95 +1,50 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
-  <head>
-    <meta charset="utf-8" />
-    <title>Connexion – M@jestiOS</title>
-    <meta
-      name="description"
-      content="Connexion à M@jestiOS – Accédez à votre OS d’intelligences unifiées."
-    />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Connexion – M@jestiOS</title>
 
-    <link rel="stylesheet" href="assets/css/theme.css" />
-    <link rel="stylesheet" href="assets/css/main.css" />
-    <link rel="stylesheet" href="assets/css/layout.css" />
-    <link rel="stylesheet" href="assets/css/components.css" />
-    <link rel="stylesheet" href="assets/css/responsive.css" />
-  </head>
+  <!-- Styles -->
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
 
-  <body>
-    <div class="app-shell">
+<body>
 
-      <header class="app-header">
-        <div class="app-header-inner">
-          <a href="index.html" class="brand">
-            <div class="brand-mark">M</div>
-            <div class="brand-text">
-              <div class="brand-name">M@jestiOS</div>
-              <div class="brand-tagline">L’OS d’intelligences unifiées</div>
-            </div>
-          </a>
-        </div>
-      </header>
+  <div class="login-container">
 
-      <main class="app-main">
+    <h1 class="login-title">Connexion</h1>
+    <p class="login-subtitle">Accédez à votre espace M@jestiOS</p>
 
-        <section class="section" style="padding-top: 60px">
-          <div class="container" style="max-width: 420px; margin: 0 auto">
+    <!-- Message d’erreur -->
+    <div id="errorBox" class="error-box" style="display:none;"></div>
 
-            <div class="card" style="padding: 30px">
+    <!-- Formulaire -->
+    <form id="loginForm" class="login-form">
 
-              <h1 class="section-title" style="text-align: center; margin-bottom: 20px">
-                Connexion
-              </h1>
+      <div class="form-group">
+        <label for="email">Adresse email</label>
+        <input type="email" id="email" placeholder="exemple@mail.com" required>
+      </div>
 
-              <p class="section-subtitle" style="text-align: center; margin-bottom: 30px">
-                Accédez à votre espace M@jestiOS.
-              </p>
+      <div class="form-group">
+        <label for="password">Mot de passe</label>
+        <input type="password" id="password" placeholder="Votre mot de passe" required>
+      </div>
 
-              <div id="errorBox" style="
-                display: none;
-                background: rgba(255,0,0,0.1);
-                color: #ff4d4d;
-                padding: 10px 14px;
-                border-radius: 6px;
-                margin-bottom: 16px;
-                font-size: 14px;
-              "></div>
+      <button type="submit" class="btn-login">Se connecter</button>
 
-              <form id="loginForm" class="form">
+    </form>
 
-                <div class="form-group">
-                  <label>Email</label>
-                  <input type="email" id="email" required placeholder="vous@exemple.com" />
-                </div>
+    <p class="login-footer">
+      Pas encore de compte ?
+      <a href="register.html">Créer un compte</a>
+    </p>
 
-                <div class="form-group" style="margin-top: 14px">
-                  <label>Mot de passe</label>
-                  <input type="password" id="password" required placeholder="••••••••" />
-                </div>
+  </div>
 
-                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 20px">
-                  Se connecter
-                </button>
+  <!-- Script Auth -->
+  <script src="assets/js/auth.js"></script>
 
-              </form>
-
-            </div>
-
-          </div>
-        </section>
-
-      </main>
-
-      <footer class="app-footer">
-        <div class="app-footer-inner" style="text-align: center">
-          © M@jestiOS – L’OS d’intelligences unifiées.
-        </div>
-      </footer>
-
-    </div>
-
-    <script src="assets/js/auth.js"></script>
-  </body>
+</body>
 </html>
-
