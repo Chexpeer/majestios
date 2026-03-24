@@ -78,6 +78,15 @@
 
     <button onclick="loginUser()">Se connecter</button>
 
+    <p style="text-align:center; margin-top:15px; font-size:14px;">
+      Pas encore de compte ?
+    </p>
+
+    <button onclick="window.location.href='register.html'" 
+            style="background:#2563eb; margin-top:5px;">
+      Créer un compte
+    </button>
+
     <p id="message"></p>
   </div>
 
@@ -95,10 +104,7 @@
           headers: {
             "Content-Type": "application/json"
           },
-          body: JSON.stringify({
-            email,
-            password
-          })
+          body: JSON.stringify({ email, password })
         });
 
         const data = await res.json();
@@ -106,7 +112,7 @@
 
         if (data.token) {
           localStorage.setItem("token", data.token);
-          window.location.href = "/profile.html"; 
+          window.location.href = "/profile.html";
         }
 
       } catch (err) {

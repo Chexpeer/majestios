@@ -76,6 +76,7 @@
     <input id="username" type="text" placeholder="Nom d'utilisateur" />
     <input id="email" type="email" placeholder="Adresse email" />
     <input id="password" type="password" placeholder="Mot de passe" />
+    <input id="confirmPassword" type="password" placeholder="Confirmer le mot de passe" />
 
     <button onclick="registerUser()">Créer mon compte</button>
 
@@ -87,9 +88,17 @@
       const username = document.getElementById("username").value.trim();
       const email = document.getElementById("email").value.trim();
       const password = document.getElementById("password").value.trim();
+      const confirmPassword = document.getElementById("confirmPassword").value.trim();
       const message = document.getElementById("message");
 
+      if (password !== confirmPassword) {
+        message.textContent = "Les mots de passe ne correspondent pas.";
+        message.style.color = "red";
+        return;
+      }
+
       message.textContent = "Chargement...";
+      message.style.color = "white";
 
       try {
         const res = await fetch("https://majestios-backend.onrender.com/api/auth/register", {
@@ -97,11 +106,7 @@
           headers: {
             "Content-Type": "application/json"
           },
-          body: JSON.stringify({
-            username,
-            email,
-            password
-          })
+          body: JSON.stringify({ username, email, password })
         });
 
         const data = await res.json();
