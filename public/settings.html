@@ -1,219 +1,191 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
-  <head>
-    <meta charset="utf-8" />
-    <title>Paramètres – M@jestiOS</title>
-    <meta
-      name="description"
-      content="Paramètres M@jestiOS : profil, sécurité, préférences, clés API et gouvernance."
-    />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Paramètres - Majestios</title>
 
-    <link rel="stylesheet" href="assets/css/theme.css" />
-    <link rel="stylesheet" href="assets/css/main.css" />
-    <link rel="stylesheet" href="assets/css/layout.css" />
-    <link rel="stylesheet" href="assets/css/components.css" />
-    <link rel="stylesheet" href="assets/css/responsive.css" />
-  </head>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #0d0d0d;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
 
-  <body>
-    <div class="app-shell">
+    .topbar {
+      width: 100%;
+      padding: 15px 25px;
+      background: #1a1a1a;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 0 10px rgba(0,0,0,0.4);
+    }
 
-      <header class="app-header">
-        <div class="app-header-inner">
+    .topbar h1 {
+      margin: 0;
+      font-size: 20px;
+      font-weight: 600;
+    }
 
-          <a href="index.html" class="brand">
-            <div class="brand-mark">M</div>
-            <div class="brand-text">
-              <div class="brand-name">M@jestiOS</div>
-              <div class="brand-tagline">L’OS d’intelligences unifiées</div>
-            </div>
-          </a>
+    .logout-btn {
+      background: #ef4444;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 6px;
+      color: white;
+      cursor: pointer;
+      transition: 0.2s;
+    }
 
-          <nav class="nav">
-            <div class="nav-links">
-              <a href="index.html" class="nav-link"><span>Accueil</span></a>
-              <a href="features.html" class="nav-link"><span>Fonctionnalités</span></a>
-              <a href="pricing.html" class="nav-link"><span>Tarifs</span></a>
-              <a href="about.html" class="nav-link"><span>À propos</span></a>
-              <a href="security.html" class="nav-link"><span>Sécurité</span></a>
-              <a href="faq.html" class="nav-link"><span>FAQ</span></a>
-              <a href="blog.html" class="nav-link"><span>Ressources</span></a>
-              <a href="support.html" class="nav-link"><span>Support</span></a>
-            </div>
+    .logout-btn:hover {
+      background: #dc2626;
+    }
 
-            <div class="nav-cta">
-              <span id="userEmail" style="margin-right: 12px; opacity: 0.8"></span>
-              <button onclick="logout()" class="btn btn-outline">Déconnexion</button>
-            </div>
+    .container {
+      padding: 30px;
+      max-width: 500px;
+      margin: auto;
+    }
 
-            <button class="menu-toggle btn-icon">☰</button>
-          </nav>
+    .card {
+      background: #1a1a1a;
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    }
 
-        </div>
-      </header>
+    .card h2 {
+      margin-top: 0;
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
 
-      <main class="app-main">
+    .info {
+      background: #2a2a2a;
+      padding: 12px;
+      border-radius: 6px;
+      margin: 8px 0;
+      font-size: 15px;
+    }
 
-        <section class="section" style="padding-top: 40px">
-          <div class="container">
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 6px;
+      border: none;
+      background: #2a2a2a;
+      color: white;
+      font-size: 15px;
+    }
 
-            <div class="section-header" style="text-align: center; max-width: 720px; margin: 0 auto 40px">
-              <div class="section-eyebrow">Paramètres</div>
-              <h1 class="section-title">Gérez votre compte.</h1>
-              <p class="section-subtitle">
-                Profil, sécurité, préférences, clés API et gouvernance.
-              </p>
-            </div>
+    button.save-btn {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      background: #4f46e5;
+      border: none;
+      border-radius: 6px;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
 
-            <div class="grid-2">
+    button.save-btn:hover {
+      background: #4338ca;
+    }
 
-              <div class="card">
-                <div class="card-title">Profil</div>
-                <p class="card-subtitle">Vos informations personnelles.</p>
+    #message {
+      margin-top: 15px;
+      font-size: 14px;
+      text-align: center;
+    }
+  </style>
+</head>
 
-                <div class="list">
-                  <div class="list-item">
-                    <div class="list-bullet">•</div>
-                    <div>Email : <span id="profileEmail">Chargement...</span></div>
-                  </div>
+<body>
 
-                  <div class="list-item">
-                    <div class="list-bullet">•</div>
-                    <div>Nom : Salah</div>
-                  </div>
-                </div>
+  <div class="topbar">
+    <h1>Paramètres Majestios</h1>
+    <button class="logout-btn" onclick="logout()">Déconnexion</button>
+  </div>
 
-                <div class="pricing-cta" style="margin-top: 14px">
-                  <a href="profile.html" class="btn btn-outline">Voir le profil</a>
-                </div>
-              </div>
+  <div class="container">
 
-              <div class="card">
-                <div class="card-title">Sécurité</div>
-                <p class="card-subtitle">Authentification et accès.</p>
-
-                <div class="list">
-                  <div class="list-item"><div class="list-bullet">✓</div><div>Authentification email</div></div>
-                  <div class="list-item"><div class="list-bullet">✓</div><div>Sessions actives : 2 appareils</div></div>
-                  <div class="list-item"><div class="list-bullet">✓</div><div>Clés API personnelles</div></div>
-                </div>
-
-                <div class="pricing-cta" style="margin-top: 14px">
-                  <a href="security.html" class="btn btn-outline">Gérer la sécurité</a>
-                </div>
-              </div>
-
-            </div>
-
-            <div class="grid-2" style="margin-top: 26px">
-
-              <div class="card">
-                <div class="card-title">Préférences</div>
-                <p class="card-subtitle">Personnalisez votre expérience.</p>
-
-                <div class="list">
-                  <div class="list-item"><div class="list-bullet">✓</div><div>Mode sombre activé</div></div>
-                  <div class="list-item"><div class="list-bullet">✓</div><div>Notifications activées</div></div>
-                  <div class="list-item"><div class="list-bullet">✓</div><div>Langue : Français</div></div>
-                </div>
-
-                <div class="pricing-cta" style="margin-top: 14px">
-                  <a href="#" class="btn btn-outline">Modifier les préférences</a>
-                </div>
-              </div>
-
-              <div class="card">
-                <div class="card-title">Gouvernance</div>
-                <p class="card-subtitle">Permissions, rôles et accès.</p>
-
-                <div class="list">
-                  <div class="list-item"><div class="list-bullet">•</div><div>Rôle : Administrateur</div></div>
-                  <div class="list-item"><div class="list-bullet">•</div><div>Accès workspace : complet</div></div>
-                </div>
-
-                <div class="pricing-cta" style="margin-top: 14px">
-                  <a href="workspaces.html" class="btn btn-outline">Voir les workspaces</a>
-                </div>
-              </div>
-
-            </div>
-
-            <div style="text-align: center; margin-top: 40px">
-              <a href="dashboard.html" class="btn btn-primary">Retour au dashboard</a>
-            </div>
-
-          </div>
-        </section>
-
-      </main>
-
-      <footer class="app-footer">
-        <div class="app-footer-inner">
-          <div>© M@jestiOS – L’OS d’intelligences unifiées.</div>
-
-          <div class="footer-links">
-            <a href="about.html" class="footer-link">À propos</a>
-            <a href="security.html" class="footer-link">Sécurité</a>
-            <a href="comparison.html" class="footer-link">Comparaison</a>
-            <a href="roadmap.html" class="footer-link">Roadmap</a>
-            <a href="support.html" class="footer-link">Support</a>
-            <a href="faq.html" class="footer-link">FAQ</a>
-            <a href="blog.html" class="footer-link">Ressources</a>
-            <a href="mentions-legales.html" class="footer-link">Mentions légales</a>
-            <a href="privacy.html" class="footer-link">Confidentialité</a>
-            <a href="cookies.html" class="footer-link">Cookies</a>
-            <a href="cgu.html" class="footer-link">CGU</a>
-            <a href="cgv.html" class="footer-link">CGV</a>
-          </div>
-        </div>
-      </footer>
-
+    <div class="card">
+      <h2>Informations actuelles</h2>
+      <div id="user-info">
+        <p id="message">Chargement...</p>
+      </div>
     </div>
 
-    <script src="assets/js/main.js"></script>
-    <script src="assets/js/ui.js"></script>
-    <script src="assets/js/theme.js"></script>
+    <div class="card">
+      <h2>Modifier mes informations</h2>
 
-    <!-- AUTH PROTECTION + AFFICHAGE UTILISATEUR -->
-    <script>
-      async function checkAuth() {
-        const token = localStorage.getItem("token");
+      <input id="new-username" type="text" placeholder="Nouveau nom d'utilisateur (optionnel)" />
+      <input id="new-email" type="email" placeholder="Nouvel email (optionnel)" />
+      <input id="new-password" type="password" placeholder="Nouveau mot de passe (optionnel)" />
 
-        if (!token) {
-          window.location.href = "login.html";
-          return;
-        }
+      <button class="save-btn" onclick="saveSettings()">Enregistrer les modifications</button>
+    </div>
 
-        const response = await fetch("http://localhost:4000/auth/me", {
+  </div>
+
+  <script>
+    async function loadSettings() {
+      const token = localStorage.getItem("token");
+      const message = document.getElementById("message");
+      const userInfo = document.getElementById("user-info");
+
+      if (!token) {
+        window.location.href = "/login.html";
+        return;
+      }
+
+      try {
+        const res = await fetch("https://majestios-backend.onrender.com/api/auth/me", {
           method: "GET",
           headers: {
             "Authorization": "Bearer " + token
           }
         });
 
-        const data = await response.json();
+        const data = await res.json();
 
-        if (data.error) {
-          localStorage.removeItem("token");
-          window.location.href = "login.html";
+        if (!res.ok) {
+          message.textContent = data.message || "Erreur";
           return;
         }
 
-        // Header
-        document.getElementById("userEmail").innerText = data.user.email;
+        userInfo.innerHTML = `
+          <div class="info"><strong>Email :</strong> ${data.user.email}</div>
+          <div class="info"><strong>Nom d'utilisateur :</strong> ${data.user.username}</div>
+          <div class="info"><strong>ID :</strong> ${data.user._id}</div>
+        `;
 
-        // Section Profil
-        document.getElementById("profileEmail").innerText = data.user.email;
+      } catch (err) {
+        console.error(err);
+        message.textContent = "Erreur réseau";
       }
+    }
 
-      function logout() {
-        localStorage.removeItem("token");
-        window.location.href = "login.html";
-      }
+    function logout() {
+      localStorage.removeItem("token");
+      window.location.href = "/login.html";
+    }
 
-      checkAuth();
-    </script>
+    function saveSettings() {
+      alert("La mise à jour du profil n'est pas encore activée côté backend. Je peux te coder ça si tu veux.");
+    }
 
-  </body>
+    loadSettings();
+  </script>
+
+</body>
 </html>
+

@@ -2,61 +2,150 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <title>Majestios — Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard - Majestios</title>
+
   <style>
-    body { font-family: Arial; background: #0d0d0d; color: white; padding: 40px; }
-    .box { background: #1a1a1a; padding: 30px; border-radius: 10px; max-width: 600px; margin: auto; }
-    button { padding: 10px 20px; background: #ff0044; border: none; color: white; border-radius: 6px; cursor: pointer; margin-top: 20px; }
+    body {
+      margin: 0;
+      padding: 0;
+      background: #0d0d0d;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+
+    .topbar {
+      width: 100%;
+      padding: 15px 25px;
+      background: #1a1a1a;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 0 10px rgba(0,0,0,0.4);
+    }
+
+    .topbar h1 {
+      margin: 0;
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    .logout-btn {
+      background: #ef4444;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 6px;
+      color: white;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .logout-btn:hover {
+      background: #dc2626;
+    }
+
+    .container {
+      padding: 30px;
+    }
+
+    .card {
+      background: #1a1a1a;
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    }
+
+    .card h2 {
+      margin-top: 0;
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .info {
+      background: #2a2a2a;
+      padding: 12px;
+      border-radius: 6px;
+      margin: 8px 0;
+      font-size: 15px;
+    }
+
+    #message {
+      margin-top: 15px;
+      font-size: 14px;
+    }
   </style>
 </head>
 
 <body>
 
-  <div class="box">
-    <h1>Bienvenue sur Majestios</h1>
-    <p id="userInfo">Chargement...</p>
+  <div class="topbar">
+    <h1>Majestios Dashboard</h1>
+    <button class="logout-btn" onclick="logout()">Déconnexion</button>
+  </div>
 
-    <button id="logout">Se déconnecter</button>
+  <div class="container">
+    <div class="card">
+      <h2>Informations utilisateur</h2>
+      <div id="user-info">
+        <p id="message">Chargement...</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Actions rapides</h2>
+      <div class="info">Accéder à mon profil</div>
+      <div class="info">Gérer mes paramètres</div>
+      <div class="info">Historique des activités</div>
+    </div>
   </div>
 
   <script>
-    const API_URL = "http://localhost:5000/api/auth/me";
-
-    async function loadUser() {
+    async function loadDashboard() {
       const token = localStorage.getItem("token");
+      const message = document.getElementById("message");
+      const userInfo = document.getElementById("user-info");
 
       if (!token) {
         window.location.href = "/login.html";
         return;
       }
 
-      const res = await fetch(API_URL, {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`
+      try {
+        const res = await fetch("https://majestios-backend.onrender.com/api/auth/me", {
+          method: "GET",
+          headers: {
+            "Authorization": "Bearer " + token
+          }
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+          message.textContent = data.message || "Erreur";
+          return;
         }
-      });
 
-      const data = await res.json();
+        userInfo.innerHTML = `
+          <div class="info"><strong>Email :</strong> ${data.user.email}</div>
+          <div class="info"><strong>Nom d'utilisateur :</strong> ${data.user.username}</div>
+          <div class="info"><strong>ID :</strong> ${data.user._id}</div>
+        `;
 
-      if (!data || !data.email) {
-        window.location.href = "/login.html";
-        return;
+      } catch (err) {
+        console.error(err);
+        message.textContent = "Erreur réseau";
       }
-
-      document.getElementById("userInfo").innerText =
-        "Connecté en tant que : " + data.email;
     }
 
-    document.getElementById("logout").addEventListener("click", () => {
+    function logout() {
       localStorage.removeItem("token");
       window.location.href = "/login.html";
-    });
+    }
 
-    loadUser();
+    loadDashboard();
   </script>
 
 </body>
 </html>
-
 

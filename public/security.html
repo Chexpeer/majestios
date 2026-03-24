@@ -1,196 +1,257 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
-  <head>
-    <meta charset="utf-8" />
-    <title>Sécurité – M@jestiOS</title>
-    <meta
-      name="description"
-      content="Sécurité M@jestiOS : authentification, sessions, permissions, clés API et gouvernance."
-    />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sécurité - Majestios</title>
 
-    <link rel="stylesheet" href="assets/css/theme.css" />
-    <link rel="stylesheet" href="assets/css/main.css" />
-    <link rel="stylesheet" href="assets/css/layout.css" />
-    <link rel="stylesheet" href="assets/css/components.css" />
-    <link rel="stylesheet" href="assets/css/responsive.css" />
-  </head>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #0d0d0d;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
 
-  <body>
-    <div class="app-shell">
+    .topbar {
+      width: 100%;
+      padding: 15px 25px;
+      background: #1a1a1a;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 0 10px rgba(0,0,0,0.4);
+    }
 
-      <header class="app-header">
-        <div class="app-header-inner">
+    .topbar h1 {
+      margin: 0;
+      font-size: 20px;
+      font-weight: 600;
+    }
 
-          <a href="index.html" class="brand">
-            <div class="brand-mark">M</div>
-            <div class="brand-text">
-              <div class="brand-name">M@jestiOS</div>
-              <div class="brand-tagline">L’OS d’intelligences unifiées</div>
-            </div>
-          </a>
+    .logout-btn {
+      background: #ef4444;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 6px;
+      color: white;
+      cursor: pointer;
+      transition: 0.2s;
+    }
 
-          <nav class="nav">
-            <div class="nav-links">
-              <a href="index.html" class="nav-link"><span>Accueil</span></a>
-              <a href="features.html" class="nav-link"><span>Fonctionnalités</span></a>
-              <a href="pricing.html" class="nav-link"><span>Tarifs</span></a>
-              <a href="about.html" class="nav-link"><span>À propos</span></a>
-              <a href="security.html" class="nav-link active"><span>Sécurité</span></a>
-              <a href="faq.html" class="nav-link"><span>FAQ</span></a>
-              <a href="blog.html" class="nav-link"><span>Ressources</span></a>
-              <a href="support.html" class="nav-link"><span>Support</span></a>
-            </div>
+    .logout-btn:hover {
+      background: #dc2626;
+    }
 
-            <div class="nav-cta">
-              <span id="userEmail" style="margin-right: 12px; opacity: 0.8"></span>
-              <button onclick="logout()" class="btn btn-outline">Déconnexion</button>
-            </div>
+    .container {
+      padding: 30px;
+      max-width: 600px;
+      margin: auto;
+    }
 
-            <button class="menu-toggle btn-icon">☰</button>
-          </nav>
+    .card {
+      background: #1a1a1a;
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    }
 
-        </div>
-      </header>
+    .card h2 {
+      margin-top: 0;
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
 
-      <main class="app-main">
+    .info {
+      background: #2a2a2a;
+      padding: 12px;
+      border-radius: 6px;
+      margin: 8px 0;
+      font-size: 15px;
+    }
 
-        <section class="section" style="padding-top: 40px">
-          <div class="container">
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 6px;
+      border: none;
+      background: #2a2a2a;
+      color: white;
+      font-size: 15px;
+    }
 
-            <div class="section-header" style="text-align: center; max-width: 760px; margin: 0 auto 40px">
-              <div class="section-eyebrow">Sécurité</div>
-              <h1 class="section-title">Votre sécurité, notre priorité.</h1>
-              <p class="section-subtitle">
-                Authentification, sessions, permissions, clés API et gouvernance : tout est centralisé ici.
-              </p>
-            </div>
+    button.save-btn {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      background: #4f46e5;
+      border: none;
+      border-radius: 6px;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
 
-            <div class="grid-2">
+    button.save-btn:hover {
+      background: #4338ca;
+    }
 
-              <div class="card">
-                <div class="card-title">Authentification</div>
-                <p class="card-subtitle">Méthodes d’accès à votre compte.</p>
+    #message {
+      margin-top: 15px;
+      font-size: 14px;
+      text-align: center;
+    }
+  </style>
+</head>
 
-                <div class="list">
-                  <div class="list-item"><div class="list-bullet">✓</div><div>Email : <span id="profileEmail">Chargement...</span></div></div>
-                  <div class="list-item"><div class="list-bullet">✓</div><div>Mot de passe sécurisé</div></div>
-                  <div class="list-item"><div class="list-bullet">•</div><div>2FA (à venir)</div></div>
-                </div>
+<body>
 
-                <div class="pricing-cta" style="margin-top: 14px">
-                  <a href="profile.html" class="btn btn-outline">Gérer le profil</a>
-                </div>
-              </div>
+  <div class="topbar">
+    <h1>Sécurité du compte</h1>
+    <button class="logout-btn" onclick="logout()">Déconnexion</button>
+  </div>
 
-              <div class="card">
-                <div class="card-title">Sessions actives</div>
-                <p class="card-subtitle">Appareils connectés à votre compte.</p>
+  <div class="container">
 
-                <div class="list">
-                  <div class="list-item"><div class="list-bullet">✓</div><div>Appareil actuel : actif</div></div>
-                  <div class="list-item"><div class="list-bullet">•</div><div>Autres sessions : 1 appareil</div></div>
-                </div>
-
-                <div class="pricing-cta" style="margin-top: 14px">
-                  <a href="#" class="btn btn-outline">Gérer les sessions</a>
-                </div>
-              </div>
-
-            </div>
-
-            <div class="grid-2" style="margin-top: 26px">
-
-              <div class="card">
-                <div class="card-title">Clés API</div>
-                <p class="card-subtitle">Accès programmatique à M@jestiOS.</p>
-
-                <div class="list">
-                  <div class="list-item"><div class="list-bullet">•</div><div>Aucune clé générée</div></div>
-                  <div class="list-item"><div class="list-bullet">•</div><div>Permissions granulaires (à venir)</div></div>
-                </div>
-
-                <div class="pricing-cta" style="margin-top: 14px">
-                  <a href="#" class="btn btn-primary">Générer une clé</a>
-                </div>
-              </div>
-
-              <div class="card">
-                <div class="card-title">Permissions & Rôles</div>
-                <p class="card-subtitle">Contrôle d’accès et gouvernance.</p>
-
-                <div class="list">
-                  <div class="list-item"><div class="list-bullet">✓</div><div>Rôle : Administrateur</div></div>
-                  <div class="list-item"><div class="list-bullet">✓</div><div>Accès complet aux workspaces</div></div>
-                </div>
-
-                <div class="pricing-cta" style="margin-top: 14px">
-                  <a href="workspaces.html" class="btn btn-outline">Voir les workspaces</a>
-                </div>
-              </div>
-
-            </div>
-
-            <div style="text-align: center; margin-top: 40px">
-              <a href="dashboard.html" class="btn btn-outline">Retour au dashboard</a>
-            </div>
-
-          </div>
-        </section>
-
-      </main>
-
-      <footer class="app-footer">
-        <div class="app-footer-inner">
-          <div>© M@jestiOS – L’OS d’intelligences unifiées.</div>
-        </div>
-      </footer>
-
+    <div class="card">
+      <h2>Informations sensibles</h2>
+      <div id="user-info">
+        <p id="message">Chargement...</p>
+      </div>
     </div>
 
-    <script src="assets/js/main.js"></script>
-    <script src="assets/js/ui.js"></script>
-    <script src="assets/js/theme.js"></script>
+    <div class="card">
+      <h2>Changer mon email</h2>
+      <input id="new-email" type="email" placeholder="Nouvel email" />
+      <button class="save-btn" onclick="updateEmail()">Mettre à jour l'email</button>
+    </div>
 
-    <!-- AUTH PROTECTION + AFFICHAGE UTILISATEUR -->
-    <script>
-      async function checkAuth() {
-        const token = localStorage.getItem("token");
+    <div class="card">
+      <h2>Changer mon nom d'utilisateur</h2>
+      <input id="new-username" type="text" placeholder="Nouveau nom d'utilisateur" />
+      <button class="save-btn" onclick="updateUsername()">Mettre à jour le nom d'utilisateur</button>
+    </div>
 
-        if (!token) {
-          window.location.href = "login.html";
-          return;
-        }
+    <div class="card">
+      <h2>Changer mon mot de passe</h2>
+      <input id="new-password" type="password" placeholder="Nouveau mot de passe" />
+      <button class="save-btn" onclick="updatePassword()">Mettre à jour le mot de passe</button>
+    </div>
 
-        const response = await fetch("http://localhost:4000/auth/me", {
+  </div>
+
+  <script>
+    const API = "https://majestios-backend.onrender.com/api/auth";
+
+    async function loadSecurity() {
+      const token = localStorage.getItem("token");
+      const message = document.getElementById("message");
+      const userInfo = document.getElementById("user-info");
+
+      if (!token) {
+        window.location.href = "/login.html";
+        return;
+      }
+
+      try {
+        const res = await fetch(`${API}/me`, {
           method: "GET",
-          headers: {
-            "Authorization": "Bearer " + token
-          }
+          headers: { "Authorization": "Bearer " + token }
         });
 
-        const data = await response.json();
+        const data = await res.json();
 
-        if (data.error) {
-          localStorage.removeItem("token");
-          window.location.href = "login.html";
+        if (!res.ok) {
+          message.textContent = data.message || "Erreur";
           return;
         }
 
-        // Header
-        document.getElementById("userEmail").innerText = data.user.email;
+        userInfo.innerHTML = `
+          <div class="info"><strong>Email :</strong> ${data.user.email}</div>
+          <div class="info"><strong>Nom d'utilisateur :</strong> ${data.user.username}</div>
+          <div class="info"><strong>ID :</strong> ${data.user._id}</div>
+        `;
 
-        // Section Authentification
-        document.getElementById("profileEmail").innerText = data.user.email;
+      } catch (err) {
+        console.error(err);
+        message.textContent = "Erreur réseau";
       }
+    }
 
-      function logout() {
-        localStorage.removeItem("token");
-        window.location.href = "login.html";
-      }
+    function logout() {
+      localStorage.removeItem("token");
+      window.location.href = "/login.html";
+    }
 
-      checkAuth();
-    </script>
+    async function updateEmail() {
+      const token = localStorage.getItem("token");
+      const newEmail = document.getElementById("new-email").value.trim();
+      const message = document.getElementById("message");
 
-  </body>
+      if (!newEmail) return message.textContent = "Veuillez entrer un email";
+
+      const res = await fetch(`${API}/update-email`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer " + token
+        },
+        body: JSON.stringify({ newEmail })
+      });
+
+      const data = await res.json();
+      message.textContent = data.message;
+      loadSecurity();
+    }
+
+    async function updateUsername() {
+      const token = localStorage.getItem("token");
+      const newUsername = document.getElementById("new-username").value.trim();
+      const message = document.getElementById("message");
+
+      if (!newUsername) return message.textContent = "Veuillez entrer un nom d'utilisateur";
+
+      const res = await fetch(`${API}/update-username`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer " + token
+        },
+        body: JSON.stringify({ newUsername })
+      });
+
+      const data = await res.json();
+      message.textContent = data.message;
+      loadSecurity();
+    }
+
+    async function updatePassword() {
+      const token = localStorage.getItem("token");
+      const newPassword = document.getElementById("new-password").value.trim();
+      const message = document.getElementById("message");
+
+      if (!newPassword) return message.textContent = "Veuillez entrer un mot de passe";
+
+      const res = await fetch(`${API}/update-password`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer " + token
+        },
+        body: JSON.stringify({ newPassword })
+      });
+
+      const data = await res.json();
+      message.textContent = data.message;
+    }
+
+    loadSecurity();
+  </script>
+
+</body>
 </html>
+
