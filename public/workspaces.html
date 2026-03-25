@@ -66,67 +66,32 @@
               </p>
             </div>
 
-            <div class="grid-2">
+            <!-- ============================
+                 FORMULAIRE DE CRÉATION
+            ============================= -->
+            <div class="card" style="max-width: 480px; margin: 0 auto 40px">
+              <div class="card-title">Créer un workspace</div>
+              <p class="card-subtitle">Ajoutez un espace pour une équipe ou un client.</p>
 
-              <div class="card">
-                <div class="card-title">Général</div>
-                <p class="card-subtitle">Workspace principal de votre organisation.</p>
-
-                <div class="list">
-                  <div class="list-item"><div class="list-bullet">•</div><div>Rôle : Administrateur</div></div>
-                  <div class="list-item"><div class="list-bullet">•</div><div>Accès complet</div></div>
-                </div>
-
-                <div class="pricing-cta" style="margin-top: 14px">
-                  <a href="app.html" class="btn btn-outline">Ouvrir</a>
-                </div>
-              </div>
-
-              <div class="card">
-                <div class="card-title">Équipe Produit</div>
-                <p class="card-subtitle">Espace dédié à la roadmap et aux analyses IA.</p>
-
-                <div class="list">
-                  <div class="list-item"><div class="list-bullet">•</div><div>Rôle : Éditeur</div></div>
-                  <div class="list-item"><div class="list-bullet">•</div><div>Accès aux modèles IA</div></div>
-                </div>
-
-                <div class="pricing-cta" style="margin-top: 14px">
-                  <a href="app.html" class="btn btn-outline">Ouvrir</a>
-                </div>
-              </div>
-
+              <form id="workspaceForm" style="margin-top: 16px">
+                <input
+                  type="text"
+                  id="workspaceName"
+                  class="input"
+                  placeholder="Nom du workspace"
+                  required
+                />
+                <button type="submit" class="btn btn-primary" style="margin-top: 12px">
+                  Créer
+                </button>
+              </form>
             </div>
 
-            <div class="grid-2" style="margin-top: 26px">
-
-              <div class="card">
-                <div class="card-title">Client A</div>
-                <p class="card-subtitle">Workspace isolé pour un client externe.</p>
-
-                <div class="list">
-                  <div class="list-item"><div class="list-bullet">•</div><div>Rôle : Lecture seule</div></div>
-                  <div class="list-item"><div class="list-bullet">•</div><div>Accès restreint</div></div>
-                </div>
-
-                <div class="pricing-cta" style="margin-top: 14px">
-                  <a href="app.html" class="btn btn-outline">Ouvrir</a>
-                </div>
-              </div>
-
-              <div class="card">
-                <div class="card-title">Créer un workspace</div>
-                <p class="card-subtitle">Ajoutez un espace pour une équipe ou un client.</p>
-
-                <div class="list">
-                  <div class="list-item"><div class="list-bullet">+</div><div>Nouveau workspace</div></div>
-                </div>
-
-                <div class="pricing-cta" style="margin-top: 14px">
-                  <a href="#" class="btn btn-primary">Créer</a>
-                </div>
-              </div>
-
+            <!-- ============================
+                 LISTE DES WORKSPACES
+            ============================= -->
+            <div class="grid-2" id="workspaceList">
+              <!-- Les workspaces seront injectés ici -->
             </div>
 
             <div style="text-align: center; margin-top: 40px">
@@ -150,42 +115,10 @@
     <script src="assets/js/ui.js"></script>
     <script src="assets/js/theme.js"></script>
 
-    <!-- AUTH PROTECTION + AFFICHAGE UTILISATEUR -->
-    <script>
-      async function checkAuth() {
-        const token = localStorage.getItem("token");
-
-        if (!token) {
-          window.location.href = "login.html";
-          return;
-        }
-
-        const response = await fetch("http://localhost:4000/auth/me", {
-          method: "GET",
-          headers: {
-            "Authorization": "Bearer " + token
-          }
-        });
-
-        const data = await response.json();
-
-        if (data.error) {
-          localStorage.removeItem("token");
-          window.location.href = "login.html";
-          return;
-        }
-
-        // Affichage dans le header
-        document.getElementById("userEmail").innerText = data.user.email;
-      }
-
-      function logout() {
-        localStorage.removeItem("token");
-        window.location.href = "login.html";
-      }
-
-      checkAuth();
-    </script>
+    <!-- AUTH + WORKSPACES -->
+    <script src="assets/js/auth.js"></script>
+    <script src="assets/js/workspaces.js"></script>
 
   </body>
 </html>
+

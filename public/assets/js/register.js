@@ -1,42 +1,50 @@
-const API_URL = "https://majestios-backend.onrender.com/api/auth/register";
+// REGISTER.JS – M@jestiOS
 
-const form = document.getElementById("registerForm");
-const errorBox = document.getElementById("errorBox");
-const successBox = document.getElementById("successBox");
+const API_URL = window.location.hostname.includes("localhost")
+  ? "http://localhost:4000"
+  : "https://majbackend.onrender.com";
 
-form.addEventListener("submit", async (e) => {
-  e.preventDefault();
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("registerForm");
+  const errorBox = document.getElementById("errorBox");
+  const successBox = document.getElementById("successBox");
 
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
-  const confirmPassword = document.getElementById("confirmPassword").value;
+  if (!form) return;
 
-  errorBox.style.display = "none";
-  successBox.style.display = "none";
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
 
-  if (password !== confirmPassword) {
-    errorBox.innerText = "Les mots de passe ne correspondent pas.";
-    errorBox.style.display = "block";
-    return;
-  }
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
+    const confirmPassword = document.getElementById("confirmPassword").value.trim();
 
-  const res = await fetch(API_URL, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email, password })
+    errorBox.style.display = "none";
+    successBox.style.display = "none";
+
+    if (password !== confirmPassword) {
+      errorBox.innerText = "Les mots de passe ne correspondent pas.";
+      errorBox.style.display = "block";
+      return;
+    }
+
+    const res = await fetch(`${API_URL}/auth/register`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password })
+    });
+
+    const data = await res.json();
+
+    if (res.ok) {
+      successBox.innerText = "Compte créé avec succès ! Redirection...";
+      successBox.style.display = "block";
+
+      setTimeout(() => {
+        window.location.href = "login.html";
+      }, 1500);
+    } else {
+      errorBox.innerText = data.error || "Erreur lors de la création du compte.";
+      errorBox.style.display = "block";
+    }
   });
-
-  const data = await res.json();
-
-  if (res.ok) {
-    successBox.innerText = "Compte créé avec succès ! Redirection...";
-    successBox.style.display = "block";
-
-    setTimeout(() => {
-      window.location.href = "login.html";
-    }, 1500);
-  } else {
-    errorBox.innerText = data.message || "Erreur lors de la création du compte.";
-    errorBox.style.display = "block";
-  }
 });
