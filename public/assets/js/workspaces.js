@@ -1,54 +1,62 @@
-// ===============================
-//  PROTECTION D’ACCÈS
-// ===============================
-const token = localStorage.getItem("token");
-if (!token) {
+// assets/js/workspaces.js
+import { getWorkspaces, createWorkspace, deleteWorkspace } from "./workspaces-api.js";
+
+const AUTH_API = "https://majestios-backend.onrender.com/api/auth";
+
+function redirectToLogin() {
   window.location.href = "login.html";
 }
 
-// ===============================
-//  CHARGER L’UTILISATEUR
-// ===============================
+function getTokenOrRedirect() {
+  const token = localStorage.getItem("token");
+  if (!token) redirectToLogin();
+  return token;
+}
+
 async function loadUser() {
+  const token = getTokenOrRedirect();
+  const emailSpan = document.getElementById("userEmail");
+
   try {
-    const res = await fetch("https://majestios-backend.onrender.com/api/auth/me", {
+    const res = await fetch(`${AUTH_API}/me`, {
       method: "GET",
-      headers: { Authorization: "Bearer " + token }
+      headers: {
+        Authorization: "Bearer " + token,
+      },
     });
 
     const data = await res.json();
 
     if (!res.ok) {
-      console.log("Erreur auth:", data);
-      window.location.href = "login.html";
+      localStorage.removeItem("token");
+      redirectToLogin();
       return;
     }
 
-    document.getElementById("userEmail").textContent = data.user.email;
-
+    if (emailSpan) emailSpan.textContent = data.user.email;
   } catch (err) {
     console.error(err);
-    window.location.href = "login.html";
+    localStorage.removeItem("token");
+    redirectToLogin();
   }
 }
 
-// ===============================
-//  CHARGER LES WORKSPACES
-// ===============================
-async function loadWorkspaces() {
+async function renderWorkspaces() {
+  const token = getTokenOrRedirect();
   const list = document.getElementById("workspaceList");
+  const message = document.getElementById("message");
+
+  if (!list) return;
+
   list.innerHTML = "<p style='opacity:0.7'>Chargement...</p>";
+  if (message) message.textContent = "";
 
   try {
-    const res = await fetch("https://majestios-backend.onrender.com/api/workspaces", {
-      method: "GET",
-      headers: { Authorization: "Bearer " + token }
-    });
+    const data = await getWorkspaces(token);
 
-    const data = await res.json();
-
-    if (!res.ok) {
-      list.innerHTML = "<p>Erreur lors du chargement.</p>";
+    if (!data || !data.workspaces) {
+      list.innerHTML = "<p>Erreur lors du chargement des workspaces.</p>";
+      if (message) message.textContent = data?.message || "Erreur";
       return;
     }
 
@@ -59,98 +67,89 @@ async function loadWorkspaces() {
 
     list.innerHTML = "";
 
-    data.workspaces.forEach(ws => {
+    data.workspaces.forEach((ws) => {
       const card = document.createElement("div");
       card.className = "card";
 
       card.innerHTML = `
-        <h3>${ws.name}</h3>
-        <p style="opacity:0.7">${ws._id}</p>
-        <button class="btn btn-outline" onclick="deleteWorkspace('${ws._id}')">Supprimer</button>
+        <div class="card-title">${ws.name}</div>
+        <p class="card-subtitle" style="opacity:0.7">ID : ${ws._id}</p>
+        <div style="margin-top: 10px">
+          <button class="btn btn-outline" data-delete="${ws._id}">Supprimer</button>
+        </div>
       `;
 
       list.appendChild(card);
     });
 
+    list.addEventListener("click", async (e) => {
+      const btn = e.target.closest("button[data-delete]");
+      if (!btn) return;
+
+      const id = btn.getAttribute("data-delete");
+      if (!id) return;
+
+      if (!confirm("Supprimer ce workspace ?")) return;
+
+      const token = getTokenOrRedirect();
+      const data = await deleteWorkspace(id, token);
+
+      if (!data || data.error) {
+        if (message) message.textContent = data?.message || "Erreur lors de la suppression.";
+        return;
+      }
+
+      if (message) message.textContent = "Workspace supprimé.";
+      renderWorkspaces();
+    }, { once: true });
+
   } catch (err) {
     console.error(err);
-    list.innerHTML = "<p>Erreur réseau.</p>";
+    list.innerHTML = "<p>Erreur réseau lors du chargement.</p>";
   }
 }
 
-// ===============================
-//  CRÉER UN WORKSPACE
-// ===============================
-document.getElementById("workspaceForm").addEventListener("submit", async (e) => {
-  e.preventDefault();
+function setupForm() {
+  const form = document.getElementById("workspaceForm");
+  const input = document.getElementById("workspaceName");
+  const message = document.getElementById("message");
 
-  const name = document.getElementById("workspaceName").value.trim();
+  if (!form || !input) return;
 
-  if (!name) return;
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const name = input.value.trim();
+    if (!name) return;
 
-  try {
-    const res = await fetch("https://majestios-backend.onrender.com/api/workspaces", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + token
-      },
-      body: JSON.stringify({ name })
-    });
+    const token = getTokenOrRedirect();
 
-    const data = await res.json();
+    const data = await createWorkspace(name, token);
 
-    if (!res.ok) {
-      alert(data.message || "Erreur");
+    if (!data || data.error) {
+      if (message) message.textContent = data?.message || "Erreur lors de la création.";
       return;
     }
 
-    document.getElementById("workspaceName").value = "";
-    loadWorkspaces();
+    if (message) message.textContent = "Workspace créé.";
+    input.value = "";
+    renderWorkspaces();
+  });
+}
 
-  } catch (err) {
-    console.error(err);
-    alert("Erreur réseau");
-  }
+function setupLogout() {
+  const btn = document.getElementById("logoutBtn");
+  if (!btn) return;
+
+  btn.addEventListener("click", () => {
+    localStorage.removeItem("token");
+    redirectToLogin();
+  });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  getTokenOrRedirect();
+  loadUser();
+  setupForm();
+  setupLogout();
+  renderWorkspaces();
 });
-
-// ===============================
-//  SUPPRIMER UN WORKSPACE
-// ===============================
-async function deleteWorkspace(id) {
-  if (!confirm("Supprimer ce workspace ?")) return;
-
-  try {
-    const res = await fetch(`https://majestios-backend.onrender.com/api/workspaces/${id}`, {
-      method: "DELETE",
-      headers: { Authorization: "Bearer " + token }
-    });
-
-    const data = await res.json();
-
-    if (!res.ok) {
-      alert(data.message || "Erreur");
-      return;
-    }
-
-    loadWorkspaces();
-
-  } catch (err) {
-    console.error(err);
-    alert("Erreur réseau");
-  }
-}
-
-// ===============================
-//  LOGOUT
-// ===============================
-function logout() {
-  localStorage.removeItem("token");
-  window.location.href = "login.html";
-}
-
-// ===============================
-//  INITIALISATION
-// ===============================
-loadUser();
-loadWorkspaces();

@@ -44,7 +44,7 @@
 
             <div class="nav-cta">
               <span id="userEmail" style="margin-right: 12px; opacity: 0.8"></span>
-              <button onclick="logout()" class="btn btn-outline">Déconnexion</button>
+              <button id="logoutBtn" class="btn btn-outline">Déconnexion</button>
             </div>
 
             <button class="menu-toggle btn-icon">☰</button>
@@ -66,9 +66,6 @@
               </p>
             </div>
 
-            <!-- ============================
-                 FORMULAIRE DE CRÉATION
-            ============================= -->
             <div class="card" style="max-width: 480px; margin: 0 auto 40px">
               <div class="card-title">Créer un workspace</div>
               <p class="card-subtitle">Ajoutez un espace pour une équipe ou un client.</p>
@@ -85,13 +82,12 @@
                   Créer
                 </button>
               </form>
+
+              <p id="message" style="margin-top: 10px; font-size: 14px; text-align: center; opacity: 0.85"></p>
             </div>
 
-            <!-- ============================
-                 LISTE DES WORKSPACES
-            ============================= -->
             <div class="grid-2" id="workspaceList">
-              <!-- Les workspaces seront injectés ici -->
+              <!-- Workspaces injectés ici -->
             </div>
 
             <div style="text-align: center; margin-top: 40px">
@@ -115,10 +111,8 @@
     <script src="assets/js/ui.js"></script>
     <script src="assets/js/theme.js"></script>
 
-    <!-- AUTH + WORKSPACES -->
-    <script src="assets/js/auth.js"></script>
-    <script src="assets/js/workspaces.js"></script>
-
+    <!-- MODULES WORKSPACES -->
+    <script type="module" src="assets/js/workspaces.js"></script>
   </body>
 </html>
 
