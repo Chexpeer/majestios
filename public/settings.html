@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Paramètres - Majestios</title>
+  <title>Paramètres – Majestios</title>
 
   <style>
     body {
@@ -12,70 +12,45 @@
       background: #0d0d0d;
       color: white;
       font-family: Arial, sans-serif;
-    }
-
-    .topbar {
-      width: 100%;
-      padding: 15px 25px;
-      background: #1a1a1a;
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
-      box-shadow: 0 0 10px rgba(0,0,0,0.4);
+      height: 100vh;
     }
 
-    .topbar h1 {
-      margin: 0;
-      font-size: 20px;
-      font-weight: 600;
-    }
-
-    .logout-btn {
-      background: #ef4444;
-      border: none;
-      padding: 10px 18px;
-      border-radius: 6px;
-      color: white;
-      cursor: pointer;
-      transition: 0.2s;
-    }
-
-    .logout-btn:hover {
-      background: #dc2626;
-    }
-
-    .container {
-      padding: 30px;
-      max-width: 500px;
-      margin: auto;
-    }
-
-    .card {
+    .box {
+      width: 420px;
       background: #1a1a1a;
-      padding: 20px;
+      padding: 25px;
       border-radius: 12px;
-      margin-bottom: 20px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+      box-shadow: 0 0 20px rgba(0,0,0,0.4);
     }
 
-    .card h2 {
-      margin-top: 0;
-      font-size: 18px;
-      margin-bottom: 10px;
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-weight: 600;
     }
 
     .info {
       background: #2a2a2a;
       padding: 12px;
       border-radius: 6px;
-      margin: 8px 0;
+      margin: 10px 0;
       font-size: 15px;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-size: 14px;
+      opacity: 0.8;
     }
 
     input {
       width: 100%;
       padding: 12px;
-      margin: 10px 0;
+      margin-top: 6px;
       border-radius: 6px;
       border: none;
       background: #2a2a2a;
@@ -83,10 +58,10 @@
       font-size: 15px;
     }
 
-    button.save-btn {
+    button {
       width: 100%;
       padding: 12px;
-      margin-top: 10px;
+      margin-top: 20px;
       background: #4f46e5;
       border: none;
       border-radius: 6px;
@@ -96,54 +71,47 @@
       transition: 0.2s;
     }
 
-    button.save-btn:hover {
+    button:hover {
       background: #4338ca;
+    }
+
+    .danger-btn {
+      background: #ef4444;
+      margin-top: 10px;
+    }
+
+    .danger-btn:hover {
+      background: #dc2626;
     }
 
     #message {
       margin-top: 15px;
-      font-size: 14px;
       text-align: center;
+      font-size: 14px;
     }
   </style>
 </head>
 
 <body>
 
-  <div class="topbar">
-    <h1>Paramètres Majestios</h1>
-    <button class="logout-btn" onclick="logout()">Déconnexion</button>
-  </div>
+  <div class="box">
+    <h2>Paramètres du compte</h2>
 
-  <div class="container">
-
-    <div class="card">
-      <h2>Informations actuelles</h2>
-      <div id="user-info">
-        <p id="message">Chargement...</p>
-      </div>
+    <div id="content">
+      <p id="message">Chargement...</p>
     </div>
 
-    <div class="card">
-      <h2>Modifier mes informations</h2>
-
-      <input id="new-username" type="text" placeholder="Nouveau nom d'utilisateur (optionnel)" />
-      <input id="new-email" type="email" placeholder="Nouvel email (optionnel)" />
-      <input id="new-password" type="password" placeholder="Nouveau mot de passe (optionnel)" />
-
-      <button class="save-btn" onclick="saveSettings()">Enregistrer les modifications</button>
-    </div>
-
+    <button onclick="logout()" class="danger-btn">Se déconnecter</button>
   </div>
 
   <script>
     async function loadSettings() {
       const token = localStorage.getItem("token");
       const message = document.getElementById("message");
-      const userInfo = document.getElementById("user-info");
+      const content = document.getElementById("content");
 
       if (!token) {
-        window.location.href = "/login.html";
+        window.location.href = "login.html";  // ⭐ Correction
         return;
       }
 
@@ -162,11 +130,59 @@
           return;
         }
 
-        userInfo.innerHTML = `
+        content.innerHTML = `
           <div class="info"><strong>Email :</strong> ${data.user.email}</div>
           <div class="info"><strong>Nom d'utilisateur :</strong> ${data.user.username}</div>
-          <div class="info"><strong>ID :</strong> ${data.user._id}</div>
+
+          <label>Nouveau nom d'utilisateur</label>
+          <input id="newUsername" type="text" placeholder="Modifier le nom d'utilisateur" />
+
+          <label>Nouveau mot de passe</label>
+          <input id="newPassword" type="password" placeholder="Modifier le mot de passe" />
+
+          <button onclick="updateSettings()">Mettre à jour</button>
         `;
+
+      } catch (err) {
+        console.error(err);
+        message.textContent = "Erreur réseau";
+      }
+    }
+
+    async function updateSettings() {
+      const token = localStorage.getItem("token");
+      const newUsername = document.getElementById("newUsername").value.trim();
+      const newPassword = document.getElementById("newPassword").value.trim();
+      const message = document.getElementById("message");
+
+      const body = {};
+      if (newUsername) body.username = newUsername;
+      if (newPassword) body.password = newPassword;
+
+      if (Object.keys(body).length === 0) {
+        message.textContent = "Aucune modification.";
+        return;
+      }
+
+      try {
+        const res = await fetch("https://majestios-backend.onrender.com/api/auth/update", {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + token
+          },
+          body: JSON.stringify(body)
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+          message.textContent = data.message || "Erreur";
+          return;
+        }
+
+        message.textContent = "Modifications enregistrées.";
+        loadSettings();
 
       } catch (err) {
         console.error(err);
@@ -176,11 +192,7 @@
 
     function logout() {
       localStorage.removeItem("token");
-      window.location.href = "/login.html";
-    }
-
-    function saveSettings() {
-      alert("La mise à jour du profil n'est pas encore activée côté backend. Je peux te coder ça si tu veux.");
+      window.location.href = "login.html";  // ⭐ Correction
     }
 
     loadSettings();

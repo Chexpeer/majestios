@@ -84,7 +84,7 @@
       const content = document.getElementById("content");
 
       if (!token) {
-        window.location.href = "/login.html";
+        window.location.href = "login.html";   <!-- ⭐ Correction -->
         return;
       }
 
@@ -117,7 +117,7 @@
 
     function logout() {
       localStorage.removeItem("token");
-      window.location.href = "/login.html";
+      window.location.href = "login.html";   <!-- ⭐ Correction -->
     }
 
     loadProfile();
@@ -125,3 +125,4 @@
 
 </body>
 </html>
+

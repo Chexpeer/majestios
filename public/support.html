@@ -208,7 +208,7 @@
           return;
         }
 
-        const response = await fetch("http://localhost:4000/auth/me", {
+        const response = await fetch("https://majestios-backend.onrender.com/api/auth/me", {
           method: "GET",
           headers: {
             "Authorization": "Bearer " + token
@@ -217,7 +217,7 @@
 
         const data = await response.json();
 
-        if (data.error) {
+        if (!response.ok) {
           localStorage.removeItem("token");
           window.location.href = "login.html";
           return;
@@ -236,3 +236,4 @@
 
   </body>
 </html>
+

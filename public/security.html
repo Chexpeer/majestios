@@ -153,7 +153,7 @@
       const userInfo = document.getElementById("user-info");
 
       if (!token) {
-        window.location.href = "/login.html";
+        window.location.href = "login.html";  // ⭐ Correction
         return;
       }
 
@@ -184,69 +184,42 @@
 
     function logout() {
       localStorage.removeItem("token");
-      window.location.href = "/login.html";
+      window.location.href = "login.html";  // ⭐ Correction
     }
 
     async function updateEmail() {
-      const token = localStorage.getItem("token");
-      const newEmail = document.getElementById("new-email").value.trim();
-      const message = document.getElementById("message");
-
-      if (!newEmail) return message.textContent = "Veuillez entrer un email";
-
-      const res = await fetch(`${API}/update-email`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": "Bearer " + token
-        },
-        body: JSON.stringify({ newEmail })
-      });
-
-      const data = await res.json();
-      message.textContent = data.message;
-      loadSecurity();
+      updateField("email", document.getElementById("new-email").value.trim());
     }
 
     async function updateUsername() {
+      updateField("username", document.getElementById("new-username").value.trim());
+    }
+
+    async function updatePassword() {
+      updateField("password", document.getElementById("new-password").value.trim());
+    }
+
+    async function updateField(field, value) {
       const token = localStorage.getItem("token");
-      const newUsername = document.getElementById("new-username").value.trim();
       const message = document.getElementById("message");
 
-      if (!newUsername) return message.textContent = "Veuillez entrer un nom d'utilisateur";
+      if (!value) {
+        message.textContent = "Veuillez remplir le champ.";
+        return;
+      }
 
-      const res = await fetch(`${API}/update-username`, {
+      const res = await fetch(`${API}/update`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
           "Authorization": "Bearer " + token
         },
-        body: JSON.stringify({ newUsername })
+        body: JSON.stringify({ [field]: value })
       });
 
       const data = await res.json();
       message.textContent = data.message;
       loadSecurity();
-    }
-
-    async function updatePassword() {
-      const token = localStorage.getItem("token");
-      const newPassword = document.getElementById("new-password").value.trim();
-      const message = document.getElementById("message");
-
-      if (!newPassword) return message.textContent = "Veuillez entrer un mot de passe";
-
-      const res = await fetch(`${API}/update-password`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": "Bearer " + token
-        },
-        body: JSON.stringify({ newPassword })
-      });
-
-      const data = await res.json();
-      message.textContent = data.message;
     }
 
     loadSecurity();

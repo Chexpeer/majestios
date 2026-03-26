@@ -107,7 +107,7 @@
       const userInfo = document.getElementById("user-info");
 
       if (!token) {
-        window.location.href = "/login.html";
+        window.location.href = "login.html";  // ⭐ Correction
         return;
       }
 
@@ -140,7 +140,7 @@
 
     function logout() {
       localStorage.removeItem("token");
-      window.location.href = "/login.html";
+      window.location.href = "login.html";  // ⭐ Correction
     }
 
     loadDashboard();
@@ -148,4 +148,5 @@
 
 </body>
 </html>
+
 

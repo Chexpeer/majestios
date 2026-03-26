@@ -1,98 +1,156 @@
-// WORKSPACES.JS – M@jestiOS
+// ===============================
+//  PROTECTION D’ACCÈS
+// ===============================
+const token = localStorage.getItem("token");
+if (!token) {
+  window.location.href = "login.html";
+}
 
-// Auto-switch backend (Render / Localhost)
-const API_URL = window.location.hostname.includes("localhost")
-  ? "http://localhost:4000"
-  : "https://majbackend.onrender.com";
+// ===============================
+//  CHARGER L’UTILISATEUR
+// ===============================
+async function loadUser() {
+  try {
+    const res = await fetch("https://majestios-backend.onrender.com/api/auth/me", {
+      method: "GET",
+      headers: { Authorization: "Bearer " + token }
+    });
 
-/* ============================
-   FETCH ALL WORKSPACES
-============================ */
-async function fetchWorkspaces() {
-  const token = localStorage.getItem("token");
-  if (!token) return;
+    const data = await res.json();
 
-  const response = await fetch(`${API_URL}/api/workspaces`, {
-    headers: { Authorization: "Bearer " + token }
-  });
+    if (!res.ok) {
+      console.log("Erreur auth:", data);
+      window.location.href = "login.html";
+      return;
+    }
 
-  const data = await response.json();
-  if (!response.ok) return;
+    document.getElementById("userEmail").textContent = data.user.email;
 
+  } catch (err) {
+    console.error(err);
+    window.location.href = "login.html";
+  }
+}
+
+// ===============================
+//  CHARGER LES WORKSPACES
+// ===============================
+async function loadWorkspaces() {
   const list = document.getElementById("workspaceList");
-  if (!list) return;
+  list.innerHTML = "<p style='opacity:0.7'>Chargement...</p>";
 
-  list.innerHTML = "";
-
-  data.workspaces.forEach(ws => {
-    const li = document.createElement("li");
-    li.className = "workspace-item";
-    li.innerHTML = `
-      <span>${ws.name}</span>
-      <button data-id="${ws._id}" class="delete-workspace">Supprimer</button>
-    `;
-    list.appendChild(li);
-  });
-
-  // Bind delete buttons
-  document.querySelectorAll(".delete-workspace").forEach(btn => {
-    btn.addEventListener("click", async () => {
-      const id = btn.getAttribute("data-id");
-      await deleteWorkspace(id);
-      fetchWorkspaces();
+  try {
+    const res = await fetch("https://majestios-backend.onrender.com/api/workspaces", {
+      method: "GET",
+      headers: { Authorization: "Bearer " + token }
     });
-  });
-}
 
-/* ============================
-   CREATE WORKSPACE
-============================ */
-async function createWorkspace(name) {
-  const token = localStorage.getItem("token");
-  if (!token) return;
+    const data = await res.json();
 
-  await fetch(`${API_URL}/api/workspaces`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: "Bearer " + token
-    },
-    body: JSON.stringify({ name })
-  });
-}
+    if (!res.ok) {
+      list.innerHTML = "<p>Erreur lors du chargement.</p>";
+      return;
+    }
 
-/* ============================
-   DELETE WORKSPACE
-============================ */
-async function deleteWorkspace(id) {
-  const token = localStorage.getItem("token");
-  if (!token) return;
+    if (data.workspaces.length === 0) {
+      list.innerHTML = "<p style='opacity:0.7'>Aucun workspace pour le moment.</p>";
+      return;
+    }
 
-  await fetch(`${API_URL}/api/workspaces/${id}`, {
-    method: "DELETE",
-    headers: { Authorization: "Bearer " + token }
-  });
-}
+    list.innerHTML = "";
 
-/* ============================
-   INIT PAGE
-============================ */
-document.addEventListener("DOMContentLoaded", async () => {
-  await checkAuth(); // vient de auth.js
+    data.workspaces.forEach(ws => {
+      const card = document.createElement("div");
+      card.className = "card";
 
-  const form = document.getElementById("workspaceForm");
-  const input = document.getElementById("workspaceName");
+      card.innerHTML = `
+        <h3>${ws.name}</h3>
+        <p style="opacity:0.7">${ws._id}</p>
+        <button class="btn btn-outline" onclick="deleteWorkspace('${ws._id}')">Supprimer</button>
+      `;
 
-  await fetchWorkspaces();
-
-  if (form && input) {
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const name = input.value.trim();
-      if (!name) return;
-      await createWorkspace(name);
-      input.value = "";
-      fetchWorkspaces();
+      list.appendChild(card);
     });
+
+  } catch (err) {
+    console.error(err);
+    list.innerHTML = "<p>Erreur réseau.</p>";
+  }
+}
+
+// ===============================
+//  CRÉER UN WORKSPACE
+// ===============================
+document.getElementById("workspaceForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const name = document.getElementById("workspaceName").value.trim();
+
+  if (!name) return;
+
+  try {
+    const res = await fetch("https://majestios-backend.onrender.com/api/workspaces", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token
+      },
+      body: JSON.stringify({ name })
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      alert(data.message || "Erreur");
+      return;
+    }
+
+    document.getElementById("workspaceName").value = "";
+    loadWorkspaces();
+
+  } catch (err) {
+    console.error(err);
+    alert("Erreur réseau");
   }
 });
+
+// ===============================
+//  SUPPRIMER UN WORKSPACE
+// ===============================
+async function deleteWorkspace(id) {
+  if (!confirm("Supprimer ce workspace ?")) return;
+
+  try {
+    const res = await fetch(`https://majestios-backend.onrender.com/api/workspaces/${id}`, {
+      method: "DELETE",
+      headers: { Authorization: "Bearer " + token }
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      alert(data.message || "Erreur");
+      return;
+    }
+
+    loadWorkspaces();
+
+  } catch (err) {
+    console.error(err);
+    alert("Erreur réseau");
+  }
+}
+
+// ===============================
+//  LOGOUT
+// ===============================
+function logout() {
+  localStorage.removeItem("token");
+  window.location.href = "login.html";
+}
+
+// ===============================
+//  INITIALISATION
+// ===============================
+loadUser();
+loadWorkspaces();
