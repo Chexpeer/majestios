@@ -3,150 +3,174 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dashboard - Majestios</title>
+  <title>Tableau de bord - Majestios</title>
+  
+  <link rel="stylesheet" href="assets/css/theme.css" />
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <link rel="stylesheet" href="assets/css/layout.css" />
+  <link rel="stylesheet" href="assets/css/components.css" />
 
   <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background: #0d0d0d;
-      color: white;
-      font-family: Arial, sans-serif;
+    body { background: #0d0d0d; color: white; font-family: 'Inter', sans-serif; }
+    
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      margin-top: 30px;
     }
 
-    .topbar {
-      width: 100%;
-      padding: 15px 25px;
+    .stat-card {
       background: #1a1a1a;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: 0 0 10px rgba(0,0,0,0.4);
-    }
-
-    .topbar h1 {
-      margin: 0;
-      font-size: 20px;
-      font-weight: 600;
-    }
-
-    .logout-btn {
-      background: #ef4444;
-      border: none;
-      padding: 10px 18px;
-      border-radius: 6px;
-      color: white;
-      cursor: pointer;
-      transition: 0.2s;
-    }
-
-    .logout-btn:hover {
-      background: #dc2626;
-    }
-
-    .container {
-      padding: 30px;
-    }
-
-    .card {
-      background: #1a1a1a;
-      padding: 20px;
+      padding: 25px;
       border-radius: 12px;
-      margin-bottom: 20px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+      border: 1px solid rgba(255,255,255,0.1);
     }
 
-    .card h2 {
-      margin-top: 0;
-      font-size: 18px;
-      margin-bottom: 10px;
+    .user-badge {
+      background: #4f46e5;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      text-transform: uppercase;
     }
 
-    .info {
-      background: #2a2a2a;
-      padding: 12px;
-      border-radius: 6px;
-      margin: 8px 0;
-      font-size: 15px;
+    /* Style du menu déroulant pour la navigation */
+    .nav-dropdown { position: relative; display: inline-block; }
+    #workspace-submenu {
+      display: none;
+      position: absolute;
+      background: #1a1a1a;
+      min-width: 200px;
+      box-shadow: 0px 8px 16px rgba(0,0,0,0.5);
+      z-index: 1000;
+      padding: 10px;
+      border-radius: 8px;
+      list-style: none;
+      border: 1px solid rgba(255,255,255,0.1);
     }
-
-    #message {
-      margin-top: 15px;
-      font-size: 14px;
-    }
+    .nav-dropdown:hover #workspace-submenu { display: block; }
   </style>
 </head>
 
 <body>
+  <div class="app-shell">
+    
+    <header class="app-header">
+      <div class="app-header-inner">
+        <a href="dashboard.html" class="brand">
+          <div class="brand-mark">M</div>
+          <div class="brand-text">
+            <div class="brand-name">M@jestiOS</div>
+          </div>
+        </a>
 
-  <div class="topbar">
-    <h1>Majestios Dashboard</h1>
-    <button class="logout-btn" onclick="logout()">Déconnexion</button>
-  </div>
+        <nav class="nav">
+          <div class="nav-links">
+            <a href="dashboard.html" class="nav-link active"><span>Dashboard</span></a>
+            
+            <div class="nav-dropdown">
+              <a href="workspaces.html" class="nav-link"><span>Mes Espaces ▾</span></a>
+              <ul id="workspace-submenu">
+                <li style="padding:10px; opacity:0.5; font-size:12px;">Chargement...</li>
+              </ul>
+            </div>
 
-  <div class="container">
-    <div class="card">
-      <h2>Informations utilisateur</h2>
-      <div id="user-info">
-        <p id="message">Chargement...</p>
+            <a href="settings.html" class="nav-link"><span>Paramètres</span></a>
+          </div>
+
+          <div class="nav-cta">
+            <span id="userEmail" style="margin-right: 12px; opacity: 0.8; font-size: 14px;"></span>
+            <button id="logoutBtn" class="btn btn-outline">Déconnexion</button>
+          </div>
+        </nav>
       </div>
-    </div>
+    </header>
 
-    <div class="card">
-      <h2>Actions rapides</h2>
-      <div class="info">Accéder à mon profil</div>
-      <div class="info">Gérer mes paramètres</div>
-      <div class="info">Historique des activités</div>
-    </div>
+    <main class="app-main">
+      <div class="container">
+        
+        <div class="section-header" style="margin-top: 40px;">
+          <span class="user-badge">Membre Majestios</span>
+          <h1 id="welcomeMessage" style="font-size: 32px; margin-top: 10px;">Bienvenue sur votre Dashboard</h1>
+          <p style="opacity:0.6;">Gérez vos IA, vos projets et vos accès en un seul endroit.</p>
+        </div>
+
+        <div class="dashboard-grid">
+          <div class="stat-card">
+            <h3>Mon Profil</h3>
+            <div id="user-details" style="margin-top: 15px;">
+              <p style="margin: 5px 0;"><strong>Pseudo :</strong> <span id="displayUsername">...</span></p>
+              <p style="margin: 5px 0;"><strong>Email :</strong> <span id="displayEmail">...</span></p>
+            </div>
+            <a href="profile.html" class="btn btn-outline btn-sm" style="margin-top: 15px; display: inline-block;">Modifier</a>
+          </div>
+
+          <div class="stat-card">
+            <h3>Actions Rapides</h3>
+            <ul style="list-style: none; padding: 0; margin-top: 15px;">
+              <li style="margin-bottom: 10px;"><a href="workspaces.html" style="color: #4f46e5; text-decoration: none;">+ Créer un nouvel espace</a></li>
+              <li style="margin-bottom: 10px;"><a href="billing.html" style="color: white; text-decoration: none; opacity: 0.8;">Voir ma facturation</a></li>
+              <li><a href="support.html" style="color: white; text-decoration: none; opacity: 0.8;">Contacter le support</a></li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </main>
+
+    <footer class="app-footer">
+      <div class="app-footer-inner">
+        <div>© M@jestiOS – L’OS d’intelligences unifiées.</div>
+      </div>
+    </footer>
   </div>
 
-  <script>
-    async function loadDashboard() {
-      const token = localStorage.getItem("token");
-      const message = document.getElementById("message");
-      const userInfo = document.getElementById("user-info");
+  <script type="module">
+    import { updateSidebarWorkspaces } from './assets/js/ui.js';
+    import { getWorkspaces } from './assets/js/workspaces-api.js';
 
+    async function initDashboard() {
+      const token = localStorage.getItem("token");
       if (!token) {
-        window.location.href = "login.html";  // ⭐ Correction
+        window.location.href = "login.html";
         return;
       }
 
       try {
-        const res = await fetch("https://majestios-backend.onrender.com/api/auth/me", {
+        // 1. Récupérer les infos de l'utilisateur
+        const userRes = await fetch("https://majestios-backend.onrender.com/api/auth/me", {
           method: "GET",
-          headers: {
-            "Authorization": "Bearer " + token
-          }
+          headers: { "Authorization": "Bearer " + token }
         });
+        const userData = await userRes.json();
 
-        const data = await res.json();
-
-        if (!res.ok) {
-          message.textContent = data.message || "Erreur";
-          return;
+        if (userRes.ok && userData.user) {
+          document.getElementById("welcomeMessage").textContent = `Ravi de vous revoir, ${userData.user.username}`;
+          document.getElementById("displayUsername").textContent = userData.user.username;
+          document.getElementById("displayEmail").textContent = userData.user.email;
+          document.getElementById("userEmail").textContent = userData.user.email;
         }
 
-        userInfo.innerHTML = `
-          <div class="info"><strong>Email :</strong> ${data.user.email}</div>
-          <div class="info"><strong>Nom d'utilisateur :</strong> ${data.user.username}</div>
-          <div class="info"><strong>ID :</strong> ${data.user._id}</div>
-        `;
+        // 2. Charger les workspaces dans le menu déroulant
+        const wsData = await getWorkspaces(token);
+        if (wsData && wsData.workspaces) {
+          updateSidebarWorkspaces(wsData.workspaces);
+        }
 
       } catch (err) {
-        console.error(err);
-        message.textContent = "Erreur réseau";
+        console.error("Erreur d'initialisation :", err);
       }
     }
 
-    function logout() {
+    // Gestion du bouton de déconnexion
+    document.getElementById("logoutBtn").addEventListener("click", () => {
       localStorage.removeItem("token");
-      window.location.href = "login.html";  // ⭐ Correction
-    }
+      window.location.href = "login.html";
+    });
 
-    loadDashboard();
+    document.addEventListener("DOMContentLoaded", initDashboard);
   </script>
-
 </body>
 </html>
-
 

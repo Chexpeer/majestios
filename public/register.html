@@ -4,82 +4,27 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Créer un compte - Majestios</title>
-
   <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background: #0d0d0d;
-      color: white;
-      font-family: Arial, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
-
-    .box {
-      width: 350px;
-      background: #1a1a1a;
-      padding: 25px;
-      border-radius: 12px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.4);
-    }
-
-    h2 {
-      text-align: center;
-      margin-bottom: 20px;
-      font-weight: 600;
-    }
-
-    input {
-      width: 100%;
-      padding: 12px;
-      margin: 10px 0;
-      border-radius: 6px;
-      border: none;
-      background: #2a2a2a;
-      color: white;
-      font-size: 15px;
-    }
-
-    button {
-      width: 100%;
-      padding: 12px;
-      margin-top: 10px;
-      background: #4f46e5;
-      border: none;
-      border-radius: 6px;
-      color: white;
-      font-size: 16px;
-      cursor: pointer;
-      transition: 0.2s;
-    }
-
-    button:hover {
-      background: #4338ca;
-    }
-
-    #message {
-      margin-top: 15px;
-      text-align: center;
-      font-size: 14px;
-    }
+    body { margin: 0; padding: 0; background: #0d0d0d; color: white; font-family: Arial, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; }
+    .box { width: 350px; background: #1a1a1a; padding: 25px; border-radius: 12px; box-shadow: 0 0 20px rgba(0,0,0,0.4); }
+    h2 { text-align: center; margin-bottom: 20px; font-weight: 600; }
+    input { width: 100%; padding: 12px; margin: 10px 0; border-radius: 6px; border: none; background: #2a2a2a; color: white; font-size: 15px; box-sizing: border-box; }
+    button { width: 100%; padding: 12px; margin-top: 10px; background: #4f46e5; border: none; border-radius: 6px; color: white; font-size: 16px; cursor: pointer; transition: 0.2s; }
+    button:hover { background: #4338ca; }
+    #message { margin-top: 15px; text-align: center; font-size: 14px; }
+    .login-link { display: block; text-align: center; margin-top: 15px; color: #4f46e5; text-decoration: none; font-size: 14px; }
   </style>
 </head>
-
 <body>
 
   <div class="box">
     <h2>Créer un compte</h2>
-
-    <input id="username" type="text" placeholder="Nom d'utilisateur" />
-    <input id="email" type="email" placeholder="Adresse email" />
-    <input id="password" type="password" placeholder="Mot de passe" />
-    <input id="confirmPassword" type="password" placeholder="Confirmer le mot de passe" />
-
+    <input id="username" type="text" placeholder="Nom d'utilisateur" required />
+    <input id="email" type="email" placeholder="Adresse email" required />
+    <input id="password" type="password" placeholder="Mot de passe" required />
+    <input id="confirmPassword" type="password" placeholder="Confirmer le mot de passe" required />
     <button onclick="registerUser()">Créer mon compte</button>
-
+    <a href="login.html" class="login-link">Déjà un compte ? Se connecter</a>
     <p id="message"></p>
   </div>
 
@@ -91,9 +36,15 @@
       const confirmPassword = document.getElementById("confirmPassword").value.trim();
       const message = document.getElementById("message");
 
+      if (!username || !email || !password) {
+        message.textContent = "Veuillez remplir tous les champs.";
+        message.style.color = "#ef4444";
+        return;
+      }
+
       if (password !== confirmPassword) {
         message.textContent = "Les mots de passe ne correspondent pas.";
-        message.style.color = "red";
+        message.style.color = "#ef4444";
         return;
       }
 
@@ -103,27 +54,26 @@
       try {
         const res = await fetch("https://majestios-backend.onrender.com/api/auth/register", {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ username, email, password })
         });
 
         const data = await res.json();
-        message.textContent = data.message;
 
-        // ⭐ REDIRECTION AJOUTÉE — CORRECTION MAJEURE
-        if (data.success) {
-          window.location.href = "login.html";
+        if (res.ok) {
+          message.style.color = "#10b981";
+          message.textContent = "Compte créé ! Redirection...";
+          setTimeout(() => { window.location.href = "login.html"; }, 1500);
+        } else {
+          message.style.color = "#ef4444";
+          message.textContent = data.message || "Erreur lors de l'inscription";
         }
-
       } catch (err) {
-        console.error(err);
+        message.style.color = "#ef4444";
         message.textContent = "Erreur réseau";
       }
     }
   </script>
-
 </body>
 </html>
 
