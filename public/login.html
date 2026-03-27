@@ -1,52 +1,144 @@
-<script>
-  async function loginUser() {
-    const emailInput = document.getElementById("email");
-    const passwordInput = document.getElementById("password");
-    const message = document.getElementById("message");
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Connexion - Majestios</title>
 
-    const email = emailInput.value.trim();
-    const password = passwordInput.value.trim();
-
-    // Empêche l’auto-remplissage de tromper le JS
-    emailInput.setAttribute("autocomplete", "off");
-    passwordInput.setAttribute("autocomplete", "off");
-
-    if (!email || !password) {
-      message.textContent = "Veuillez remplir tous les champs.";
-      return;
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #0d0d0d;
+      color: white;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
     }
 
-    message.textContent = "Connexion en cours...";
+    .box {
+      width: 350px;
+      background: #1a1a1a;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.4);
+    }
 
-    try {
-      const res = await fetch("https://majestios-backend.onrender.com/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password })
-      });
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
 
-      const data = await res.json();
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 6px;
+      border: none;
+      background: #2a2a2a;
+      color: white;
+      font-size: 15px;
+    }
 
-      if (!res.ok) {
-        message.textContent = data.message || "Identifiants incorrects.";
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      background: #4f46e5;
+      border: none;
+      border-radius: 6px;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    button:hover {
+      background: #4338ca;
+    }
+
+    #message {
+      margin-top: 15px;
+      text-align: center;
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="box">
+    <h2>Connexion</h2>
+
+    <input id="email" type="email" placeholder="Adresse email" autocomplete="off" />
+    <input id="password" type="password" placeholder="Mot de passe" autocomplete="off" />
+
+    <button onclick="loginUser()">Se connecter</button>
+
+    <p style="text-align:center; margin-top:15px; font-size:14px;">
+      Pas encore de compte ?
+    </p>
+
+    <button onclick="window.location.href='register.html'" 
+            style="background:#2563eb; margin-top:5px;">
+      Créer un compte
+    </button>
+
+    <p id="message"></p>
+  </div>
+
+  <script>
+    async function loginUser() {
+      const emailInput = document.getElementById("email");
+      const passwordInput = document.getElementById("password");
+      const message = document.getElementById("message");
+
+      const email = emailInput.value.trim();
+      const password = passwordInput.value.trim();
+
+      if (!email || !password) {
+        message.textContent = "Veuillez remplir tous les champs.";
         return;
       }
 
-      if (!data.token) {
-        message.textContent = "Erreur : aucun token reçu.";
-        return;
+      message.textContent = "Connexion en cours...";
+
+      try {
+        const res = await fetch("https://majestios-backend.onrender.com/api/auth/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, password })
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+          message.textContent = data.message || "Identifiants incorrects.";
+          return;
+        }
+
+        if (!data.token) {
+          message.textContent = "Erreur : aucun token reçu.";
+          return;
+        }
+
+        // Stockage du token et de l'utilisateur
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("user", JSON.stringify(data.user));
+
+        // Redirection
+        window.location.href = "workspaces.html";
+
+      } catch (err) {
+        console.error(err);
+        message.textContent = "Erreur réseau.";
       }
-
-      // Stockage du token
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("user", JSON.stringify(data.user));
-
-      // Redirection
-      window.location.href = "workspaces.html";
-
-    } catch (err) {
-      console.error(err);
-      message.textContent = "Erreur réseau.";
     }
-  }
-</script>
+  </script>
+
+</body>
+</html>
+
