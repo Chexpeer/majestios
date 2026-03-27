@@ -27,13 +27,14 @@ async function loadUser() {
 
     const data = await res.json();
 
-    if (!res.ok) {
+    if (!res.ok || !data.user) {
       localStorage.removeItem("token");
       redirectToLogin();
       return;
     }
 
     if (emailSpan) emailSpan.textContent = data.user.email;
+
   } catch (err) {
     console.error(err);
     localStorage.removeItem("token");
@@ -46,21 +47,19 @@ async function renderWorkspaces() {
   const list = document.getElementById("workspaceList");
   const message = document.getElementById("message");
 
-  if (!list) return;
-
   list.innerHTML = "<p style='opacity:0.7'>Chargement...</p>";
   if (message) message.textContent = "";
 
   try {
     const data = await getWorkspaces(token);
 
-    if (!data || !data.workspaces) {
+    if (!data || data.error) {
       list.innerHTML = "<p>Erreur lors du chargement des workspaces.</p>";
-      if (message) message.textContent = data?.message || "Erreur";
+      if (message) message.textContent = data?.message || "Erreur réseau.";
       return;
     }
 
-    if (data.workspaces.length === 0) {
+    if (!data.workspaces || data.workspaces.length === 0) {
       list.innerHTML = "<p style='opacity:0.7'>Aucun workspace pour le moment.</p>";
       return;
     }
@@ -101,7 +100,7 @@ async function renderWorkspaces() {
 
       if (message) message.textContent = "Workspace supprimé.";
       renderWorkspaces();
-    }, { once: true });
+    });
 
   } catch (err) {
     console.error(err);
@@ -114,15 +113,12 @@ function setupForm() {
   const input = document.getElementById("workspaceName");
   const message = document.getElementById("message");
 
-  if (!form || !input) return;
-
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
     const name = input.value.trim();
     if (!name) return;
 
     const token = getTokenOrRedirect();
-
     const data = await createWorkspace(name, token);
 
     if (!data || data.error) {
@@ -130,7 +126,7 @@ function setupForm() {
       return;
     }
 
-    if (message) message.textContent = "Workspace créé.";
+    message.textContent = "Workspace créé.";
     input.value = "";
     renderWorkspaces();
   });
@@ -138,8 +134,6 @@ function setupForm() {
 
 function setupLogout() {
   const btn = document.getElementById("logoutBtn");
-  if (!btn) return;
-
   btn.addEventListener("click", () => {
     localStorage.removeItem("token");
     redirectToLogin();
@@ -153,3 +147,4 @@ document.addEventListener("DOMContentLoaded", () => {
   setupLogout();
   renderWorkspaces();
 });
+

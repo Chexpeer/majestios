@@ -2,6 +2,21 @@
 
 const WORKSPACE_API = "https://majestios-backend.onrender.com/api/workspaces";
 
+async function safeJson(res) {
+  let bodyText = "";
+  try {
+    bodyText = await res.text();        // on lit toujours la réponse
+    return JSON.parse(bodyText);        // on tente de parser en JSON
+  } catch (e) {
+    console.error("Réponse non JSON de l’API workspaces :", bodyText);
+    return {
+      error: true,
+      message: `Réponse invalide du serveur (status ${res.status})`,
+      raw: bodyText,
+    };
+  }
+}
+
 export async function getWorkspaces(token) {
   const res = await fetch(WORKSPACE_API, {
     method: "GET",
@@ -10,7 +25,7 @@ export async function getWorkspaces(token) {
     },
   });
 
-  return res.json();
+  return safeJson(res);
 }
 
 export async function createWorkspace(name, token) {
@@ -23,7 +38,7 @@ export async function createWorkspace(name, token) {
     body: JSON.stringify({ name }),
   });
 
-  return res.json();
+  return safeJson(res);
 }
 
 export async function deleteWorkspace(id, token) {
@@ -34,6 +49,5 @@ export async function deleteWorkspace(id, token) {
     },
   });
 
-  return res.json();
+  return safeJson(res);
 }
-
