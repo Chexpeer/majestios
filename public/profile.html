@@ -1,128 +1,209 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Profil - Majestios</title>
+  <head>
+    <meta charset="utf-8" />
+    <title>Profil – M@jestiOS</title>
+    <meta
+      name="description"
+      content="Gérez votre profil utilisateur M@jestiOS : email, sécurité, préférences et informations personnelles."
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background: #0d0d0d;
-      color: white;
-      font-family: Arial, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
+    <link rel="stylesheet" href="assets/css/theme.css" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <link rel="stylesheet" href="assets/css/layout.css" />
+    <link rel="stylesheet" href="assets/css/components.css" />
+    <link rel="stylesheet" href="assets/css/responsive.css" />
+  </head>
 
-    .box {
-      width: 380px;
-      background: #1a1a1a;
-      padding: 25px;
-      border-radius: 12px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.4);
-    }
+  <body>
+    <div class="app-shell">
 
-    h2 {
-      text-align: center;
-      margin-bottom: 20px;
-      font-weight: 600;
-    }
+      <!-- HEADER UNIFIÉ + BARRE IA PREMIUM -->
+      <header class="app-header">
+        <div class="app-header-inner">
 
-    .info {
-      background: #2a2a2a;
-      padding: 12px;
-      border-radius: 6px;
-      margin: 10px 0;
-      font-size: 15px;
-    }
+          <a href="dashboard.html" class="brand">
+            <div class="brand-mark">M</div>
+            <div class="brand-text">
+              <div class="brand-name">M@jestiOS</div>
+              <div class="brand-tagline">L’OS d’intelligences unifiées</div>
+            </div>
+          </a>
 
-    button {
-      width: 100%;
-      padding: 12px;
-      margin-top: 20px;
-      background: #ef4444;
-      border: none;
-      border-radius: 6px;
-      color: white;
-      font-size: 16px;
-      cursor: pointer;
-      transition: 0.2s;
-    }
+          <!-- BARRE IA PREMIUM -->
+          <form
+            class="ia-bar"
+            action="app.html"
+            method="GET"
+            style="
+              flex: 1;
+              max-width: 520px;
+              margin: 0 24px;
+              display: flex;
+              align-items: center;
+              gap: 8px;
+              padding: 8px 12px;
+              border-radius: 999px;
+              background: rgba(15,23,42,0.9);
+              border: 1px solid rgba(148,163,184,0.35);
+            "
+          >
+            <span
+              style="
+                width: 22px;
+                height: 22px;
+                border-radius: 999px;
+                background: radial-gradient(circle at 30% 30%, #22c55e, #4f46e5);
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 12px;
+              "
+            >
+              ✦
+            </span>
+            <input
+              type="text"
+              name="prompt"
+              placeholder="Demandez à vos IA unifiées…"
+              style="
+                flex: 1;
+                border: none;
+                background: transparent;
+                color: #e5e7eb;
+                font-size: 14px;
+                outline: none;
+              "
+            />
+            <button
+              type="submit"
+              class="btn btn-primary"
+              style="padding: 6px 14px; font-size: 13px; border-radius: 999px;"
+            >
+              Lancer
+            </button>
+          </form>
 
-    button:hover {
-      background: #dc2626;
-    }
+          <nav class="nav">
+            <div class="nav-links">
+              <a href="dashboard.html" class="nav-link"><span>Dashboard</span></a>
+              <a href="workspaces.html" class="nav-link"><span>Mes espaces</span></a>
+              <a href="settings.html" class="nav-link"><span>Paramètres</span></a>
+              <a href="profile.html" class="nav-link nav-link-active"><span>Profil</span></a>
+            </div>
 
-    #message {
-      margin-top: 15px;
-      text-align: center;
-      font-size: 14px;
-    }
-  </style>
-</head>
+            <div class="nav-cta">
+              <span id="userEmail" style="margin-right: 12px; opacity: 0.8; font-size: 14px;"></span>
+              <button onclick="logout()" class="btn btn-outline">Déconnexion</button>
+            </div>
 
-<body>
+            <button class="menu-toggle btn-icon">☰</button>
+          </nav>
 
-  <div class="box">
-    <h2>Mon Profil</h2>
+        </div>
+      </header>
 
-    <div id="content">
-      <p id="message">Chargement...</p>
+      <!-- CONTENU DE LA PAGE PROFIL -->
+      <main class="app-main">
+        <section class="section">
+          <div class="container" style="max-width: 720px;">
+
+            <div class="section-header" style="text-align: center;">
+              <div class="section-eyebrow">Compte</div>
+              <h1 class="section-title">Votre profil utilisateur</h1>
+              <p class="section-subtitle">
+                Gérez vos informations personnelles, votre email et vos préférences.
+              </p>
+            </div>
+
+            <div class="card" style="padding: 24px;">
+
+              <h3 class="card-title" style="margin-bottom: 16px;">Informations du compte</h3>
+
+              <div class="list" style="margin-bottom: 20px;">
+                <div class="list-item">
+                  <div class="list-bullet">•</div>
+                  <div>
+                    <strong>Email :</strong>
+                    <span id="profileEmail" style="opacity: 0.8;">Chargement…</span>
+                  </div>
+                </div>
+
+                <div class="list-item">
+                  <div class="list-bullet">•</div>
+                  <div>
+                    <strong>ID utilisateur :</strong>
+                    <span id="profileId" style="opacity: 0.8;">Chargement…</span>
+                  </div>
+                </div>
+              </div>
+
+              <hr style="border-color: rgba(30,64,175,0.6); margin: 20px 0;" />
+
+              <h3 class="card-title" style="margin-bottom: 16px;">Sécurité</h3>
+
+              <p class="card-subtitle" style="margin-bottom: 12px;">
+                Vous pouvez mettre à jour votre mot de passe depuis la page Paramètres.
+              </p>
+
+              <a href="settings.html" class="btn btn-outline">Aller aux paramètres</a>
+
+            </div>
+
+          </div>
+        </section>
+      </main>
+
+      <!-- FOOTER UNIFIÉ -->
+      <footer class="app-footer">
+        <div class="app-footer-inner">
+          <div>© M@jestiOS – L’OS d’intelligences unifiées.</div>
+        </div>
+      </footer>
+
     </div>
 
-    <button onclick="logout()">Se déconnecter</button>
-  </div>
-
-  <script>
-    async function loadProfile() {
-      const token = localStorage.getItem("token");
-      const message = document.getElementById("message");
-      const content = document.getElementById("content");
-
-      if (!token) {
-        window.location.href = "login.html";   <!-- ⭐ Correction -->
-        return;
+    <!-- LOGIQUE JS -->
+    <script type="module">
+      function logout() {
+        localStorage.removeItem("token");
+        window.location.href = "login.html";
       }
 
-      try {
-        const res = await fetch("https://majestios-backend.onrender.com/api/auth/me", {
-          method: "GET",
-          headers: {
-            "Authorization": "Bearer " + token
-          }
-        });
-
-        const data = await res.json();
-
-        if (!res.ok) {
-          message.textContent = data.message || "Erreur";
+      async function initProfile() {
+        const token = localStorage.getItem("token");
+        if (!token) {
+          window.location.href = "login.html";
           return;
         }
 
-        content.innerHTML = `
-          <div class="info"><strong>Email :</strong> ${data.user.email}</div>
-          <div class="info"><strong>Nom d'utilisateur :</strong> ${data.user.username}</div>
-          <div class="info"><strong>ID :</strong> ${data.user._id}</div>
-        `;
+        try {
+          const res = await fetch("https://majestios-backend.onrender.com/api/auth/me", {
+            method: "GET",
+            headers: { "Authorization": "Bearer " + token }
+          });
 
-      } catch (err) {
-        console.error(err);
-        message.textContent = "Erreur réseau";
+          const data = await res.json();
+
+          if (res.ok && data.user) {
+            document.getElementById("userEmail").textContent = data.user.email;
+            document.getElementById("profileEmail").textContent = data.user.email;
+            document.getElementById("profileId").textContent = data.user._id;
+          }
+        } catch (e) {
+          console.error(e);
+        }
       }
-    }
 
-    function logout() {
-      localStorage.removeItem("token");
-      window.location.href = "login.html";   <!-- ⭐ Correction -->
-    }
+      document.addEventListener("DOMContentLoaded", initProfile);
+    </script>
 
-    loadProfile();
-  </script>
-
-</body>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/ui.js"></script>
+    <script src="assets/js/theme.js"></script>
+    <script src="assets/js/analytics.js"></script>
+  </body>
 </html>
+
 

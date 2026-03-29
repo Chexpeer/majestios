@@ -1,0 +1,69 @@
+Microsoft Windows [version 10.0.26200.8037]
+(c) Microsoft Corporation. Tous droits réservés.
+
+C:\GitHub\Majestios>tree /f /a
+Structure du dossier
+Le numéro de série du volume est 3A07-7179
+C:.
+|   .gitattributes
+|
++---public
+|   |   about.html
+|   |   app.html
+|   |   billing.html
+|   |   blog.html
+|   |   cgu.html
+|   |   cgv.html
+|   |   comparison.html
+|   |   cookies.html
+|   |   dashboard.html
+|   |   faq.html
+|   |   features.html
+|   |   historique.html
+|   |   index.html
+|   |   login.html
+|   |   mentions-legales.html
+|   |   multi-IA.html
+|   |   notifications.html
+|   |   pricing.html
+|   |   privacy.html
+|   |   profile.html
+|   |   register.html
+|   |   roadmap.html
+|   |   security.html
+|   |   settings.html
+|   |   support.html
+|   |   workspaces.html
+|   |
+|   \---assets
+|       +---css
+|       |       components.css
+|       |       layout.css
+|       |       main.css
+|       |       responsive.css
+|       |       style.css
+|       |       theme.css
+|       |
+|       +---data
+|       |       models.json
+|       |       settings.json
+|       |       user.json
+|       |       workspaces.json
+|       |
+|       \---js
+|               analytics.js
+|               auth.js
+|               main.js
+|               register.js
+|               theme.js
+|               ui.js
+|               workspaces-api.js
+|               workspaces.js
+|
+\---src
+    \---api
+            auth.js
+            Nouveau Document texte.txt
+
+
+C:\GitHub\Majestios>

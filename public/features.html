@@ -8,6 +8,7 @@
       content="Découvrez les fonctionnalités de M@jestiOS : un OS minimaliste qui mutualise GPT‑4, Claude, Gemini et Mistral dans une interface unifiée."
     />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <link rel="stylesheet" href="assets/css/theme.css" />
     <link rel="stylesheet" href="assets/css/main.css" />
     <link rel="stylesheet" href="assets/css/layout.css" />
@@ -17,8 +18,11 @@
 
   <body>
     <div class="app-shell">
+
+      <!-- HEADER UNIFIÉ + BARRE IA PREMIUM -->
       <header class="app-header">
         <div class="app-header-inner">
+
           <a href="index.html" class="brand">
             <div class="brand-mark">M</div>
             <div class="brand-text">
@@ -26,6 +30,61 @@
               <div class="brand-tagline">L’OS d’intelligences unifiées</div>
             </div>
           </a>
+
+          <!-- BARRE IA PREMIUM -->
+          <form
+            class="ia-bar"
+            action="app.html"
+            method="GET"
+            style="
+              flex: 1;
+              max-width: 520px;
+              margin: 0 24px;
+              display: flex;
+              align-items: center;
+              gap: 8px;
+              padding: 8px 12px;
+              border-radius: 999px;
+              background: rgba(15,23,42,0.9);
+              border: 1px solid rgba(148,163,184,0.35);
+            "
+          >
+            <span
+              style="
+                width: 22px;
+                height: 22px;
+                border-radius: 999px;
+                background: radial-gradient(circle at 30% 30%, #22c55e, #4f46e5);
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 12px;
+              "
+            >
+              ✦
+            </span>
+            <input
+              type="text"
+              name="prompt"
+              placeholder="Demandez à vos IA unifiées…"
+              style="
+                flex: 1;
+                border: none;
+                background: transparent;
+                color: #e5e7eb;
+                font-size: 14px;
+                outline: none;
+              "
+            />
+            <button
+              type="submit"
+              class="btn btn-primary"
+              style="padding: 6px 14px; font-size: 13px; border-radius: 999px;"
+            >
+              Lancer
+            </button>
+          </form>
+
           <nav class="nav">
             <div class="nav-links">
               <a href="index.html" class="nav-link"><span>Accueil</span></a>
@@ -37,45 +96,56 @@
               <a href="blog.html" class="nav-link"><span>Ressources</span></a>
               <a href="support.html" class="nav-link"><span>Support</span></a>
             </div>
+
             <div class="nav-cta">
               <a href="login.html" class="btn btn-outline">Connexion</a>
               <a href="app.html" class="btn btn-primary">Ouvrir le chat</a>
             </div>
+
             <button class="menu-toggle btn-icon">☰</button>
           </nav>
+
         </div>
       </header>
 
+      <!-- CONTENU ORIGINAL (inchangé, juste harmonisé) -->
       <main class="app-main">
+
         <section class="hero">
           <div class="container">
             <div class="hero-header" style="max-width: 720px; margin: 0 auto; text-align: center">
+
               <div class="hero-badges" style="justify-content: center">
                 <div class="badge">
                   <span class="badge-dot"></span>
-                  <span>GPT‑4, Claude, Gemini &amp; Mistral unifiés</span>
+                  <span>GPT‑4, Claude, Gemini & Mistral unifiés</span>
                 </div>
                 <div class="chip">
                   <span class="chip-pill">OS d’intelligences</span>
                   <span>Vue centralisée</span>
                 </div>
               </div>
+
               <h1 class="hero-title">
                 Toutes vos IA premium,
                 <span>dans une seule interface</span>.
               </h1>
+
               <p class="hero-subtitle" style="margin: 0 auto">
                 M@jestiOS orchestre vos modèles, vos workspaces, vos historiques et vos coûts dans un cockpit
                 minimaliste pensé pour la productivité.
               </p>
+
               <div class="hero-actions" style="justify-content: center">
                 <a href="app.html" class="btn btn-primary">Essayer le chat multi‑IA</a>
                 <a href="pricing.html" class="btn btn-ghost">Voir les tarifs</a>
               </div>
+
             </div>
           </div>
         </section>
 
+        <!-- SECTION 1 -->
         <section class="section">
           <div class="container">
             <div class="section-header">
@@ -94,18 +164,9 @@
                   GPT‑4, Claude, Gemini et Mistral accessibles dans une seule interface fluide.
                 </p>
                 <div class="list">
-                  <div class="list-item">
-                    <div class="list-bullet">•</div>
-                    <div>Basculer entre modèles en un clic.</div>
-                  </div>
-                  <div class="list-item">
-                    <div class="list-bullet">•</div>
-                    <div>Comparer les réponses sans changer d’onglet.</div>
-                  </div>
-                  <div class="list-item">
-                    <div class="list-bullet">•</div>
-                    <div>Historique unifié, exportable.</div>
-                  </div>
+                  <div class="list-item"><div class="list-bullet">•</div><div>Basculer entre modèles en un clic.</div></div>
+                  <div class="list-item"><div class="list-bullet">•</div><div>Comparer les réponses sans changer d’onglet.</div></div>
+                  <div class="list-item"><div class="list-bullet">•</div><div>Historique unifié, exportable.</div></div>
                 </div>
               </div>
 
@@ -115,32 +176,23 @@
                   L’OS choisit automatiquement le meilleur modèle selon la tâche, la qualité attendue et le coût.
                 </p>
                 <div class="list">
-                  <div class="list-item">
-                    <div class="list-bullet">✓</div>
-                    <div>Optimisation qualité / coût.</div>
-                  </div>
-                  <div class="list-item">
-                    <div class="list-bullet">✓</div>
-                    <div>Stratégies personnalisées par workspace.</div>
-                  </div>
-                  <div class="list-item">
-                    <div class="list-bullet">✓</div>
-                    <div>Contrôle manuel possible à tout moment.</div>
-                  </div>
+                  <div class="list-item"><div class="list-bullet">✓</div><div>Optimisation qualité / coût.</div></div>
+                  <div class="list-item"><div class="list-bullet">✓</div><div>Stratégies personnalisées par workspace.</div></div>
+                  <div class="list-item"><div class="list-bullet">✓</div><div>Contrôle manuel possible à tout moment.</div></div>
                 </div>
               </div>
             </div>
           </div>
         </section>
 
+        <!-- SECTION 2 -->
         <section class="section">
           <div class="container">
             <div class="section-header">
               <div class="section-eyebrow">Organisation</div>
               <h2 class="section-title">Workspaces, permissions et gouvernance.</h2>
               <p class="section-subtitle">
-                Structurez vos projets, vos équipes et vos clients dans des espaces dédiés, chacun avec ses propres
-                modèles, historiques et règles.
+                Structurez vos projets, vos équipes et vos clients dans des espaces dédiés, chacun avec ses propres modèles, historiques et règles.
               </p>
             </div>
 
@@ -151,49 +203,34 @@
                   Un espace par client, par équipe ou par projet, avec ses propres paramètres.
                 </p>
                 <div class="list">
-                  <div class="list-item">
-                    <div class="list-bullet">•</div>
-                    <div>Isolation des conversations et des clés.</div>
-                  </div>
-                  <div class="list-item">
-                    <div class="list-bullet">•</div>
-                    <div>Modèles activés ou désactivés par workspace.</div>
-                  </div>
+                  <div class="list-item"><div class="list-bullet">•</div><div>Isolation des conversations et des clés.</div></div>
+                  <div class="list-item"><div class="list-bullet">•</div><div>Modèles activés ou désactivés par workspace.</div></div>
                 </div>
               </div>
 
               <div class="card">
-                <div class="card-title">Permissions &amp; rôles</div>
+                <div class="card-title">Permissions & rôles</div>
                 <p class="card-subtitle">
                   Contrôlez qui peut utiliser quels modèles et accéder à quels historiques.
                 </p>
                 <div class="list">
-                  <div class="list-item">
-                    <div class="list-bullet">✓</div>
-                    <div>Rôles simples et clairs.</div>
-                  </div>
-                  <div class="list-item">
-                    <div class="list-bullet">✓</div>
-                    <div>Accès restreint aux modèles coûteux.</div>
-                  </div>
-                  <div class="list-item">
-                    <div class="list-bullet">✓</div>
-                    <div>Logs et audit centralisés.</div>
-                  </div>
+                  <div class="list-item"><div class="list-bullet">✓</div><div>Rôles simples et clairs.</div></div>
+                  <div class="list-item"><div class="list-bullet">✓</div><div>Accès restreint aux modèles coûteux.</div></div>
+                  <div class="list-item"><div class="list-bullet">✓</div><div>Logs et audit centralisés.</div></div>
                 </div>
               </div>
             </div>
           </div>
         </section>
 
+        <!-- SECTION 3 -->
         <section class="section">
           <div class="container">
             <div class="section-header">
               <div class="section-eyebrow">Productivité</div>
               <h2 class="section-title">Pensé pour aller vite, sans friction.</h2>
               <p class="section-subtitle">
-                Une interface minimaliste, des raccourcis, des exports, des comparaisons instantanées. Tout est
-                optimisé pour réduire le temps entre l’idée et le résultat.
+                Une interface minimaliste, des raccourcis, des exports, des comparaisons instantanées.
               </p>
             </div>
 
@@ -204,31 +241,19 @@
                   Comparez les réponses de plusieurs IA sur une même requête.
                 </p>
                 <div class="list">
-                  <div class="list-item">
-                    <div class="list-bullet">•</div>
-                    <div>Vue côte‑à‑côte.</div>
-                  </div>
-                  <div class="list-item">
-                    <div class="list-bullet">•</div>
-                    <div>Analyse des différences.</div>
-                  </div>
+                  <div class="list-item"><div class="list-bullet">•</div><div>Vue côte‑à‑côte.</div></div>
+                  <div class="list-item"><div class="list-bullet">•</div><div>Analyse des différences.</div></div>
                 </div>
               </div>
 
               <div class="card">
-                <div class="card-title">Exports &amp; intégrations</div>
+                <div class="card-title">Exports & intégrations</div>
                 <p class="card-subtitle">
                   Exportez vos conversations ou connectez M@jestiOS à vos outils.
                 </p>
                 <div class="list">
-                  <div class="list-item">
-                    <div class="list-bullet">✓</div>
-                    <div>Export PDF / Markdown.</div>
-                  </div>
-                  <div class="list-item">
-                    <div class="list-bullet">✓</div>
-                    <div>Intégrations Slack / Notion (roadmap).</div>
-                  </div>
+                  <div class="list-item"><div class="list-bullet">✓</div><div>Export PDF / Markdown.</div></div>
+                  <div class="list-item"><div class="list-bullet">✓</div><div>Intégrations Slack / Notion (roadmap).</div></div>
                 </div>
               </div>
             </div>
@@ -238,8 +263,10 @@
             </div>
           </div>
         </section>
+
       </main>
 
+      <!-- FOOTER UNIFIÉ -->
       <footer class="app-footer">
         <div class="app-footer-inner">
           <div>© M@jestiOS – L’OS d’intelligences unifiées.</div>
@@ -259,6 +286,7 @@
           </div>
         </div>
       </footer>
+
     </div>
 
     <script src="assets/js/main.js"></script>
@@ -267,3 +295,4 @@
     <script src="assets/js/analytics.js"></script>
   </body>
 </html>
+

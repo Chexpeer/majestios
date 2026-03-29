@@ -5,19 +5,24 @@
     <title>M@jestiOS – L’OS d’intelligences unifiées</title>
     <meta
       name="description"
-      content="M@jestiOS mutualise GPT‑4, Claude, Gemini et Mistral dans une seule interface pour un rapport qualité‑prix imbattable."
+      content="M@jestiOS unifie GPT‑4, Claude, Gemini et Mistral dans une interface premium, minimaliste et productive."
     />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <link rel="stylesheet" href="assets/css/theme.css" />
     <link rel="stylesheet" href="assets/css/main.css" />
     <link rel="stylesheet" href="assets/css/layout.css" />
     <link rel="stylesheet" href="assets/css/components.css" />
     <link rel="stylesheet" href="assets/css/responsive.css" />
   </head>
+
   <body>
     <div class="app-shell">
+
+      <!-- HEADER UNIFIÉ + BARRE IA PREMIUM -->
       <header class="app-header">
         <div class="app-header-inner">
+
           <a href="index.html" class="brand">
             <div class="brand-mark">M</div>
             <div class="brand-text">
@@ -25,6 +30,61 @@
               <div class="brand-tagline">L’OS d’intelligences unifiées</div>
             </div>
           </a>
+
+          <!-- BARRE IA PREMIUM -->
+          <form
+            class="ia-bar"
+            action="app.html"
+            method="GET"
+            style="
+              flex: 1;
+              max-width: 520px;
+              margin: 0 24px;
+              display: flex;
+              align-items: center;
+              gap: 8px;
+              padding: 8px 12px;
+              border-radius: 999px;
+              background: rgba(15,23,42,0.9);
+              border: 1px solid rgba(148,163,184,0.35);
+            "
+          >
+            <span
+              style="
+                width: 22px;
+                height: 22px;
+                border-radius: 999px;
+                background: radial-gradient(circle at 30% 30%, #22c55e, #4f46e5);
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 12px;
+              "
+            >
+              ✦
+            </span>
+            <input
+              type="text"
+              name="prompt"
+              placeholder="Demandez à vos IA unifiées…"
+              style="
+                flex: 1;
+                border: none;
+                background: transparent;
+                color: #e5e7eb;
+                font-size: 14px;
+                outline: none;
+              "
+            />
+            <button
+              type="submit"
+              class="btn btn-primary"
+              style="padding: 6px 14px; font-size: 13px; border-radius: 999px;"
+            >
+              Lancer
+            </button>
+          </form>
+
           <nav class="nav">
             <div class="nav-links">
               <a href="index.html" class="nav-link nav-link-active"><span>Accueil</span></a>
@@ -36,471 +96,86 @@
               <a href="blog.html" class="nav-link"><span>Ressources</span></a>
               <a href="support.html" class="nav-link"><span>Support</span></a>
             </div>
+
             <div class="nav-cta">
               <a href="login.html" class="btn btn-outline">Connexion</a>
               <a href="app.html" class="btn btn-primary">Ouvrir le chat</a>
             </div>
-            <button class="menu-toggle btn-icon" aria-label="Menu">
-              <span>☰</span>
-            </button>
+
+            <button class="menu-toggle btn-icon">☰</button>
           </nav>
+
         </div>
       </header>
 
+      <!-- HERO -->
       <main class="app-main">
         <section class="hero">
           <div class="container">
-            <div class="hero-grid">
-              <div class="hero-header">
-                <div class="hero-badges">
-                  <div class="badge">
-                    <span class="badge-dot"></span>
-                    <span>Sessions actives sur GPT‑4, Claude, Gemini &amp; Mistral</span>
-                  </div>
-                  <div class="chip">
-                    <span class="chip-pill">Multi‑IA</span>
-                    <span>Un seul abonnement, toutes vos IA premium</span>
-                  </div>
+            <div class="hero-header" style="max-width: 720px; margin: 0 auto; text-align: center">
+
+              <div class="hero-badges" style="justify-content: center">
+                <div class="badge">
+                  <span class="badge-dot"></span>
+                  <span>GPT‑4, Claude, Gemini & Mistral unifiés</span>
                 </div>
-                <h1 class="hero-title">
-                  L’OS qui mutualise
-                  <span>vos IA premium</span>
-                  pour un rapport qualité‑prix imbattable.
-                </h1>
-                <p class="hero-subtitle">
-                  M@jestiOS unifie GPT‑4, Claude, Gemini et Mistral dans une interface minimaliste,
-                  pensée pour la productivité, la sécurité et la maîtrise de vos coûts.
-                </p>
-                <div class="hero-actions">
-                  <a href="app.html" class="btn btn-primary">
-                    Ouvrir le chat multi‑IA
-                  </a>
-                  <a href="pricing.html" class="btn btn-ghost">
-                    Voir les tarifs
-                  </a>
-                </div>
-                <div class="hero-meta">
-                  <div class="hero-meta-item">
-                    <span class="hero-meta-dot"></span>
-                    <span>Optimisé pour freelances, équipes et PME</span>
-                  </div>
-                  <div class="hero-meta-item">
-                    <span class="hero-meta-dot"></span>
-                    <span>Sans friction, sans sur‑abonnements</span>
-                  </div>
-                </div>
-                <div class="kpi-row">
-                  <div class="kpi">
-                    <div class="kpi-label">Temps moyen pour centraliser vos IA</div>
-                    <div class="kpi-value">Moins de 5 minutes</div>
-                  </div>
-                  <div class="kpi">
-                    <div class="kpi-label">Économie moyenne estimée</div>
-                    <div class="kpi-value">‑30 à ‑60&nbsp;% / mois</div>
-                  </div>
+                <div class="chip">
+                  <span class="chip-pill">OS d’intelligences</span>
+                  <span>Vue centralisée</span>
                 </div>
               </div>
 
-              <aside class="hero-panel">
-                <div class="hero-panel-header">
-                  <div class="hero-panel-tabs">
-                    <button class="hero-tab hero-tab-active">Session unifiée</button>
-                    <button class="hero-tab">Routage intelligent</button>
-                    <button class="hero-tab">Workspaces</button>
-                  </div>
-                  <div class="chip">
-                    <span class="chip-pill">Live</span>
-                    <span>Réseau d’IA connecté</span>
-                  </div>
-                </div>
-                <div class="hero-panel-body">
-                  <div class="hero-chat">
-                    <div class="hero-chat-header">
-                      <div class="hero-chat-title">Chat multi‑IA</div>
-                      <div class="hero-chat-status">
-                        <span class="hero-chat-status-dot"></span>
-                        <span>4 modèles disponibles</span>
-                      </div>
-                    </div>
-                    <div class="hero-chat-messages">
-                      <div class="hero-msg hero-msg-user">
-                        Résume ce document pour un client non‑tech, puis propose un plan d’action.
-                      </div>
-                      <div class="hero-msg hero-msg-ai">
-                        GPT‑4&nbsp;: Résumé clair en 5 points, adapté à un décideur. Plan d’action en 3 étapes priorisées.
-                      </div>
-                      <div class="hero-msg hero-msg-ai">
-                        Claude&nbsp;: Reformulation orientée storytelling, prête à être envoyée par email.
-                      </div>
-                      <div class="hero-msg hero-msg-ai">
-                        Gemini&nbsp;: Suggestions de visuels et d’angles marketing pour la présentation.
-                      </div>
-                      <div class="hero-msg hero-msg-ai">
-                        Mistral&nbsp;: Version courte optimisée pour Slack / Teams.
-                      </div>
-                    </div>
-                    <div class="hero-chat-input">
-                      <input
-                        type="text"
-                        placeholder="Posez une question, M@jestiOS orchestre les meilleures IA pour vous…"
-                      />
-                      <button class="btn-icon">⮞</button>
-                    </div>
-                  </div>
-                  <div class="hero-panel-side">
-                    <div class="hero-panel-card">
-                      <div class="hero-panel-card-header">
-                        <span class="hero-panel-card-title">Routage automatique</span>
-                        <span class="text-muted">Qualité / coût</span>
-                      </div>
-                      <div class="hero-panel-metric">
-                        Jusqu’à ‑52&nbsp;% de coût moyen
-                        <span>vs. abonnements séparés</span>
-                      </div>
-                    </div>
-                    <div class="hero-panel-card">
-                      <div class="hero-panel-card-header">
-                        <span class="hero-panel-card-title">Contrôle fin</span>
-                        <span class="text-muted">Par workspace</span>
-                      </div>
-                      <p class="text-soft">
-                        Choisissez IA par projet, par client ou par équipe, sans changer d’interface.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </aside>
+              <h1 class="hero-title">
+                Toutes vos IA premium,
+                <span>dans une seule interface</span>.
+              </h1>
+
+              <p class="hero-subtitle" style="margin: 0 auto">
+                M@jestiOS orchestre vos modèles, vos workspaces, vos historiques et vos coûts dans un cockpit
+                minimaliste pensé pour la productivité.
+              </p>
+
+              <div class="hero-actions" style="justify-content: center">
+                <a href="app.html" class="btn btn-primary">Essayer le chat multi‑IA</a>
+                <a href="pricing.html" class="btn btn-ghost">Voir les tarifs</a>
+              </div>
+
             </div>
           </div>
         </section>
 
-        <section class="section">
-          <div class="container">
-            <div class="grid-2">
-              <div>
-                <div class="section-header" style="text-align: left; margin-bottom: 20px">
-                  <div class="section-eyebrow">Problème</div>
-                  <h2 class="section-title">
-                    Trop d’abonnements, trop d’onglets, aucune vision globale.
-                  </h2>
-                  <p class="section-subtitle">
-                    Vous jonglez entre plusieurs IA, plusieurs factures et plusieurs interfaces. Résultat&nbsp;:
-                    du temps perdu, des coûts qui explosent et aucune gouvernance claire.
-                  </p>
-                </div>
-                <div class="list">
-                  <div class="list-item">
-                    <div class="list-bullet">•</div>
-                    <div>
-                      <strong>Abonnements éclatés</strong><br />
-                      GPT‑4, Claude, Gemini, Mistral… chacun avec sa facturation, ses limites et ses surprises.
-                    </div>
-                  </div>
-                  <div class="list-item">
-                    <div class="list-bullet">•</div>
-                    <div>
-                      <strong>Contexte dispersé</strong><br />
-                      Conversations et prompts éparpillés dans plusieurs chats, impossible de capitaliser proprement.
-                    </div>
-                  </div>
-                  <div class="list-item">
-                    <div class="list-bullet">•</div>
-                    <div>
-                      <strong>Aucune stratégie de coût</strong><br />
-                      Vous utilisez parfois un modèle trop cher pour une tâche simple, faute d’orchestration.
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div>
-                <div class="card card-soft">
-                  <div class="card-header">
-                    <div>
-                      <div class="card-title">Solution M@jestiOS</div>
-                      <div class="card-subtitle">
-                        Un seul OS, plusieurs IA, une facture maîtrisée.
-                      </div>
-                    </div>
-                    <div class="chip">
-                      <span class="chip-pill">OS d’intelligences</span>
-                      <span>Vue unifiée</span>
-                    </div>
-                  </div>
-                  <div class="list">
-                    <div class="list-item">
-                      <div class="list-bullet">✓</div>
-                      <div>
-                        <strong>Interface unique</strong><br />
-                        Un seul chat, un seul historique, un seul espace de travail pour toutes vos IA.
-                      </div>
-                    </div>
-                    <div class="list-item">
-                      <div class="list-bullet">✓</div>
-                      <div>
-                        <strong>Routage intelligent</strong><br />
-                        M@jestiOS choisit le meilleur modèle selon la tâche, la qualité attendue et le budget.
-                      </div>
-                    </div>
-                    <div class="list-item">
-                      <div class="list-bullet">✓</div>
-                      <div>
-                        <strong>Gouvernance claire</strong><br />
-                        Workspaces, droits, logs et historique centralisés pour vos équipes et vos clients.
-                      </div>
-                    </div>
-                  </div>
-                  <div class="tag-row">
-                    <span class="tag">Freelances &amp; agences</span>
-                    <span class="tag">PME &amp; équipes produit</span>
-                    <span class="tag">C‑levels &amp; direction</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
+        <!-- SECTION FEATURES -->
         <section class="section">
           <div class="container">
             <div class="section-header">
-              <div class="section-eyebrow">Cas d’usage</div>
-              <h2 class="section-title">Un cockpit unique pour vos usages quotidiens.</h2>
+              <div class="section-eyebrow">Vue unifiée</div>
+              <h2 class="section-title">Un seul chat, plusieurs IA premium.</h2>
               <p class="section-subtitle">
-                Rédaction, code, stratégie, support, marketing… M@jestiOS orchestre la bonne IA au bon moment,
-                sans que vous ayez à changer d’onglet.
+                Plus besoin d’ouvrir quatre onglets. M@jestiOS centralise vos conversations et vous permet de
+                comparer les réponses des modèles sans copier‑coller.
               </p>
             </div>
+
             <div class="grid-2">
               <div class="card">
-                <div class="card-title">Création &amp; stratégie</div>
+                <div class="card-title">Chat multi‑IA</div>
                 <p class="card-subtitle">
-                  Combinez la créativité de Claude, la rigueur de GPT‑4 et la vision data de Gemini dans un seul flux.
+                  GPT‑4, Claude, Gemini et Mistral accessibles dans une seule interface fluide.
                 </p>
-                <div class="list">
-                  <div class="list-item">
-                    <div class="list-bullet">•</div>
-                    <div>Briefs clients, plans marketing, scripts vidéo, pitch decks.</div>
-                  </div>
-                  <div class="list-item">
-                    <div class="list-bullet">•</div>
-                    <div>Comparaison de réponses entre modèles, sans copier‑coller.</div>
-                  </div>
-                </div>
               </div>
+
               <div class="card">
-                <div class="card-title">Produit, tech &amp; support</div>
+                <div class="card-title">Routage intelligent</div>
                 <p class="card-subtitle">
-                  Accélérez vos specs, votre code et vos réponses support avec un routage adapté à chaque tâche.
+                  L’OS choisit automatiquement le meilleur modèle selon la tâche, la qualité attendue et le coût.
                 </p>
-                <div class="list">
-                  <div class="list-item">
-                    <div class="list-bullet">•</div>
-                    <div>Génération de code, revues, tests, documentation.</div>
-                  </div>
-                  <div class="list-item">
-                    <div class="list-bullet">•</div>
-                    <div>Macros de réponses support, FAQ dynamiques, résumés de tickets.</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section class="section">
-          <div class="container">
-            <div class="section-header">
-              <div class="section-eyebrow">Sécurité &amp; gouvernance</div>
-              <h2 class="section-title">Pensé comme un OS, pas comme un simple chat.</h2>
-              <p class="section-subtitle">
-                M@jestiOS centralise les accès, les logs et les workspaces pour vous donner une vision claire de
-                qui utilise quoi, quand et pour quel usage.
-              </p>
-            </div>
-            <div class="grid-2">
-              <div class="card">
-                <div class="card-title">Workspaces &amp; droits</div>
-                <div class="list">
-                  <div class="list-item">
-                    <div class="list-bullet">✓</div>
-                    <div>Workspaces par équipe, client ou projet.</div>
-                  </div>
-                  <div class="list-item">
-                    <div class="list-bullet">✓</div>
-                    <div>Rôles et permissions pour limiter l’accès à certains modèles.</div>
-                  </div>
-                  <div class="list-item">
-                    <div class="list-bullet">✓</div>
-                    <div>Historique centralisé, exportable pour audit.</div>
-                  </div>
-                </div>
-              </div>
-              <div class="card">
-                <div class="card-title">Sécurité &amp; conformité</div>
-                <div class="list">
-                  <div class="list-item">
-                    <div class="list-bullet">✓</div>
-                    <div>Connexion sécurisée, gestion fine des clés et des accès.</div>
-                  </div>
-                  <div class="list-item">
-                    <div class="list-bullet">✓</div>
-                    <div>Politique de confidentialité claire, pensée pour les équipes européennes.</div>
-                  </div>
-                  <div class="list-item">
-                    <div class="list-bullet">✓</div>
-                    <div>Roadmap publique sur la sécurité et la gouvernance.</div>
-                  </div>
-                </div>
-                <div class="pricing-cta" style="margin-top: 14px">
-                  <a href="security.html" class="btn btn-outline">Voir la page sécurité</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section class="section">
-          <div class="container">
-            <div class="section-header">
-              <div class="section-eyebrow">Tarifs</div>
-              <h2 class="section-title">Un seul abonnement, plusieurs IA premium.</h2>
-              <p class="section-subtitle">
-                Des plans pensés pour les indépendants, les équipes et les organisations qui veulent unifier leurs
-                IA sans exploser leur budget.
-              </p>
-            </div>
-            <div class="pricing-grid">
-              <div class="pricing-card">
-                <div class="pricing-name">Solo</div>
-                <div class="pricing-price">
-                  29&nbsp;€<span>/mois</span>
-                </div>
-                <div class="pricing-desc">
-                  Pour les freelances et indépendants qui veulent un cockpit multi‑IA minimaliste.
-                </div>
-                <div class="pricing-features">
-                  <div class="pricing-feature">
-                    <span class="pricing-feature-dot"></span>
-                    <span>Accès unifié GPT‑4, Claude, Gemini, Mistral.</span>
-                  </div>
-                  <div class="pricing-feature">
-                    <span class="pricing-feature-dot"></span>
-                    <span>1 workspace, historique illimité.</span>
-                  </div>
-                </div>
-                <div class="pricing-cta">
-                  <a href="register.html" class="btn btn-outline">Commencer</a>
-                </div>
-              </div>
-              <div class="pricing-card pricing-card-featured">
-                <div class="pricing-badge">Recommandé</div>
-                <div class="pricing-name">Équipe</div>
-                <div class="pricing-price">
-                  79&nbsp;€<span>/mois</span>
-                </div>
-                <div class="pricing-desc">
-                  Pour les équipes produit, marketing ou support qui veulent orchestrer plusieurs IA ensemble.
-                </div>
-                <div class="pricing-features">
-                  <div class="pricing-feature">
-                    <span class="pricing-feature-dot"></span>
-                    <span>Jusqu’à 10 membres, 5 workspaces.</span>
-                  </div>
-                  <div class="pricing-feature">
-                    <span class="pricing-feature-dot"></span>
-                    <span>Routage intelligent qualité / coût.</span>
-                  </div>
-                  <div class="pricing-feature">
-                    <span class="pricing-feature-dot"></span>
-                    <span>Logs, export, gouvernance simple.</span>
-                  </div>
-                </div>
-                <div class="pricing-cta">
-                  <a href="register.html" class="btn btn-primary">Activer M@jestiOS</a>
-                </div>
-              </div>
-              <div class="pricing-card">
-                <div class="pricing-name">Organisation</div>
-                <div class="pricing-price">
-                  Sur mesure<span></span>
-                </div>
-                <div class="pricing-desc">
-                  Pour les structures qui veulent une gouvernance avancée, du SSO et des intégrations dédiées.
-                </div>
-                <div class="pricing-features">
-                  <div class="pricing-feature">
-                    <span class="pricing-feature-dot"></span>
-                    <span>Workspaces illimités, rôles avancés.</span>
-                  </div>
-                  <div class="pricing-feature">
-                    <span class="pricing-feature-dot"></span>
-                    <span>Support prioritaire, accompagnement déploiement.</span>
-                  </div>
-                </div>
-                <div class="pricing-cta">
-                  <a href="support.html" class="btn btn-outline">Parler à l’équipe</a>
-                </div>
-              </div>
-            </div>
-            <div style="text-align: center; margin-top: 18px; font-size: 12px" class="text-muted">
-              Besoin de comparer avec vos abonnements actuels&nbsp;?
-              <a href="comparison.html" class="footer-link">Voir la comparaison détaillée</a>.
-            </div>
-          </div>
-        </section>
-
-        <section class="section">
-          <div class="container">
-            <div class="section-header">
-              <div class="section-eyebrow">FAQ</div>
-              <h2 class="section-title">Questions fréquentes sur M@jestiOS.</h2>
-              <p class="section-subtitle">
-                Une interface minimaliste, mais une vraie logique d’OS derrière. Voici les questions qui reviennent
-                le plus souvent.
-              </p>
-            </div>
-            <div class="faq-preview">
-              <div class="faq-list">
-                <div class="faq-item">
-                  <div class="faq-q">Est‑ce que M@jestiOS remplace mes abonnements existants&nbsp;?</div>
-                  <div class="faq-a">
-                    L’objectif est de centraliser et d’optimiser. Selon votre usage, vous pouvez réduire ou
-                    réorganiser vos abonnements pour ne garder que ce qui est réellement utile.
-                  </div>
-                </div>
-                <div class="faq-item">
-                  <div class="faq-q">Quelles IA sont disponibles dans l’OS&nbsp;?</div>
-                  <div class="faq-a">
-                    Nous orchestrons aujourd’hui GPT‑4, Claude, Gemini et Mistral. La roadmap publique détaille les
-                    prochains modèles et intégrations.
-                  </div>
-                </div>
-              </div>
-              <div class="card">
-                <div class="card-title">Aller plus loin</div>
-                <p class="card-subtitle">
-                  Retrouvez la FAQ complète, la roadmap et les détails de sécurité sur les pages dédiées.
-                </p>
-                <div class="list">
-                  <div class="list-item">
-                    <div class="list-bullet">•</div>
-                    <div><a href="faq.html" class="footer-link">FAQ complète</a></div>
-                  </div>
-                  <div class="list-item">
-                    <div class="list-bullet">•</div>
-                    <div><a href="roadmap.html" class="footer-link">Roadmap publique</a></div>
-                  </div>
-                  <div class="list-item">
-                    <div class="list-bullet">•</div>
-                    <div><a href="security.html" class="footer-link">Sécurité &amp; confidentialité</a></div>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
         </section>
       </main>
 
+      <!-- FOOTER -->
       <footer class="app-footer">
         <div class="app-footer-inner">
           <div>© M@jestiOS – L’OS d’intelligences unifiées.</div>
@@ -520,6 +195,7 @@
           </div>
         </div>
       </footer>
+
     </div>
 
     <script src="assets/js/main.js"></script>

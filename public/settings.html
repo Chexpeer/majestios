@@ -1,203 +1,269 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Paramètres – Majestios</title>
+  <head>
+    <meta charset="utf-8" />
+    <title>Paramètres – M@jestiOS</title>
+    <meta
+      name="description"
+      content="Gérez vos paramètres M@jestiOS : sécurité, mot de passe, préférences et configuration du compte."
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background: #0d0d0d;
-      color: white;
-      font-family: Arial, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
+    <link rel="stylesheet" href="assets/css/theme.css" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <link rel="stylesheet" href="assets/css/layout.css" />
+    <link rel="stylesheet" href="assets/css/components.css" />
+    <link rel="stylesheet" href="assets/css/responsive.css" />
+  </head>
 
-    .box {
-      width: 420px;
-      background: #1a1a1a;
-      padding: 25px;
-      border-radius: 12px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.4);
-    }
+  <body>
+    <div class="app-shell">
 
-    h2 {
-      text-align: center;
-      margin-bottom: 20px;
-      font-weight: 600;
-    }
+      <!-- HEADER UNIFIÉ + BARRE IA PREMIUM -->
+      <header class="app-header">
+        <div class="app-header-inner">
 
-    .info {
-      background: #2a2a2a;
-      padding: 12px;
-      border-radius: 6px;
-      margin: 10px 0;
-      font-size: 15px;
-    }
+          <a href="dashboard.html" class="brand">
+            <div class="brand-mark">M</div>
+            <div class="brand-text">
+              <div class="brand-name">M@jestiOS</div>
+              <div class="brand-tagline">L’OS d’intelligences unifiées</div>
+            </div>
+          </a>
 
-    label {
-      display: block;
-      margin-top: 15px;
-      font-size: 14px;
-      opacity: 0.8;
-    }
+          <!-- BARRE IA PREMIUM -->
+          <form
+            class="ia-bar"
+            action="app.html"
+            method="GET"
+            style="
+              flex: 1;
+              max-width: 520px;
+              margin: 0 24px;
+              display: flex;
+              align-items: center;
+              gap: 8px;
+              padding: 8px 12px;
+              border-radius: 999px;
+              background: rgba(15,23,42,0.9);
+              border: 1px solid rgba(148,163,184,0.35);
+            "
+          >
+            <span
+              style="
+                width: 22px;
+                height: 22px;
+                border-radius: 999px;
+                background: radial-gradient(circle at 30% 30%, #22c55e, #4f46e5);
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 12px;
+              "
+            >
+              ✦
+            </span>
+            <input
+              type="text"
+              name="prompt"
+              placeholder="Demandez à vos IA unifiées…"
+              style="
+                flex: 1;
+                border: none;
+                background: transparent;
+                color: #e5e7eb;
+                font-size: 14px;
+                outline: none;
+              "
+            />
+            <button
+              type="submit"
+              class="btn btn-primary"
+              style="padding: 6px 14px; font-size: 13px; border-radius: 999px;"
+            >
+              Lancer
+            </button>
+          </form>
 
-    input {
-      width: 100%;
-      padding: 12px;
-      margin-top: 6px;
-      border-radius: 6px;
-      border: none;
-      background: #2a2a2a;
-      color: white;
-      font-size: 15px;
-    }
+          <nav class="nav">
+            <div class="nav-links">
+              <a href="dashboard.html" class="nav-link"><span>Dashboard</span></a>
+              <a href="workspaces.html" class="nav-link"><span>Mes espaces</span></a>
+              <a href="settings.html" class="nav-link nav-link-active"><span>Paramètres</span></a>
+              <a href="profile.html" class="nav-link"><span>Profil</span></a>
+            </div>
 
-    button {
-      width: 100%;
-      padding: 12px;
-      margin-top: 20px;
-      background: #4f46e5;
-      border: none;
-      border-radius: 6px;
-      color: white;
-      font-size: 16px;
-      cursor: pointer;
-      transition: 0.2s;
-    }
+            <div class="nav-cta">
+              <span id="userEmail" style="margin-right: 12px; opacity: 0.8; font-size: 14px;"></span>
+              <button onclick="logout()" class="btn btn-outline">Déconnexion</button>
+            </div>
 
-    button:hover {
-      background: #4338ca;
-    }
+            <button class="menu-toggle btn-icon">☰</button>
+          </nav>
 
-    .danger-btn {
-      background: #ef4444;
-      margin-top: 10px;
-    }
+        </div>
+      </header>
 
-    .danger-btn:hover {
-      background: #dc2626;
-    }
+      <!-- CONTENU DES PARAMÈTRES -->
+      <main class="app-main">
+        <section class="section">
+          <div class="container" style="max-width: 720px;">
 
-    #message {
-      margin-top: 15px;
-      text-align: center;
-      font-size: 14px;
-    }
-  </style>
-</head>
+            <div class="section-header" style="text-align: center;">
+              <div class="section-eyebrow">Compte</div>
+              <h1 class="section-title">Paramètres du compte</h1>
+              <p class="section-subtitle">
+                Gérez votre mot de passe et vos préférences de sécurité.
+              </p>
+            </div>
 
-<body>
+            <div class="card" style="padding: 24px;">
 
-  <div class="box">
-    <h2>Paramètres du compte</h2>
+              <h3 class="card-title" style="margin-bottom: 16px;">Sécurité</h3>
 
-    <div id="content">
-      <p id="message">Chargement...</p>
+              <p class="card-subtitle" style="margin-bottom: 20px;">
+                Modifiez votre mot de passe pour sécuriser votre compte.
+              </p>
+
+              <form id="passwordForm" style="display: flex; flex-direction: column; gap: 14px;">
+
+                <div>
+                  <label for="oldPassword" style="font-size: 14px;">Mot de passe actuel</label>
+                  <input
+                    type="password"
+                    id="oldPassword"
+                    class="input"
+                    style="margin-top: 6px; width: 100%;"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label for="newPassword" style="font-size: 14px;">Nouveau mot de passe</label>
+                  <input
+                    type="password"
+                    id="newPassword"
+                    class="input"
+                    style="margin-top: 6px; width: 100%;"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label for="confirmPassword" style="font-size: 14px;">Confirmer le mot de passe</label>
+                  <input
+                    type="password"
+                    id="confirmPassword"
+                    class="input"
+                    style="margin-top: 6px; width: 100%;"
+                    required
+                  />
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="margin-top: 10px;">
+                  Mettre à jour le mot de passe
+                </button>
+
+                <p id="passwordMessage" style="font-size: 14px; margin-top: 10px;"></p>
+
+              </form>
+
+            </div>
+
+          </div>
+        </section>
+      </main>
+
+      <!-- FOOTER -->
+      <footer class="app-footer">
+        <div class="app-footer-inner">
+          <div>© M@jestiOS – L’OS d’intelligences unifiées.</div>
+        </div>
+      </footer>
+
     </div>
 
-    <button onclick="logout()" class="danger-btn">Se déconnecter</button>
-  </div>
-
-  <script>
-    async function loadSettings() {
-      const token = localStorage.getItem("token");
-      const message = document.getElementById("message");
-      const content = document.getElementById("content");
-
-      if (!token) {
-        window.location.href = "login.html";  // ⭐ Correction
-        return;
+    <!-- LOGIQUE JS -->
+    <script type="module">
+      function logout() {
+        localStorage.removeItem("token");
+        window.location.href = "login.html";
       }
 
-      try {
-        const res = await fetch("https://majestios-backend.onrender.com/api/auth/me", {
-          method: "GET",
-          headers: {
-            "Authorization": "Bearer " + token
+      async function initSettings() {
+        const token = localStorage.getItem("token");
+        if (!token) {
+          window.location.href = "login.html";
+          return;
+        }
+
+        // Récup user
+        try {
+          const userRes = await fetch("https://majestios-backend.onrender.com/api/auth/me", {
+            method: "GET",
+            headers: { "Authorization": "Bearer " + token }
+          });
+          const userData = await userRes.json();
+          if (userRes.ok && userData.user) {
+            document.getElementById("userEmail").textContent = userData.user.email;
+          }
+        } catch (e) {
+          console.error(e);
+        }
+
+        // Gestion du changement de mot de passe
+        const form = document.getElementById("passwordForm");
+        const message = document.getElementById("passwordMessage");
+
+        form.addEventListener("submit", async e => {
+          e.preventDefault();
+
+          const oldPassword = document.getElementById("oldPassword").value;
+          const newPassword = document.getElementById("newPassword").value;
+          const confirmPassword = document.getElementById("confirmPassword").value;
+
+          if (newPassword !== confirmPassword) {
+            message.textContent = "Les mots de passe ne correspondent pas.";
+            message.style.color = "#ef4444";
+            return;
+          }
+
+          try {
+            const res = await fetch("https://majestios-backend.onrender.com/api/auth/update-password", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + token
+              },
+              body: JSON.stringify({ oldPassword, newPassword })
+            });
+
+            const data = await res.json();
+
+            if (res.ok) {
+              message.textContent = "Mot de passe mis à jour avec succès.";
+              message.style.color = "#22c55e";
+              form.reset();
+            } else {
+              message.textContent = data.message || "Erreur lors de la mise à jour.";
+              message.style.color = "#ef4444";
+            }
+          } catch (e) {
+            console.error(e);
+            message.textContent = "Erreur réseau.";
+            message.style.color = "#ef4444";
           }
         });
-
-        const data = await res.json();
-
-        if (!res.ok) {
-          message.textContent = data.message || "Erreur";
-          return;
-        }
-
-        content.innerHTML = `
-          <div class="info"><strong>Email :</strong> ${data.user.email}</div>
-          <div class="info"><strong>Nom d'utilisateur :</strong> ${data.user.username}</div>
-
-          <label>Nouveau nom d'utilisateur</label>
-          <input id="newUsername" type="text" placeholder="Modifier le nom d'utilisateur" />
-
-          <label>Nouveau mot de passe</label>
-          <input id="newPassword" type="password" placeholder="Modifier le mot de passe" />
-
-          <button onclick="updateSettings()">Mettre à jour</button>
-        `;
-
-      } catch (err) {
-        console.error(err);
-        message.textContent = "Erreur réseau";
-      }
-    }
-
-    async function updateSettings() {
-      const token = localStorage.getItem("token");
-      const newUsername = document.getElementById("newUsername").value.trim();
-      const newPassword = document.getElementById("newPassword").value.trim();
-      const message = document.getElementById("message");
-
-      const body = {};
-      if (newUsername) body.username = newUsername;
-      if (newPassword) body.password = newPassword;
-
-      if (Object.keys(body).length === 0) {
-        message.textContent = "Aucune modification.";
-        return;
       }
 
-      try {
-        const res = await fetch("https://majestios-backend.onrender.com/api/auth/update", {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": "Bearer " + token
-          },
-          body: JSON.stringify(body)
-        });
+      document.addEventListener("DOMContentLoaded", initSettings);
+    </script>
 
-        const data = await res.json();
-
-        if (!res.ok) {
-          message.textContent = data.message || "Erreur";
-          return;
-        }
-
-        message.textContent = "Modifications enregistrées.";
-        loadSettings();
-
-      } catch (err) {
-        console.error(err);
-        message.textContent = "Erreur réseau";
-      }
-    }
-
-    function logout() {
-      localStorage.removeItem("token");
-      window.location.href = "login.html";  // ⭐ Correction
-    }
-
-    loadSettings();
-  </script>
-
-</body>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/ui.js"></script>
+    <script src="assets/js/theme.js"></script>
+    <script src="assets/js/analytics.js"></script>
+  </body>
 </html>
+
 
