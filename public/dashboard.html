@@ -2,10 +2,10 @@
 <html lang="fr">
   <head>
     <meta charset="utf-8" />
-    <title>Dashboard – M@jestiOS</title>
+    <title>Dashboard – MajestiOS</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <!-- TES CSS EXISTANTS -->
+    <!-- CSS EXISTANTS -->
     <link rel="stylesheet" href="assets/css/theme.css" />
     <link rel="stylesheet" href="assets/css/main.css" />
     <link rel="stylesheet" href="assets/css/layout.css" />
@@ -16,7 +16,7 @@
   <body>
     <div class="app-shell">
 
-      <!-- SIDEBAR VERTICALE (HTML SEULEMENT) -->
+      <!-- SIDEBAR -->
       <aside style="
         width: 240px;
         background: #0f172a;
@@ -31,15 +31,15 @@
         <div class="brand">
           <div class="brand-mark">M</div>
           <div class="brand-text">
-            <div class="brand-name">M@jestiOS</div>
-            <div class="brand-tagline">OS d’intelligences unifiées</div>
+            <div class="brand-name">MajestiOS</div>
+            <div class="brand-tagline">Intelligence unifiée</div>
           </div>
         </div>
 
         <nav class="nav-links" style="flex-direction:column;gap:14px;margin-top:20px;">
           <a href="dashboard.html" class="nav-link nav-link-active"><span>Dashboard</span></a>
           <a href="workspaces.html" class="nav-link"><span>Mes espaces</span></a>
-          <a href="multi-IA.html" class="nav-link"><span>Multi‑IA</span></a>
+          <a href="app.html" class="nav-link"><span>MajestiOS Chat</span></a>
           <a href="historique.html" class="nav-link"><span>Historique</span></a>
           <a href="notifications.html" class="nav-link"><span>Notifications</span></a>
           <a href="settings.html" class="nav-link"><span>Paramètres</span></a>
@@ -55,74 +55,61 @@
       <!-- CONTENU PRINCIPAL -->
       <main class="app-main" style="margin-left:240px;">
 
-        <!-- BARRE IA CENTRALE -->
-        <form class="ia-bar" action="app.html" method="GET" style="
-          max-width:600px;
-          margin:32px auto;
-          display:flex;
-          align-items:center;
-          gap:10px;
-          padding:10px 16px;
-          border-radius:999px;
-          background:rgba(15,23,42,0.9);
-          border:1px solid rgba(148,163,184,0.35);
-        ">
-          <span style="
-            width:22px;height:22px;border-radius:999px;
-            background:radial-gradient(circle at 30% 30%, #22c55e, #4f46e5);
-          ">✦</span>
-
-          <input type="text" name="prompt" placeholder="Demandez à vos IA unifiées…" style="
-            flex:1;border:none;background:transparent;color:#e5e7eb;font-size:14px;outline:none;
-          " />
-
-          <button type="submit" class="btn btn-primary" style="border-radius:999px;padding:6px 16px;">
-            Lancer
-          </button>
-        </form>
-
-        <!-- CONTENU DASHBOARD -->
-        <section class="section">
-          <div class="container">
+        <!-- HEADER DASHBOARD -->
+        <section class="section" style="padding-top:40px;">
+          <div class="container" style="max-width:900px;">
 
             <div class="section-header" style="text-align:center;">
-              <div class="section-eyebrow">Bienvenue</div>
+              <div class="section-eyebrow">MajestiOS Intelligence</div>
               <h1 class="section-title">Votre tableau de bord</h1>
               <p class="section-subtitle">
-                Accédez rapidement à vos espaces, vos modèles IA et vos préférences.
+                Une vue d’ensemble de votre activité, de vos économies et de vos interactions avec MajestiOS.
               </p>
             </div>
 
-            <div class="grid-2">
+            <!-- STATS -->
+            <div class="grid-3" style="margin-top:30px;">
 
-              <div class="card">
-                <div class="card-title">Vos workspaces</div>
-                <p class="card-subtitle">Organisez vos projets, équipes et clients.</p>
-
-                <div id="workspaceList" class="list" style="margin-top:14px;">
-                  <div class="list-item">
-                    <div class="list-bullet">•</div>
-                    <div>Chargement…</div>
-                  </div>
-                </div>
-
-                <a href="workspaces.html" class="btn btn-outline" style="margin-top:16px;">Gérer les espaces</a>
+              <div class="card" style="padding:20px;text-align:center;">
+                <div class="card-title">Requêtes IA</div>
+                <div id="statRequests" style="font-size:32px;font-weight:600;margin-top:6px;">—</div>
+                <div class="card-subtitle">Total depuis votre inscription</div>
               </div>
 
-              <div class="card">
-                <div class="card-title">Modèles IA</div>
-                <p class="card-subtitle">GPT‑4, Claude, Gemini, Mistral.</p>
-
-                <div class="list" style="margin-top:14px;">
-                  <div class="list-item"><div class="list-bullet">●</div><div>GPT‑4</div></div>
-                  <div class="list-item"><div class="list-bullet">●</div><div>Claude</div></div>
-                  <div class="list-item"><div class="list-bullet">●</div><div>Gemini</div></div>
-                  <div class="list-item"><div class="list-bullet">●</div><div>Mistral</div></div>
-                </div>
-
-                <a href="app.html" class="btn btn-primary" style="margin-top:16px;">Ouvrir le chat</a>
+              <div class="card" style="padding:20px;text-align:center;">
+                <div class="card-title">Économies réalisées</div>
+                <div id="statSavings" style="font-size:32px;font-weight:600;margin-top:6px;">—%</div>
+                <div class="card-subtitle">Optimisation automatique</div>
               </div>
 
+              <div class="card" style="padding:20px;text-align:center;">
+                <div class="card-title">Workspaces</div>
+                <div id="statWorkspaces" style="font-size:32px;font-weight:600;margin-top:6px;">—</div>
+                <div class="card-subtitle">Espaces actifs</div>
+              </div>
+
+            </div>
+
+            <!-- APERÇU HISTORIQUE -->
+            <div class="card" style="padding:24px;margin-top:40px;">
+              <h3 class="card-title">Dernières interactions</h3>
+              <p class="card-subtitle">Vos 5 dernières requêtes traitées par MajestiOS Intelligence.</p>
+
+              <div id="historyPreview" class="list" style="margin-top:16px;">
+                <div class="list-item">
+                  <div class="list-bullet">•</div>
+                  <div>Chargement…</div>
+                </div>
+              </div>
+
+              <div style="text-align:right;margin-top:14px;">
+                <a href="historique.html" class="btn btn-outline">Voir tout l’historique</a>
+              </div>
+            </div>
+
+            <!-- CTA -->
+            <div style="text-align:center;margin-top:40px;">
+              <a href="app.html" class="btn btn-primary">Ouvrir MajestiOS Chat</a>
             </div>
 
           </div>
@@ -132,52 +119,59 @@
 
       <footer class="app-footer">
         <div class="app-footer-inner">
-          <div>© M@jestiOS – L’OS d’intelligences unifiées.</div>
+          <div>© MajestiOS – Intelligence unifiée.</div>
         </div>
       </footer>
 
     </div>
 
-    <!-- JS EXISTANTS -->
+    <!-- JS -->
     <script type="module">
-      import { getWorkspaces } from './assets/js/workspaces-api.js';
-
-      function logout() {
-        localStorage.removeItem("token");
-        window.location.href = "login.html";
-      }
+      import { checkAuth } from "./assets/js/auth.js";
 
       async function initDashboard() {
-        const token = localStorage.getItem("token");
-        if (!token) return (window.location.href = "login.html");
+        const user = await checkAuth();
+        if (!user) return;
 
-        const userRes = await fetch("https://majestios-backend.onrender.com/api/auth/me", {
+        const token = localStorage.getItem("token");
+
+        // Récupération des stats
+        const statsRes = await fetch("https://majestios-backend.onrender.com/api/user/stats", {
           headers: { Authorization: "Bearer " + token }
         });
-        const userData = await userRes.json();
-        if (userData.user) {
-          document.getElementById("sidebarEmail").textContent = userData.user.email;
-        }
+        const stats = await statsRes.json();
 
-        const wsData = await getWorkspaces(token);
-        const list = document.getElementById("workspaceList");
+        document.getElementById("statRequests").textContent = stats.totalRequests ?? 0;
+        document.getElementById("statSavings").textContent = stats.savingsPercent ?? "0%";
+        document.getElementById("statWorkspaces").textContent = stats.workspaces ?? 1;
 
-        if (wsData.workspaces?.length) {
-          list.innerHTML = wsData.workspaces
-            .map(ws => `
-              <div class="list-item">
-                <div class="list-bullet">•</div>
-                <div>${ws.name}</div>
-              </div>
-            `)
-            .join('');
-        } else {
+        // Aperçu historique
+        const histRes = await fetch("https://majestios-backend.onrender.com/api/user/history?limit=5", {
+          headers: { Authorization: "Bearer " + token }
+        });
+        const history = await histRes.json();
+
+        const list = document.getElementById("historyPreview");
+
+        if (!history.items || history.items.length === 0) {
           list.innerHTML = `
             <div class="list-item">
               <div class="list-bullet">•</div>
-              <div>Aucun workspace pour le moment.</div>
+              <div>Aucune interaction récente.</div>
             </div>
           `;
+        } else {
+          list.innerHTML = history.items
+            .map(h => `
+              <div class="list-item">
+                <div class="list-bullet">•</div>
+                <div>
+                  <strong>${h.prompt.slice(0, 60)}${h.prompt.length > 60 ? "…" : ""}</strong><br>
+                  <span style="font-size:12px;opacity:0.6;">${new Date(h.date).toLocaleString()}</span>
+                </div>
+              </div>
+            `)
+            .join("");
         }
       }
 

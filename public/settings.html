@@ -2,10 +2,10 @@
 <html lang="fr">
   <head>
     <meta charset="utf-8" />
-    <title>Paramètres – M@jestiOS</title>
+    <title>Paramètres – MajestiOS</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <!-- TES CSS EXISTANTS -->
+    <!-- CSS EXISTANTS -->
     <link rel="stylesheet" href="assets/css/theme.css" />
     <link rel="stylesheet" href="assets/css/main.css" />
     <link rel="stylesheet" href="assets/css/layout.css" />
@@ -16,7 +16,7 @@
   <body>
     <div class="app-shell">
 
-      <!-- SIDEBAR VERTICALE -->
+      <!-- SIDEBAR -->
       <aside style="
         width: 240px;
         background: #0f172a;
@@ -31,15 +31,15 @@
         <div class="brand">
           <div class="brand-mark">M</div>
           <div class="brand-text">
-            <div class="brand-name">M@jestiOS</div>
-            <div class="brand-tagline">OS d’intelligences unifiées</div>
+            <div class="brand-name">MajestiOS</div>
+            <div class="brand-tagline">Intelligence unifiée</div>
           </div>
         </div>
 
         <nav class="nav-links" style="flex-direction:column;gap:14px;margin-top:20px;">
           <a href="dashboard.html" class="nav-link"><span>Dashboard</span></a>
           <a href="workspaces.html" class="nav-link"><span>Mes espaces</span></a>
-          <a href="app.html" class="nav-link"><span>Multi‑IA</span></a>
+          <a href="app.html" class="nav-link"><span>MajestiOS Chat</span></a>
           <a href="historique.html" class="nav-link"><span>Historique</span></a>
           <a href="notifications.html" class="nav-link"><span>Notifications</span></a>
           <a href="settings.html" class="nav-link nav-link-active"><span>Paramètres</span></a>
@@ -55,107 +55,107 @@
       <!-- CONTENU PRINCIPAL -->
       <main class="app-main" style="margin-left:240px;">
 
-        <!-- BARRE IA CENTRALE -->
-        <form class="ia-bar" action="app.html" method="GET" style="
-          max-width:600px;
-          margin:32px auto;
-          display:flex;
-          align-items:center;
-          gap:10px;
-          padding:10px 16px;
-          border-radius:999px;
-          background:rgba(15,23,42,0.9);
-          border:1px solid rgba(148,163,184,0.35);
-        ">
-          <span style="
-            width:22px;height:22px;border-radius:999px;
-            background:radial-gradient(circle at 30% 30%, #22c55e, #4f46e5);
-          ">✦</span>
-
-          <input type="text" name="prompt" placeholder="Demandez à vos IA unifiées…" style="
-            flex:1;border:none;background:transparent;color:#e5e7eb;font-size:14px;outline:none;
-          " />
-
-          <button type="submit" class="btn btn-primary" style="border-radius:999px;padding:6px 16px;">
-            Lancer
-          </button>
-        </form>
-
-        <!-- CONTENU PARAMÈTRES -->
-        <section class="section">
-          <div class="container" style="max-width:820px;">
+        <section class="section" style="padding-top:40px;">
+          <div class="container" style="max-width:800px;">
 
             <div class="section-header" style="text-align:center;">
-              <div class="section-eyebrow">Configuration</div>
-              <h1 class="section-title">Paramètres du compte</h1>
+              <div class="section-eyebrow">MajestiOS Intelligence</div>
+              <h1 class="section-title">Paramètres</h1>
               <p class="section-subtitle">
-                Gérez vos préférences, sécurité, notifications et personnalisation.
+                Gérez vos préférences et personnalisez votre expérience MajestiOS.
               </p>
             </div>
 
-            <!-- PARAMÈTRES GÉNÉRAUX -->
-            <div class="card" style="padding:24px;margin-bottom:24px;">
-              <h3 class="card-title" style="margin-bottom:14px;">Préférences générales</h3>
+            <!-- PRÉFÉRENCES GÉNÉRALES -->
+            <div class="card" style="padding:24px;margin-top:20px;">
+              <h3 class="card-title">Préférences générales</h3>
 
-              <div class="list">
-                <div class="list-item">
-                  <div class="list-bullet">•</div>
-                  <div>Thème : <strong>Automatique</strong></div>
+              <div style="display:flex;flex-direction:column;gap:14px;margin-top:14px;">
+
+                <div>
+                  <label>Langue de l’interface</label>
+                  <select id="lang" class="input" style="margin-top:6px;">
+                    <option value="fr">Français</option>
+                    <option value="en">Anglais</option>
+                  </select>
                 </div>
 
-                <div class="list-item">
-                  <div class="list-bullet">•</div>
-                  <div>Langue : <strong>Français</strong></div>
+                <div>
+                  <label>Thème</label>
+                  <select id="theme" class="input" style="margin-top:6px;">
+                    <option value="dark">Sombre</option>
+                    <option value="light">Clair</option>
+                    <option value="system">Système</option>
+                  </select>
                 </div>
 
-                <div class="list-item">
-                  <div class="list-bullet">•</div>
-                  <div>Animations : <strong>Activées</strong></div>
-                </div>
+                <button id="saveGeneral" class="btn btn-primary" style="margin-top:10px;">
+                  Enregistrer
+                </button>
+
+                <p id="generalMessage" style="font-size:14px;margin-top:10px;"></p>
               </div>
             </div>
 
-            <!-- PARAMÈTRES NOTIFICATIONS -->
-            <div class="card" style="padding:24px;margin-bottom:24px;">
-              <h3 class="card-title" style="margin-bottom:14px;">Notifications</h3>
+            <!-- PRÉFÉRENCES IA -->
+            <div class="card" style="padding:24px;margin-top:30px;">
+              <h3 class="card-title">MajestiOS Intelligence</h3>
 
-              <div class="list">
-                <div class="list-item">
-                  <div class="list-bullet">•</div>
-                  <div>Alertes IA : <strong>Activées</strong></div>
+              <p class="card-subtitle" style="margin-top:6px;">
+                Ajustez le comportement de l’IA unifiée.
+              </p>
+
+              <div style="display:flex;flex-direction:column;gap:14px;margin-top:14px;">
+
+                <div>
+                  <label>Style de réponse</label>
+                  <select id="style" class="input" style="margin-top:6px;">
+                    <option value="balanced">Équilibré</option>
+                    <option value="concise">Concise</option>
+                    <option value="detailed">Détaillée</option>
+                    <option value="creative">Créative</option>
+                  </select>
                 </div>
 
-                <div class="list-item">
-                  <div class="list-bullet">•</div>
-                  <div>Emails système : <strong>Activés</strong></div>
+                <div>
+                  <label>Stratégie IA par défaut</label>
+                  <select id="strategy" class="input" style="margin-top:6px;">
+                    <option value="balanced">Équilibrée</option>
+                    <option value="cost">Économique</option>
+                    <option value="speed">Rapide</option>
+                    <option value="quality">Qualité maximale</option>
+                  </select>
                 </div>
 
-                <div class="list-item">
-                  <div class="list-bullet">•</div>
-                  <div>Notifications push : <strong>Désactivées</strong></div>
-                </div>
+                <button id="saveAI" class="btn btn-primary" style="margin-top:10px;">
+                  Enregistrer
+                </button>
+
+                <p id="aiMessage" style="font-size:14px;margin-top:10px;"></p>
               </div>
             </div>
 
-            <!-- PARAMÈTRES SÉCURITÉ -->
-            <div class="card" style="padding:24px;">
-              <h3 class="card-title" style="margin-bottom:14px;">Sécurité</h3>
+            <!-- NOTIFICATIONS -->
+            <div class="card" style="padding:24px;margin-top:30px;">
+              <h3 class="card-title">Notifications</h3>
 
-              <div class="list">
-                <div class="list-item">
-                  <div class="list-bullet">•</div>
-                  <div>Mot de passe : <strong>••••••••</strong></div>
-                </div>
+              <div style="display:flex;flex-direction:column;gap:14px;margin-top:14px;">
 
-                <div class="list-item">
-                  <div class="list-bullet">•</div>
-                  <div>Authentification 2FA : <strong>Désactivée</strong></div>
-                </div>
+                <label style="display:flex;align-items:center;gap:10px;">
+                  <input type="checkbox" id="notifEmail" />
+                  Recevoir les notifications par email
+                </label>
 
-                <div class="list-item">
-                  <div class="list-bullet">•</div>
-                  <div>Sessions actives : <strong>1</strong></div>
-                </div>
+                <label style="display:flex;align-items:center;gap:10px;">
+                  <input type="checkbox" id="notifIA" />
+                  Alerte quand MajestiOS détecte une économie importante
+                </label>
+
+                <button id="saveNotif" class="btn btn-primary" style="margin-top:10px;">
+                  Enregistrer
+                </button>
+
+                <p id="notifMessage" style="font-size:14px;margin-top:10px;"></p>
               </div>
             </div>
 
@@ -166,7 +166,7 @@
 
       <footer class="app-footer">
         <div class="app-footer-inner">
-          <div>© M@jestiOS – L’OS d’intelligences unifiées.</div>
+          <div>© MajestiOS – Intelligence unifiée.</div>
         </div>
       </footer>
 
@@ -174,23 +174,93 @@
 
     <!-- JS -->
     <script type="module">
-      function logout() {
-        localStorage.removeItem("token");
-        window.location.href = "login.html";
-      }
+      import { checkAuth } from "./assets/js/auth.js";
 
       async function initSettings() {
-        const token = localStorage.getItem("token");
-        if (!token) return (window.location.href = "login.html");
+        const user = await checkAuth();
+        if (!user) return;
 
-        // USER
-        const userRes = await fetch("https://majestios-backend.onrender.com/api/auth/me", {
+        const token = localStorage.getItem("token");
+
+        // Charger les préférences
+        const res = await fetch("https://majestios-backend.onrender.com/api/user/settings", {
           headers: { Authorization: "Bearer " + token }
         });
-        const userData = await userRes.json();
-        if (userData.user) {
-          document.getElementById("sidebarEmail").textContent = userData.user.email;
-        }
+        const settings = await res.json();
+
+        // Remplir les champs
+        document.getElementById("lang").value = settings.lang ?? "fr";
+        document.getElementById("theme").value = settings.theme ?? "dark";
+        document.getElementById("style").value = settings.style ?? "balanced";
+        document.getElementById("strategy").value = settings.strategy ?? "balanced";
+        document.getElementById("notifEmail").checked = settings.notifEmail ?? false;
+        document.getElementById("notifIA").checked = settings.notifIA ?? false;
+
+        // Sauvegarde des préférences générales
+        document.getElementById("saveGeneral").onclick = async () => {
+          const msg = document.getElementById("generalMessage");
+
+          const body = {
+            lang: document.getElementById("lang").value,
+            theme: document.getElementById("theme").value
+          };
+
+          const res = await fetch("https://majestios-backend.onrender.com/api/user/settings/general", {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + token
+            },
+            body: JSON.stringify(body)
+          });
+
+          msg.textContent = res.ok ? "Préférences enregistrées." : "Erreur.";
+          msg.style.color = res.ok ? "#10b981" : "#ef4444";
+        };
+
+        // Sauvegarde IA
+        document.getElementById("saveAI").onclick = async () => {
+          const msg = document.getElementById("aiMessage");
+
+          const body = {
+            style: document.getElementById("style").value,
+            strategy: document.getElementById("strategy").value
+          };
+
+          const res = await fetch("https://majestios-backend.onrender.com/api/user/settings/ai", {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + token
+            },
+            body: JSON.stringify(body)
+          });
+
+          msg.textContent = res.ok ? "Préférences IA enregistrées." : "Erreur.";
+          msg.style.color = res.ok ? "#10b981" : "#ef4444";
+        };
+
+        // Sauvegarde notifications
+        document.getElementById("saveNotif").onclick = async () => {
+          const msg = document.getElementById("notifMessage");
+
+          const body = {
+            notifEmail: document.getElementById("notifEmail").checked,
+            notifIA: document.getElementById("notifIA").checked
+          };
+
+          const res = await fetch("https://majestios-backend.onrender.com/api/user/settings/notif", {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + token
+            },
+            body: JSON.stringify(body)
+          });
+
+          msg.textContent = res.ok ? "Notifications mises à jour." : "Erreur.";
+          msg.style.color = res.ok ? "#10b981" : "#ef4444";
+        };
       }
 
       document.addEventListener("DOMContentLoaded", initSettings);
@@ -202,3 +272,4 @@
     <script src="assets/js/analytics.js"></script>
   </body>
 </html>
+

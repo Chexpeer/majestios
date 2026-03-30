@@ -1,68 +1,66 @@
-// main.js
-// Logique générale de l'application M@jestiOS
+// public/assets/js/main.js
 
-document.addEventListener("DOMContentLoaded", () => {
-  console.log("M@jestiOS loaded.");
+import { checkAuth, logout, getToken } from "./auth.js";
 
-  // --- Navigation mobile ---
+// Pages protégées (nécessitent un token)
+const protectedPages = [
+  "dashboard.html",
+  "workspaces.html",
+  "app.html",
+  "historique.html",
+  "notifications.html",
+  "settings.html",
+  "profile.html"
+];
+
+// Vérifie si la page actuelle est protégée
+function isProtectedPage() {
+  const page = window.location.pathname.split("/").pop();
+  return protectedPages.includes(page);
+}
+
+// Active le lien de la sidebar correspondant à la page
+function highlightActiveLink() {
+  const page = window.location.pathname.split("/").pop();
   const links = document.querySelectorAll(".nav-link");
-  const menu = document.querySelector(".nav");
-  const toggle = document.querySelector(".menu-toggle");
 
   links.forEach(link => {
-    link.addEventListener("click", () => {
-      if (menu) menu.classList.remove("nav-open");
-    });
-  });
-
-  if (toggle && menu) {
-    toggle.addEventListener("click", () => {
-      menu.classList.toggle("nav-open");
-    });
-  }
-
-  // --- Header auto-hide on scroll ---
-  let lastScroll = 0;
-  const header = document.querySelector(".app-header");
-
-  window.addEventListener("scroll", () => {
-    const current = window.scrollY;
-
-    if (!header) return;
-
-    if (current > lastScroll && current > 80) {
-      header.classList.add("header-hidden");
+    if (link.getAttribute("href") === page) {
+      link.classList.add("nav-link-active");
     } else {
-      header.classList.remove("header-hidden");
+      link.classList.remove("nav-link-active");
     }
-
-    lastScroll = current;
   });
+}
 
-  // --- Chargement des données JSON (models, settings, user, workspaces) ---
+// Initialise la sidebar (email + logout)
+async function initSidebar() {
+  const user = await checkAuth();
+  if (!user) return;
 
-  async function loadJSON(path) {
-    try {
-      const response = await fetch(path);
-      if (!response.ok) throw new Error("Erreur de chargement : " + path);
-      return await response.json();
-    } catch (err) {
-      console.error(err);
-      return null;
-    }
+  const emailEl = document.getElementById("sidebarEmail");
+  if (emailEl) emailEl.textContent = user.email;
+
+  const logoutBtn = document.getElementById("logoutBtn");
+  if (logoutBtn) logoutBtn.onclick = logout;
+}
+
+// Redirection automatique si pas connecté
+async function enforceAuth() {
+  if (!isProtectedPage()) return;
+
+  const token = getToken();
+  if (!token) {
+    window.location.href = "login.html";
+    return;
   }
 
-  // Exemple : pré-charger les données clés de l’OS
-  Promise.all([
-    loadJSON("assets/data/models.json"),
-    loadJSON("assets/data/settings.json"),
-    loadJSON("assets/data/user.json"),
-    loadJSON("assets/data/workspaces.json")
-  ]).then(([models, settings, user, workspaces]) => {
-    console.log("Models:", models);
-    console.log("Settings:", settings);
-    console.log("User:", user);
-    console.log("Workspaces:", workspaces);
-    // Ici tu pourras plus tard brancher la logique d’UI / routing / préférences
-  });
+  await checkAuth();
+}
+
+// INITIALISATION GLOBALE
+document.addEventListener("DOMContentLoaded", async () => {
+  highlightActiveLink();
+  await enforceAuth();
+  await initSidebar();
 });

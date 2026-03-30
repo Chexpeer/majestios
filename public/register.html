@@ -1,79 +1,171 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Créer un compte - Majestios</title>
-  <style>
-    body { margin: 0; padding: 0; background: #0d0d0d; color: white; font-family: Arial, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; }
-    .box { width: 350px; background: #1a1a1a; padding: 25px; border-radius: 12px; box-shadow: 0 0 20px rgba(0,0,0,0.4); }
-    h2 { text-align: center; margin-bottom: 20px; font-weight: 600; }
-    input { width: 100%; padding: 12px; margin: 10px 0; border-radius: 6px; border: none; background: #2a2a2a; color: white; font-size: 15px; box-sizing: border-box; }
-    button { width: 100%; padding: 12px; margin-top: 10px; background: #4f46e5; border: none; border-radius: 6px; color: white; font-size: 16px; cursor: pointer; transition: 0.2s; }
-    button:hover { background: #4338ca; }
-    #message { margin-top: 15px; text-align: center; font-size: 14px; }
-    .login-link { display: block; text-align: center; margin-top: 15px; color: #4f46e5; text-decoration: none; font-size: 14px; }
-  </style>
-</head>
-<body>
+  <head>
+    <meta charset="utf-8" />
+    <title>Créer un compte – MajestiOS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <div class="box">
-    <h2>Créer un compte</h2>
-    <input id="username" type="text" placeholder="Nom d'utilisateur" required />
-    <input id="email" type="email" placeholder="Adresse email" required />
-    <input id="password" type="password" placeholder="Mot de passe" required />
-    <input id="confirmPassword" type="password" placeholder="Confirmer le mot de passe" required />
-    <button onclick="registerUser()">Créer mon compte</button>
-    <a href="login.html" class="login-link">Déjà un compte ? Se connecter</a>
-    <p id="message"></p>
-  </div>
+    <!-- TES CSS EXISTANTS -->
+    <link rel="stylesheet" href="assets/css/theme.css" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <link rel="stylesheet" href="assets/css/layout.css" />
+    <link rel="stylesheet" href="assets/css/components.css" />
+    <link rel="stylesheet" href="assets/css/responsive.css" />
 
-  <script>
-    async function registerUser() {
-      const username = document.getElementById("username").value.trim();
-      const email = document.getElementById("email").value.trim();
-      const password = document.getElementById("password").value.trim();
-      const confirmPassword = document.getElementById("confirmPassword").value.trim();
-      const message = document.getElementById("message");
-
-      if (!username || !email || !password) {
-        message.textContent = "Veuillez remplir tous les champs.";
-        message.style.color = "#ef4444";
-        return;
+    <style>
+      .google-btn {
+        width: 100%;
+        padding: 12px;
+        background: #ffffff;
+        color: #111;
+        border-radius: 6px;
+        border: none;
+        font-size: 15px;
+        cursor: pointer;
+        margin-top: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
       }
-
-      if (password !== confirmPassword) {
-        message.textContent = "Les mots de passe ne correspondent pas.";
-        message.style.color = "#ef4444";
-        return;
+      .google-btn:hover { background: #e5e5e5; }
+      .separator {
+        text-align: center;
+        margin: 18px 0;
+        opacity: 0.5;
+        font-size: 13px;
       }
+    </style>
+  </head>
 
-      message.textContent = "Chargement...";
-      message.style.color = "white";
+  <body>
+    <div class="app-shell">
 
-      try {
-        const res = await fetch("https://majestios-backend.onrender.com/api/auth/register", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ username, email, password })
-        });
+      <!-- PAGE SANS SIDEBAR (REGISTER) -->
+      <main class="app-main" style="
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        min-height:100vh;
+        padding:20px;
+      ">
 
-        const data = await res.json();
+        <div class="card" style="
+          width:100%;
+          max-width:380px;
+          padding:28px;
+        ">
+          <div style="text-align:center;margin-bottom:20px;">
+            <div class="brand">
+              <div class="brand-mark">M</div>
+              <div class="brand-text">
+                <div class="brand-name">MajestiOS</div>
+                <div class="brand-tagline">Créer votre compte</div>
+              </div>
+            </div>
+          </div>
 
-        if (res.ok) {
-          message.style.color = "#10b981";
-          message.textContent = "Compte créé ! Redirection...";
-          setTimeout(() => { window.location.href = "login.html"; }, 1500);
+          <h2 class="card-title" style="text-align:center;margin-bottom:6px;">
+            Inscription
+          </h2>
+
+          <p style="text-align:center;font-size:14px;color:var(--color-text-soft);margin-bottom:20px;">
+            MajestiOS Intelligence vous accueille.
+          </p>
+
+          <!-- GOOGLE SIGNUP -->
+          <button class="google-btn" onclick="signupWithGoogle()">
+            <img src="https://www.svgrepo.com/show/475656/google-color.svg" width="18" />
+            Continuer avec Google
+          </button>
+
+          <div class="separator">ou</div>
+
+          <form id="registerForm" style="display:flex;flex-direction:column;gap:14px;">
+            <div>
+              <label style="font-size:14px;">Email</label>
+              <input
+                type="email"
+                id="email"
+                class="input"
+                style="margin-top:6px;width:100%;"
+                required
+              />
+            </div>
+
+            <div>
+              <label style="font-size:14px;">Nom d'utilisateur</label>
+              <input
+                type="text"
+                id="username"
+                class="input"
+                style="margin-top:6px;width:100%;"
+                required
+              />
+            </div>
+
+            <div>
+              <label style="font-size:14px;">Mot de passe</label>
+              <input
+                type="password"
+                id="password"
+                class="input"
+                style="margin-top:6px;width:100%;"
+                required
+              />
+            </div>
+
+            <button class="btn btn-primary" style="margin-top:10px;">Créer mon compte</button>
+
+            <p id="registerMessage" style="font-size:14px;margin-top:10px;text-align:center;"></p>
+
+            <div style="text-align:center;margin-top:10px;">
+              <a href="login.html" class="nav-link">Déjà un compte ? Se connecter</a>
+              <br />
+              <a href="index.html" class="nav-link" style="margin-top:6px;display:inline-block;">Retour à l’accueil</a>
+            </div>
+          </form>
+
+        </div>
+
+      </main>
+
+    </div>
+
+    <!-- JS -->
+    <script type="module">
+      import { register, saveToken } from "./assets/js/auth.js";
+
+      const form = document.getElementById("registerForm");
+      const message = document.getElementById("registerMessage");
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const email = document.getElementById("email").value.trim();
+        const username = document.getElementById("username").value.trim();
+        const password = document.getElementById("password").value.trim();
+
+        const res = await register(email, username, password);
+
+        if (res.token) {
+          saveToken(res.token);
+          window.location.href = "dashboard.html";
         } else {
+          message.textContent = res.message || "Erreur lors de l'inscription.";
           message.style.color = "#ef4444";
-          message.textContent = data.message || "Erreur lors de l'inscription";
         }
-      } catch (err) {
-        message.style.color = "#ef4444";
-        message.textContent = "Erreur réseau";
+      });
+
+      function signupWithGoogle() {
+        window.location.href = "https://majestios-backend.onrender.com/api/auth/google";
       }
-    }
-  </script>
-</body>
+    </script>
+
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/ui.js"></script>
+    <script src="assets/js/theme.js"></script>
+    <script src="assets/js/analytics.js"></script>
+  </body>
 </html>
 

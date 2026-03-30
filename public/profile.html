@@ -2,13 +2,10 @@
 <html lang="fr">
   <head>
     <meta charset="utf-8" />
-    <title>Profil – M@jestiOS</title>
-    <meta
-      name="description"
-      content="Gérez votre profil utilisateur M@jestiOS : email, sécurité, préférences et informations personnelles."
-    />
+    <title>Profil – MajestiOS</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+    <!-- CSS EXISTANTS -->
     <link rel="stylesheet" href="assets/css/theme.css" />
     <link rel="stylesheet" href="assets/css/main.css" />
     <link rel="stylesheet" href="assets/css/layout.css" />
@@ -19,181 +16,207 @@
   <body>
     <div class="app-shell">
 
-      <!-- HEADER UNIFIÉ + BARRE IA PREMIUM -->
-      <header class="app-header">
-        <div class="app-header-inner">
-
-          <a href="dashboard.html" class="brand">
-            <div class="brand-mark">M</div>
-            <div class="brand-text">
-              <div class="brand-name">M@jestiOS</div>
-              <div class="brand-tagline">L’OS d’intelligences unifiées</div>
-            </div>
-          </a>
-
-          <!-- BARRE IA PREMIUM -->
-          <form
-            class="ia-bar"
-            action="app.html"
-            method="GET"
-            style="
-              flex: 1;
-              max-width: 520px;
-              margin: 0 24px;
-              display: flex;
-              align-items: center;
-              gap: 8px;
-              padding: 8px 12px;
-              border-radius: 999px;
-              background: rgba(15,23,42,0.9);
-              border: 1px solid rgba(148,163,184,0.35);
-            "
-          >
-            <span
-              style="
-                width: 22px;
-                height: 22px;
-                border-radius: 999px;
-                background: radial-gradient(circle at 30% 30%, #22c55e, #4f46e5);
-                display: inline-flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 12px;
-              "
-            >
-              ✦
-            </span>
-            <input
-              type="text"
-              name="prompt"
-              placeholder="Demandez à vos IA unifiées…"
-              style="
-                flex: 1;
-                border: none;
-                background: transparent;
-                color: #e5e7eb;
-                font-size: 14px;
-                outline: none;
-              "
-            />
-            <button
-              type="submit"
-              class="btn btn-primary"
-              style="padding: 6px 14px; font-size: 13px; border-radius: 999px;"
-            >
-              Lancer
-            </button>
-          </form>
-
-          <nav class="nav">
-            <div class="nav-links">
-              <a href="dashboard.html" class="nav-link"><span>Dashboard</span></a>
-              <a href="workspaces.html" class="nav-link"><span>Mes espaces</span></a>
-              <a href="settings.html" class="nav-link"><span>Paramètres</span></a>
-              <a href="profile.html" class="nav-link nav-link-active"><span>Profil</span></a>
-            </div>
-
-            <div class="nav-cta">
-              <span id="userEmail" style="margin-right: 12px; opacity: 0.8; font-size: 14px;"></span>
-              <button onclick="logout()" class="btn btn-outline">Déconnexion</button>
-            </div>
-
-            <button class="menu-toggle btn-icon">☰</button>
-          </nav>
-
+      <!-- SIDEBAR -->
+      <aside style="
+        width: 240px;
+        background: #0f172a;
+        border-right: 1px solid rgba(148,163,184,0.15);
+        position: fixed;
+        inset: 0 auto 0 0;
+        padding: 24px 18px;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+      ">
+        <div class="brand">
+          <div class="brand-mark">M</div>
+          <div class="brand-text">
+            <div class="brand-name">MajestiOS</div>
+            <div class="brand-tagline">Intelligence unifiée</div>
+          </div>
         </div>
-      </header>
 
-      <!-- CONTENU DE LA PAGE PROFIL -->
-      <main class="app-main">
-        <section class="section">
-          <div class="container" style="max-width: 720px;">
+        <nav class="nav-links" style="flex-direction:column;gap:14px;margin-top:20px;">
+          <a href="dashboard.html" class="nav-link"><span>Dashboard</span></a>
+          <a href="workspaces.html" class="nav-link"><span>Mes espaces</span></a>
+          <a href="app.html" class="nav-link"><span>MajestiOS Chat</span></a>
+          <a href="historique.html" class="nav-link"><span>Historique</span></a>
+          <a href="notifications.html" class="nav-link"><span>Notifications</span></a>
+          <a href="settings.html" class="nav-link"><span>Paramètres</span></a>
+          <a href="profile.html" class="nav-link nav-link-active"><span>Profil</span></a>
+        </nav>
 
-            <div class="section-header" style="text-align: center;">
-              <div class="section-eyebrow">Compte</div>
-              <h1 class="section-title">Votre profil utilisateur</h1>
+        <div style="margin-top:auto;">
+          <div id="sidebarEmail" style="font-size:13px;opacity:0.7;margin-bottom:8px;"></div>
+          <button onclick="logout()" class="btn btn-outline">Déconnexion</button>
+        </div>
+      </aside>
+
+      <!-- CONTENU PRINCIPAL -->
+      <main class="app-main" style="margin-left:240px;">
+
+        <section class="section" style="padding-top:40px;">
+          <div class="container" style="max-width:800px;">
+
+            <div class="section-header" style="text-align:center;">
+              <div class="section-eyebrow">MajestiOS Intelligence</div>
+              <h1 class="section-title">Votre profil</h1>
               <p class="section-subtitle">
-                Gérez vos informations personnelles, votre email et vos préférences.
+                Gérez vos informations personnelles et vos préférences.
               </p>
             </div>
 
-            <div class="card" style="padding: 24px;">
+            <!-- INFO UTILISATEUR -->
+            <div class="card" style="padding:24px;margin-top:20px;">
+              <h3 class="card-title">Informations personnelles</h3>
 
-              <h3 class="card-title" style="margin-bottom: 16px;">Informations du compte</h3>
-
-              <div class="list" style="margin-bottom: 20px;">
-                <div class="list-item">
-                  <div class="list-bullet">•</div>
-                  <div>
-                    <strong>Email :</strong>
-                    <span id="profileEmail" style="opacity: 0.8;">Chargement…</span>
-                  </div>
+              <div style="display:flex;flex-direction:column;gap:14px;margin-top:14px;">
+                <div>
+                  <label>Email</label>
+                  <input id="email" class="input" disabled style="margin-top:6px;" />
                 </div>
 
-                <div class="list-item">
-                  <div class="list-bullet">•</div>
-                  <div>
-                    <strong>ID utilisateur :</strong>
-                    <span id="profileId" style="opacity: 0.8;">Chargement…</span>
-                  </div>
+                <div>
+                  <label>Nom d'utilisateur</label>
+                  <input id="username" class="input" style="margin-top:6px;" />
                 </div>
+
+                <div>
+                  <label>Date d'inscription</label>
+                  <input id="createdAt" class="input" disabled style="margin-top:6px;" />
+                </div>
+
+                <button id="saveProfile" class="btn btn-primary" style="margin-top:10px;">
+                  Enregistrer les modifications
+                </button>
+
+                <p id="profileMessage" style="font-size:14px;margin-top:10px;"></p>
               </div>
+            </div>
 
-              <hr style="border-color: rgba(30,64,175,0.6); margin: 20px 0;" />
+            <!-- CHANGEMENT DE MOT DE PASSE -->
+            <div class="card" style="padding:24px;margin-top:30px;">
+              <h3 class="card-title">Sécurité</h3>
 
-              <h3 class="card-title" style="margin-bottom: 16px;">Sécurité</h3>
+              <div style="display:flex;flex-direction:column;gap:14px;margin-top:14px;">
+                <div>
+                  <label>Nouveau mot de passe</label>
+                  <input id="newPassword" type="password" class="input" style="margin-top:6px;" />
+                </div>
 
-              <p class="card-subtitle" style="margin-bottom: 12px;">
-                Vous pouvez mettre à jour votre mot de passe depuis la page Paramètres.
+                <button id="changePassword" class="btn btn-outline">
+                  Mettre à jour le mot de passe
+                </button>
+
+                <p id="passwordMessage" style="font-size:14px;margin-top:10px;"></p>
+              </div>
+            </div>
+
+            <!-- SUPPRESSION DU COMPTE -->
+            <div class="card" style="padding:24px;margin-top:30px;border:1px solid #7f1d1d;">
+              <h3 class="card-title" style="color:#ef4444;">Supprimer mon compte</h3>
+              <p class="card-subtitle" style="margin-top:6px;">
+                Cette action est irréversible. Toutes vos données seront supprimées.
               </p>
 
-              <a href="settings.html" class="btn btn-outline">Aller aux paramètres</a>
+              <button id="deleteAccount" class="btn btn-outline" style="margin-top:14px;color:#ef4444;border-color:#ef4444;">
+                Supprimer définitivement
+              </button>
 
+              <p id="deleteMessage" style="font-size:14px;margin-top:10px;"></p>
             </div>
 
           </div>
         </section>
+
       </main>
 
-      <!-- FOOTER UNIFIÉ -->
       <footer class="app-footer">
         <div class="app-footer-inner">
-          <div>© M@jestiOS – L’OS d’intelligences unifiées.</div>
+          <div>© MajestiOS – Intelligence unifiée.</div>
         </div>
       </footer>
 
     </div>
 
-    <!-- LOGIQUE JS -->
+    <!-- JS -->
     <script type="module">
-      function logout() {
-        localStorage.removeItem("token");
-        window.location.href = "login.html";
-      }
+      import { checkAuth } from "./assets/js/auth.js";
 
       async function initProfile() {
-        const token = localStorage.getItem("token");
-        if (!token) {
-          window.location.href = "login.html";
-          return;
-        }
+        const user = await checkAuth();
+        if (!user) return;
 
-        try {
-          const res = await fetch("https://majestios-backend.onrender.com/api/auth/me", {
-            method: "GET",
-            headers: { "Authorization": "Bearer " + token }
+        const token = localStorage.getItem("token");
+
+        // Remplir les champs
+        document.getElementById("email").value = user.email;
+        document.getElementById("username").value = user.username;
+        document.getElementById("createdAt").value = new Date(user.createdAt).toLocaleString();
+
+        // Sauvegarde du profil
+        document.getElementById("saveProfile").onclick = async () => {
+          const username = document.getElementById("username").value.trim();
+          const msg = document.getElementById("profileMessage");
+
+          const res = await fetch("https://majestios-backend.onrender.com/api/user/update", {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + token
+            },
+            body: JSON.stringify({ username })
           });
 
           const data = await res.json();
+          msg.textContent = data.message || "Profil mis à jour.";
+          msg.style.color = res.ok ? "#10b981" : "#ef4444";
+        };
 
-          if (res.ok && data.user) {
-            document.getElementById("userEmail").textContent = data.user.email;
-            document.getElementById("profileEmail").textContent = data.user.email;
-            document.getElementById("profileId").textContent = data.user._id;
+        // Changer mot de passe
+        document.getElementById("changePassword").onclick = async () => {
+          const newPassword = document.getElementById("newPassword").value.trim();
+          const msg = document.getElementById("passwordMessage");
+
+          if (!newPassword) {
+            msg.textContent = "Veuillez entrer un nouveau mot de passe.";
+            msg.style.color = "#ef4444";
+            return;
           }
-        } catch (e) {
-          console.error(e);
-        }
+
+          const res = await fetch("https://majestios-backend.onrender.com/api/user/password", {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + token
+            },
+            body: JSON.stringify({ newPassword })
+          });
+
+          const data = await res.json();
+          msg.textContent = data.message || "Mot de passe mis à jour.";
+          msg.style.color = res.ok ? "#10b981" : "#ef4444";
+        };
+
+        // Suppression du compte
+        document.getElementById("deleteAccount").onclick = async () => {
+          const msg = document.getElementById("deleteMessage");
+
+          const res = await fetch("https://majestios-backend.onrender.com/api/user/delete", {
+            method: "DELETE",
+            headers: { Authorization: "Bearer " + token }
+          });
+
+          const data = await res.json();
+          msg.textContent = data.message || "Compte supprimé.";
+
+          if (res.ok) {
+            localStorage.removeItem("token");
+            setTimeout(() => window.location.href = "index.html", 1500);
+          } else {
+            msg.style.color = "#ef4444";
+          }
+        };
       }
 
       document.addEventListener("DOMContentLoaded", initProfile);
@@ -205,5 +228,3 @@
     <script src="assets/js/analytics.js"></script>
   </body>
 </html>
-
-
