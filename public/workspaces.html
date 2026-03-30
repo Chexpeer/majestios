@@ -2,10 +2,10 @@
 <html lang="fr">
   <head>
     <meta charset="utf-8" />
-    <title>Workspaces – M@jestiOS</title>
+    <title>Workspaces – MajestiOS</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <!-- TES CSS EXISTANTS -->
+    <!-- CSS EXISTANTS -->
     <link rel="stylesheet" href="assets/css/theme.css" />
     <link rel="stylesheet" href="assets/css/main.css" />
     <link rel="stylesheet" href="assets/css/layout.css" />
@@ -16,7 +16,7 @@
   <body>
     <div class="app-shell">
 
-      <!-- SIDEBAR VERTICALE -->
+      <!-- SIDEBAR -->
       <aside style="
         width: 240px;
         background: #0f172a;
@@ -31,15 +31,15 @@
         <div class="brand">
           <div class="brand-mark">M</div>
           <div class="brand-text">
-            <div class="brand-name">M@jestiOS</div>
-            <div class="brand-tagline">OS d’intelligences unifiées</div>
+            <div class="brand-name">MajestiOS</div>
+            <div class="brand-tagline">Intelligence unifiée</div>
           </div>
         </div>
 
         <nav class="nav-links" style="flex-direction:column;gap:14px;margin-top:20px;">
           <a href="dashboard.html" class="nav-link"><span>Dashboard</span></a>
           <a href="workspaces.html" class="nav-link nav-link-active"><span>Mes espaces</span></a>
-          <a href="multi-IA.html" class="nav-link"><span>Multi‑IA</span></a>
+          <a href="app.html" class="nav-link"><span>MajestiOS Chat</span></a>
           <a href="historique.html" class="nav-link"><span>Historique</span></a>
           <a href="notifications.html" class="nav-link"><span>Notifications</span></a>
           <a href="settings.html" class="nav-link"><span>Paramètres</span></a>
@@ -55,7 +55,7 @@
       <!-- CONTENU PRINCIPAL -->
       <main class="app-main" style="margin-left:240px;">
 
-        <!-- BARRE IA CENTRALE -->
+        <!-- BARRE IA -->
         <form class="ia-bar" action="app.html" method="GET" style="
           max-width:600px;
           margin:32px auto;
@@ -72,7 +72,7 @@
             background:radial-gradient(circle at 30% 30%, #22c55e, #4f46e5);
           ">✦</span>
 
-          <input type="text" name="prompt" placeholder="Demandez à vos IA unifiées…" style="
+          <input type="text" name="prompt" placeholder="Demandez à MajestiOS Intelligence…" style="
             flex:1;border:none;background:transparent;color:#e5e7eb;font-size:14px;outline:none;
           " />
 
@@ -81,7 +81,7 @@
           </button>
         </form>
 
-        <!-- CONTENU WORKSPACES -->
+        <!-- WORKSPACES -->
         <section class="section">
           <div class="container" style="max-width:820px;">
 
@@ -89,12 +89,11 @@
               <div class="section-eyebrow">Organisation</div>
               <h1 class="section-title">Vos workspaces</h1>
               <p class="section-subtitle">
-                Gérez vos espaces de travail : projets, équipes, clients.  
-                Chaque workspace possède ses propres modèles, historiques et paramètres.
+                Organisez vos projets, équipes et clients dans des espaces dédiés.
+                Chaque workspace possède son propre historique et ses propres paramètres.
               </p>
             </div>
 
-            <!-- CARD PRINCIPALE -->
             <div class="card" style="padding:24px;">
 
               <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
@@ -111,7 +110,7 @@
 
             </div>
 
-            <!-- MODAL CRÉATION WORKSPACE -->
+            <!-- MODAL -->
             <div
               id="workspaceModal"
               style="
@@ -157,13 +156,13 @@
 
       <footer class="app-footer">
         <div class="app-footer-inner">
-          <div>© M@jestiOS – L’OS d’intelligences unifiées.</div>
+          <div>© MajestiOS – Intelligence unifiée.</div>
         </div>
       </footer>
 
     </div>
 
-    <!-- JS EXISTANTS -->
+    <!-- JS -->
     <script type="module">
       import { getWorkspaces, createWorkspace } from './assets/js/workspaces-api.js';
 

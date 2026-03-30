@@ -2,7 +2,7 @@
 <html lang="fr">
   <head>
     <meta charset="utf-8" />
-    <title>Multi‑IA – M@jestiOS</title>
+    <title>MajestiOS Chat – Intelligence unifiée</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <link rel="stylesheet" href="assets/css/theme.css" />
@@ -30,15 +30,15 @@
         <div class="brand">
           <div class="brand-mark">M</div>
           <div class="brand-text">
-            <div class="brand-name">M@jestiOS</div>
-            <div class="brand-tagline">OS d’intelligences unifiées</div>
+            <div class="brand-name">MajestiOS</div>
+            <div class="brand-tagline">Intelligence unifiée</div>
           </div>
         </div>
 
         <nav class="nav-links" style="flex-direction:column;gap:14px;margin-top:20px;">
           <a href="dashboard.html" class="nav-link"><span>Dashboard</span></a>
           <a href="workspaces.html" class="nav-link"><span>Mes espaces</span></a>
-          <a href="app.html" class="nav-link nav-link-active"><span>Multi‑IA</span></a>
+          <a href="app.html" class="nav-link nav-link-active"><span>MajestiOS Chat</span></a>
           <a href="historique.html" class="nav-link"><span>Historique</span></a>
           <a href="notifications.html" class="nav-link"><span>Notifications</span></a>
           <a href="settings.html" class="nav-link"><span>Paramètres</span></a>
@@ -54,7 +54,7 @@
       <!-- CONTENU PRINCIPAL -->
       <main class="app-main" style="margin-left:240px;">
 
-        <!-- BARRE IA CENTRALE -->
+        <!-- BARRE IA -->
         <form class="ia-bar" style="
           max-width:600px;
           margin:32px auto;
@@ -71,7 +71,7 @@
             background:radial-gradient(circle at 30% 30%, #22c55e, #4f46e5);
           ">✦</span>
 
-          <input id="mainPrompt" type="text" placeholder="Demandez à vos IA unifiées…" style="
+          <input id="mainPrompt" type="text" placeholder="Demandez à MajestiOS Intelligence…" style="
             flex:1;border:none;background:transparent;color:#e5e7eb;font-size:14px;outline:none;
           " />
 
@@ -80,35 +80,23 @@
           </button>
         </form>
 
-        <!-- MULTI‑IA PANEL -->
+        <!-- CHAT -->
         <section class="section">
           <div class="container" style="max-width:900px;">
 
             <div class="section-header" style="text-align:center;">
-              <div class="section-eyebrow">Multi‑IA</div>
-              <h1 class="section-title">Vos intelligences unifiées</h1>
+              <div class="section-eyebrow">MajestiOS Intelligence</div>
+              <h1 class="section-title">Votre espace de conversation</h1>
               <p class="section-subtitle">
-                Comparez, combinez et orchestrez plusieurs modèles IA dans un seul espace.
+                Une seule IA. Une seule interface. Une intelligence unifiée.
               </p>
             </div>
 
             <div class="card" style="padding:24px;">
 
-              <!-- Sélecteurs -->
-              <div style="display:flex;gap:14px;margin-bottom:20px;">
-                <select id="modelSelect" class="input" style="flex:1;">
-                  <option value="gpt4">GPT‑4</option>
-                  <option value="claude">Claude</option>
-                  <option value="gemini">Gemini</option>
-                  <option value="mistral">Mistral</option>
-                </select>
-
-                <button id="clearChat" class="btn btn-outline">Effacer</button>
-              </div>
-
               <!-- Chat -->
               <div id="chatBox" style="
-                height:420px;
+                height:480px;
                 overflow-y:auto;
                 padding:14px;
                 border-radius:14px;
@@ -118,7 +106,7 @@
                 flex-direction:column;
                 gap:12px;
               ">
-                <div style="opacity:0.6;font-size:13px;">Démarrez une conversation…</div>
+                <div style="opacity:0.6;font-size:13px;">MajestiOS est prêt à vous aider.</div>
               </div>
 
               <!-- Input -->
@@ -136,7 +124,7 @@
 
       <footer class="app-footer">
         <div class="app-footer-inner">
-          <div>© M@jestiOS – L’OS d’intelligences unifiées.</div>
+          <div>© MajestiOS – Intelligence unifiée.</div>
         </div>
       </footer>
 
@@ -153,28 +141,74 @@
         const chatBox = document.getElementById("chatBox");
         const chatForm = document.getElementById("chatForm");
         const chatInput = document.getElementById("chatInput");
-        const modelSelect = document.getElementById("modelSelect");
-        const clearChat = document.getElementById("clearChat");
 
-        clearChat.onclick = () => {
-          chatBox.innerHTML = `<div style="opacity:0.6;font-size:13px;">Démarrez une conversation…</div>`;
-        };
+        // Effet "MajestiOS réfléchit…"
+        function thinking() {
+          const el = document.createElement("div");
+          el.className = "hero-msg hero-msg-ai";
+          el.id = "thinking";
+          el.textContent = "MajestiOS réfléchit…";
+          chatBox.appendChild(el);
+          chatBox.scrollTop = chatBox.scrollHeight;
+        }
 
+        function stopThinking() {
+          const el = document.getElementById("thinking");
+          if (el) el.remove();
+        }
+
+        // Envoi message
         chatForm.addEventListener("submit", async e => {
           e.preventDefault();
 
           const prompt = chatInput.value.trim();
           if (!prompt) return;
 
-          const model = modelSelect.value;
-
+          // Affichage utilisateur
           chatBox.innerHTML += `<div class="hero-msg hero-msg-user">${prompt}</div>`;
           chatInput.value = "";
           chatBox.scrollTop = chatBox.scrollHeight;
 
-          // Placeholder IA
-          chatBox.innerHTML += `<div class="hero-msg hero-msg-ai">Réponse de ${model}…</div>`;
+          thinking();
+
+          const token = localStorage.getItem("token");
+
+          // Appel MajestiOS Intelligence
+          const res = await fetch("https://majestios-backend.onrender.com/api/ai/route", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + token
+            },
+            body: JSON.stringify({
+              prompt,
+              strategy: "balanced"
+            })
+          });
+
+          const data = await res.json();
+          stopThinking();
+
+          const answer = data.response || "Erreur : aucune réponse.";
+
+          // Affichage IA
+          chatBox.innerHTML += `
+            <div class="hero-msg hero-msg-ai">
+              ${answer}<br><br>
+              <span style="opacity:0.6;font-size:12px;">— MajestiOS Intelligence</span>
+            </div>
+          `;
           chatBox.scrollTop = chatBox.scrollHeight;
+
+          // Historique
+          await fetch("https://majestios-backend.onrender.com/api/user/history/add", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + token
+            },
+            body: JSON.stringify({ prompt, response: answer })
+          });
         });
 
         // Barre IA centrale → envoie dans le chat
