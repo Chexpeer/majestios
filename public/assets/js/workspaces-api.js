@@ -1,53 +1,47 @@
-// assets/js/workspaces-api.js
+const API_URL = "https://majestios-backend.onrender.com/api/workspaces";
 
-const WORKSPACE_API = "https://majestios-backend.onrender.com/api/workspaces";
-
-async function safeJson(res) {
-  let bodyText = "";
+export async function getWorkspaces(token) {
   try {
-    bodyText = await res.text();        // on lit toujours la réponse
-    return JSON.parse(bodyText);        // on tente de parser en JSON
-  } catch (e) {
-    console.error("Réponse non JSON de l’API workspaces :", bodyText);
-    return {
-      error: true,
-      message: `Réponse invalide du serveur (status ${res.status})`,
-      raw: bodyText,
-    };
+    const res = await fetch(API_URL, {
+      headers: {
+        Authorization: "Bearer " + token
+      }
+    });
+
+    if (!res.ok) {
+      return { workspaces: [], message: "Erreur serveur" };
+    }
+
+    const data = await res.json();
+    return data; // { workspaces: [...] }
+
+  } catch (err) {
+    console.error("GET WORKSPACES ERROR:", err);
+    return { workspaces: [], message: "Erreur réseau" };
   }
 }
 
-export async function getWorkspaces(token) {
-  const res = await fetch(WORKSPACE_API, {
-    method: "GET",
-    headers: {
-      Authorization: "Bearer " + token,
-    },
-  });
-
-  return safeJson(res);
-}
-
 export async function createWorkspace(name, token) {
-  const res = await fetch(WORKSPACE_API, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: "Bearer " + token,
-    },
-    body: JSON.stringify({ name }),
-  });
+  try {
+    const res = await fetch(API_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token
+      },
+      body: JSON.stringify({ name })
+    });
 
-  return safeJson(res);
-}
+    if (!res.ok) {
+      const data = await res.json();
+      return { message: data.message || "Erreur serveur" };
+    }
 
-export async function deleteWorkspace(id, token) {
-  const res = await fetch(`${WORKSPACE_API}/${id}`, {
-    method: "DELETE",
-    headers: {
-      Authorization: "Bearer " + token,
-    },
-  });
+    const workspace = await res.json();
+    return { workspace };
 
-  return safeJson(res);
+  } catch (err) {
+    console.error("CREATE WORKSPACE ERROR:", err);
+    return { message: "Erreur réseau" };
+  }
 }

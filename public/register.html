@@ -132,7 +132,18 @@
 
     </div>
 
-    <!-- JS -->
+    <!-- SCRIPT : RÉCUPÉRATION TOKEN GOOGLE -->
+    <script>
+      const params = new URLSearchParams(window.location.search);
+      const token = params.get("token");
+
+      if (token) {
+        localStorage.setItem("token", token);
+        window.location.href = "dashboard.html";
+      }
+    </script>
+
+    <!-- SCRIPT : REGISTER + GOOGLE -->
     <script type="module">
       import { register, saveToken } from "./assets/js/auth.js";
 
@@ -162,10 +173,12 @@
       }
     </script>
 
+    <!-- TES SCRIPTS EXISTANTS -->
     <script src="assets/js/main.js"></script>
     <script src="assets/js/ui.js"></script>
     <script src="assets/js/theme.js"></script>
     <script src="assets/js/analytics.js"></script>
+
   </body>
 </html>
 

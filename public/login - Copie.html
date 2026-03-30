@@ -20,7 +20,6 @@
     .google-btn:hover { background: #e5e5e5; }
   </style>
 </head>
-
 <body>
 
   <div class="box">
@@ -46,18 +45,6 @@
     <p id="message"></p>
   </div>
 
-  <!-- SCRIPT : RÉCUPÉRATION TOKEN GOOGLE -->
-  <script>
-    const params = new URLSearchParams(window.location.search);
-    const token = params.get("token");
-
-    if (token) {
-      localStorage.setItem("token", token);
-      window.location.href = "dashboard.html";
-    }
-  </script>
-
-  <!-- SCRIPT : LOGIN EMAIL + GOOGLE -->
   <script>
     async function loginUser() {
       const email = document.getElementById("email").value.trim();
@@ -104,4 +91,3 @@
 
 </body>
 </html>
-
