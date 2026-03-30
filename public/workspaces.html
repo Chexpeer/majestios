@@ -3,12 +3,9 @@
   <head>
     <meta charset="utf-8" />
     <title>Workspaces – M@jestiOS</title>
-    <meta
-      name="description"
-      content="Gérez vos workspaces M@jestiOS : espaces de travail, projets, équipes et clients, chacun avec ses modèles IA et paramètres dédiés."
-    />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+    <!-- TES CSS EXISTANTS -->
     <link rel="stylesheet" href="assets/css/theme.css" />
     <link rel="stylesheet" href="assets/css/main.css" />
     <link rel="stylesheet" href="assets/css/layout.css" />
@@ -19,97 +16,76 @@
   <body>
     <div class="app-shell">
 
-      <!-- HEADER UNIFIÉ + BARRE IA PREMIUM -->
-      <header class="app-header">
-        <div class="app-header-inner">
-
-          <a href="dashboard.html" class="brand">
-            <div class="brand-mark">M</div>
-            <div class="brand-text">
-              <div class="brand-name">M@jestiOS</div>
-              <div class="brand-tagline">L’OS d’intelligences unifiées</div>
-            </div>
-          </a>
-
-          <!-- BARRE IA PREMIUM -->
-          <form
-            class="ia-bar"
-            action="app.html"
-            method="GET"
-            style="
-              flex: 1;
-              max-width: 520px;
-              margin: 0 24px;
-              display: flex;
-              align-items: center;
-              gap: 8px;
-              padding: 8px 12px;
-              border-radius: 999px;
-              background: rgba(15,23,42,0.9);
-              border: 1px solid rgba(148,163,184,0.35);
-            "
-          >
-            <span
-              style="
-                width: 22px;
-                height: 22px;
-                border-radius: 999px;
-                background: radial-gradient(circle at 30% 30%, #22c55e, #4f46e5);
-                display: inline-flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 12px;
-              "
-            >
-              ✦
-            </span>
-            <input
-              type="text"
-              name="prompt"
-              placeholder="Demandez à vos IA unifiées…"
-              style="
-                flex: 1;
-                border: none;
-                background: transparent;
-                color: #e5e7eb;
-                font-size: 14px;
-                outline: none;
-              "
-            />
-            <button
-              type="submit"
-              class="btn btn-primary"
-              style="padding: 6px 14px; font-size: 13px; border-radius: 999px;"
-            >
-              Lancer
-            </button>
-          </form>
-
-          <nav class="nav">
-            <div class="nav-links">
-              <a href="dashboard.html" class="nav-link"><span>Dashboard</span></a>
-              <a href="workspaces.html" class="nav-link nav-link-active"><span>Mes espaces</span></a>
-              <a href="settings.html" class="nav-link"><span>Paramètres</span></a>
-              <a href="profile.html" class="nav-link"><span>Profil</span></a>
-            </div>
-
-            <div class="nav-cta">
-              <span id="userEmail" style="margin-right: 12px; opacity: 0.8; font-size: 14px;"></span>
-              <button onclick="logout()" class="btn btn-outline">Déconnexion</button>
-            </div>
-
-            <button class="menu-toggle btn-icon">☰</button>
-          </nav>
-
+      <!-- SIDEBAR VERTICALE -->
+      <aside style="
+        width: 240px;
+        background: #0f172a;
+        border-right: 1px solid rgba(148,163,184,0.15);
+        position: fixed;
+        inset: 0 auto 0 0;
+        padding: 24px 18px;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+      ">
+        <div class="brand">
+          <div class="brand-mark">M</div>
+          <div class="brand-text">
+            <div class="brand-name">M@jestiOS</div>
+            <div class="brand-tagline">OS d’intelligences unifiées</div>
+          </div>
         </div>
-      </header>
 
-      <!-- CONTENU WORKSPACES -->
-      <main class="app-main">
+        <nav class="nav-links" style="flex-direction:column;gap:14px;margin-top:20px;">
+          <a href="dashboard.html" class="nav-link"><span>Dashboard</span></a>
+          <a href="workspaces.html" class="nav-link nav-link-active"><span>Mes espaces</span></a>
+          <a href="multi-IA.html" class="nav-link"><span>Multi‑IA</span></a>
+          <a href="historique.html" class="nav-link"><span>Historique</span></a>
+          <a href="notifications.html" class="nav-link"><span>Notifications</span></a>
+          <a href="settings.html" class="nav-link"><span>Paramètres</span></a>
+          <a href="profile.html" class="nav-link"><span>Profil</span></a>
+        </nav>
+
+        <div style="margin-top:auto;">
+          <div id="sidebarEmail" style="font-size:13px;opacity:0.7;margin-bottom:8px;"></div>
+          <button onclick="logout()" class="btn btn-outline">Déconnexion</button>
+        </div>
+      </aside>
+
+      <!-- CONTENU PRINCIPAL -->
+      <main class="app-main" style="margin-left:240px;">
+
+        <!-- BARRE IA CENTRALE -->
+        <form class="ia-bar" action="app.html" method="GET" style="
+          max-width:600px;
+          margin:32px auto;
+          display:flex;
+          align-items:center;
+          gap:10px;
+          padding:10px 16px;
+          border-radius:999px;
+          background:rgba(15,23,42,0.9);
+          border:1px solid rgba(148,163,184,0.35);
+        ">
+          <span style="
+            width:22px;height:22px;border-radius:999px;
+            background:radial-gradient(circle at 30% 30%, #22c55e, #4f46e5);
+          ">✦</span>
+
+          <input type="text" name="prompt" placeholder="Demandez à vos IA unifiées…" style="
+            flex:1;border:none;background:transparent;color:#e5e7eb;font-size:14px;outline:none;
+          " />
+
+          <button type="submit" class="btn btn-primary" style="border-radius:999px;padding:6px 16px;">
+            Lancer
+          </button>
+        </form>
+
+        <!-- CONTENU WORKSPACES -->
         <section class="section">
-          <div class="container" style="max-width: 820px;">
+          <div class="container" style="max-width:820px;">
 
-            <div class="section-header" style="text-align: center;">
+            <div class="section-header" style="text-align:center;">
               <div class="section-eyebrow">Organisation</div>
               <h1 class="section-title">Vos workspaces</h1>
               <p class="section-subtitle">
@@ -119,9 +95,9 @@
             </div>
 
             <!-- CARD PRINCIPALE -->
-            <div class="card" style="padding: 24px;">
+            <div class="card" style="padding:24px;">
 
-              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
                 <h3 class="card-title">Liste des workspaces</h3>
                 <button id="createWorkspaceBtn" class="btn btn-primary btn-sm">+ Créer un workspace</button>
               </div>
@@ -139,28 +115,28 @@
             <div
               id="workspaceModal"
               style="
-                display: none;
-                position: fixed;
-                inset: 0;
-                background: rgba(0,0,0,0.6);
-                backdrop-filter: blur(4px);
-                align-items: center;
-                justify-content: center;
-                z-index: 9999;
+                display:none;
+                position:fixed;
+                inset:0;
+                background:rgba(0,0,0,0.6);
+                backdrop-filter:blur(4px);
+                align-items:center;
+                justify-content:center;
+                z-index:9999;
               "
             >
-              <div class="card" style="padding: 24px; width: 360px;">
+              <div class="card" style="padding:24px;width:360px;">
 
-                <h3 class="card-title" style="margin-bottom: 16px;">Créer un workspace</h3>
+                <h3 class="card-title" style="margin-bottom:16px;">Créer un workspace</h3>
 
-                <form id="workspaceForm" style="display: flex; flex-direction: column; gap: 14px;">
+                <form id="workspaceForm" style="display:flex;flex-direction:column;gap:14px;">
                   <div>
-                    <label style="font-size: 14px;">Nom du workspace</label>
+                    <label style="font-size:14px;">Nom du workspace</label>
                     <input
                       type="text"
                       id="workspaceName"
                       class="input"
-                      style="margin-top: 6px; width: 100%;"
+                      style="margin-top:6px;width:100%;"
                       required
                     />
                   </div>
@@ -168,7 +144,7 @@
                   <button type="submit" class="btn btn-primary">Créer</button>
                   <button type="button" id="closeModal" class="btn btn-outline">Annuler</button>
 
-                  <p id="workspaceMessage" style="font-size: 14px; margin-top: 10px;"></p>
+                  <p id="workspaceMessage" style="font-size:14px;margin-top:10px;"></p>
                 </form>
 
               </div>
@@ -176,9 +152,9 @@
 
           </div>
         </section>
+
       </main>
 
-      <!-- FOOTER -->
       <footer class="app-footer">
         <div class="app-footer-inner">
           <div>© M@jestiOS – L’OS d’intelligences unifiées.</div>
@@ -187,7 +163,7 @@
 
     </div>
 
-    <!-- LOGIQUE JS -->
+    <!-- JS EXISTANTS -->
     <script type="module">
       import { getWorkspaces, createWorkspace } from './assets/js/workspaces-api.js';
 
@@ -198,56 +174,44 @@
 
       async function initWorkspaces() {
         const token = localStorage.getItem("token");
-        if (!token) {
-          window.location.href = "login.html";
-          return;
+        if (!token) return (window.location.href = "login.html");
+
+        // USER
+        const userRes = await fetch("https://majestios-backend.onrender.com/api/auth/me", {
+          headers: { Authorization: "Bearer " + token }
+        });
+        const userData = await userRes.json();
+        if (userData.user) {
+          document.getElementById("sidebarEmail").textContent = userData.user.email;
         }
 
-        // Récup user
-        try {
-          const userRes = await fetch("https://majestios-backend.onrender.com/api/auth/me", {
-            method: "GET",
-            headers: { "Authorization": "Bearer " + token }
-          });
-          const userData = await userRes.json();
-          if (userRes.ok && userData.user) {
-            document.getElementById("userEmail").textContent = userData.user.email;
-          }
-        } catch (e) {
-          console.error(e);
-        }
-
-        // Charger les workspaces
+        // LISTE WORKSPACES
         async function loadWorkspaces() {
-          try {
-            const wsData = await getWorkspaces(token);
-            const list = document.getElementById("workspaceList");
+          const wsData = await getWorkspaces(token);
+          const list = document.getElementById("workspaceList");
 
-            if (wsData && wsData.workspaces && wsData.workspaces.length > 0) {
-              list.innerHTML = wsData.workspaces
-                .map(ws => `
-                  <div class="list-item">
-                    <div class="list-bullet">•</div>
-                    <div>${ws.name}</div>
-                  </div>
-                `)
-                .join('');
-            } else {
-              list.innerHTML = `
+          if (wsData.workspaces?.length) {
+            list.innerHTML = wsData.workspaces
+              .map(ws => `
                 <div class="list-item">
                   <div class="list-bullet">•</div>
-                  <div>Aucun workspace pour le moment.</div>
+                  <div>${ws.name}</div>
                 </div>
-              `;
-            }
-          } catch (e) {
-            console.error(e);
+              `)
+              .join('');
+          } else {
+            list.innerHTML = `
+              <div class="list-item">
+                <div class="list-bullet">•</div>
+                <div>Aucun workspace pour le moment.</div>
+              </div>
+            `;
           }
         }
 
         await loadWorkspaces();
 
-        // Modal création
+        // MODAL
         const modal = document.getElementById("workspaceModal");
         const openBtn = document.getElementById("createWorkspaceBtn");
         const closeBtn = document.getElementById("closeModal");
@@ -269,20 +233,15 @@
           const name = document.getElementById("workspaceName").value.trim();
           if (!name) return;
 
-          try {
-            const res = await createWorkspace(token, name);
-            if (res && res.workspace) {
-              message.textContent = "Workspace créé avec succès.";
-              message.style.color = "#22c55e";
-              form.reset();
-              await loadWorkspaces();
-            } else {
-              message.textContent = res.message || "Erreur lors de la création.";
-              message.style.color = "#ef4444";
-            }
-          } catch (e) {
-            console.error(e);
-            message.textContent = "Erreur réseau.";
+          const res = await createWorkspace(name, token);
+
+          if (res.workspace) {
+            message.textContent = "Workspace créé avec succès.";
+            message.style.color = "#22c55e";
+            form.reset();
+            await loadWorkspaces();
+          } else {
+            message.textContent = res.message || "Erreur lors de la création.";
             message.style.color = "#ef4444";
           }
         });
@@ -297,4 +256,5 @@
     <script src="assets/js/analytics.js"></script>
   </body>
 </html>
+
 

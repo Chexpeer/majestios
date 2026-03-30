@@ -2,13 +2,10 @@
 <html lang="fr">
   <head>
     <meta charset="utf-8" />
-    <title>Chat multi‑IA – M@jestiOS</title>
-    <meta
-      name="description"
-      content="Chat multi‑IA de M@jestiOS : GPT‑4, Claude, Gemini et Mistral dans une interface unifiée, minimaliste et productive."
-    />
+    <title>Multi‑IA – M@jestiOS</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+    <!-- TES CSS EXISTANTS -->
     <link rel="stylesheet" href="assets/css/theme.css" />
     <link rel="stylesheet" href="assets/css/main.css" />
     <link rel="stylesheet" href="assets/css/layout.css" />
@@ -19,251 +16,135 @@
   <body>
     <div class="app-shell">
 
-      <!-- Header unifié avec barre IA premium -->
-      <!-- (reprends exactement le header ci-dessus, en remplaçant nav-cta par email + logout) -->
-      <header class="app-header">
-        <div class="app-header-inner">
-
-          <a href="dashboard.html" class="brand">
-            <div class="brand-mark">M</div>
-            <div class="brand-text">
-              <div class="brand-name">M@jestiOS</div>
-              <div class="brand-tagline">L’OS d’intelligences unifiées</div>
-            </div>
-          </a>
-
-          <form
-            class="ia-bar"
-            action="app.html"
-            method="GET"
-            style="
-              flex: 1;
-              max-width: 520px;
-              margin: 0 24px;
-              display: flex;
-              align-items: center;
-              gap: 8px;
-              padding: 8px 12px;
-              border-radius: 999px;
-              background: rgba(15,23,42,0.9);
-              border: 1px solid rgba(148,163,184,0.35);
-            "
-          >
-            <span
-              style="
-                width: 22px;
-                height: 22px;
-                border-radius: 999px;
-                background: radial-gradient(circle at 30% 30%, #22c55e, #4f46e5);
-                display: inline-flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 12px;
-              "
-            >
-              ✦
-            </span>
-            <input
-              id="globalPrompt"
-              type="text"
-              name="prompt"
-              placeholder="Demandez à vos IA unifiées…"
-              style="
-                flex: 1;
-                border: none;
-                background: transparent;
-                color: #e5e7eb;
-                font-size: 14px;
-                outline: none;
-              "
-            />
-            <button
-              type="submit"
-              class="btn btn-primary"
-              style="padding: 6px 14px; font-size: 13px; border-radius: 999px;"
-            >
-              Lancer
-            </button>
-          </form>
-
-          <nav class="nav">
-            <div class="nav-links">
-              <a href="dashboard.html" class="nav-link"><span>Dashboard</span></a>
-              <a href="workspaces.html" class="nav-link"><span>Mes espaces</span></a>
-              <a href="settings.html" class="nav-link"><span>Paramètres</span></a>
-            </div>
-
-            <div class="nav-cta">
-              <span id="userEmail" style="margin-right: 12px; opacity: 0.8; font-size: 14px;"></span>
-              <button onclick="logout()" class="btn btn-outline">Déconnexion</button>
-            </div>
-
-            <button class="menu-toggle btn-icon">☰</button>
-          </nav>
-
+      <!-- SIDEBAR VERTICALE -->
+      <aside style="
+        width: 240px;
+        background: #0f172a;
+        border-right: 1px solid rgba(148,163,184,0.15);
+        position: fixed;
+        inset: 0 auto 0 0;
+        padding: 24px 18px;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+      ">
+        <div class="brand">
+          <div class="brand-mark">M</div>
+          <div class="brand-text">
+            <div class="brand-name">M@jestiOS</div>
+            <div class="brand-tagline">OS d’intelligences unifiées</div>
+          </div>
         </div>
-      </header>
 
-      <main class="app-main">
-        <section class="section" style="padding-top: 40px;">
-          <div class="container">
+        <nav class="nav-links" style="flex-direction:column;gap:14px;margin-top:20px;">
+          <a href="dashboard.html" class="nav-link"><span>Dashboard</span></a>
+          <a href="workspaces.html" class="nav-link"><span>Mes espaces</span></a>
+          <a href="app.html" class="nav-link nav-link-active"><span>Multi‑IA</span></a>
+          <a href="historique.html" class="nav-link"><span>Historique</span></a>
+          <a href="notifications.html" class="nav-link"><span>Notifications</span></a>
+          <a href="settings.html" class="nav-link"><span>Paramètres</span></a>
+          <a href="profile.html" class="nav-link"><span>Profil</span></a>
+        </nav>
 
-            <div class="section-header" style="text-align: center; max-width: 720px; margin: 0 auto 30px;">
-              <div class="section-eyebrow">Chat multi‑IA</div>
-              <h1 class="section-title">Votre cockpit d’intelligences unifiées.</h1>
+        <div style="margin-top:auto;">
+          <div id="sidebarEmail" style="font-size:13px;opacity:0.7;margin-bottom:8px;"></div>
+          <button onclick="logout()" class="btn btn-outline">Déconnexion</button>
+        </div>
+      </aside>
+
+      <!-- CONTENU PRINCIPAL -->
+      <main class="app-main" style="margin-left:240px;">
+
+        <!-- BARRE IA CENTRALE -->
+        <form class="ia-bar" action="app.html" method="GET" style="
+          max-width:600px;
+          margin:32px auto;
+          display:flex;
+          align-items:center;
+          gap:10px;
+          padding:10px 16px;
+          border-radius:999px;
+          background:rgba(15,23,42,0.9);
+          border:1px solid rgba(148,163,184,0.35);
+        ">
+          <span style="
+            width:22px;height:22px;border-radius:999px;
+            background:radial-gradient(circle at 30% 30%, #22c55e, #4f46e5);
+          ">✦</span>
+
+          <input type="text" name="prompt" placeholder="Demandez à vos IA unifiées…" style="
+            flex:1;border:none;background:transparent;color:#e5e7eb;font-size:14px;outline:none;
+          " />
+
+          <button type="submit" class="btn btn-primary" style="border-radius:999px;padding:6px 16px;">
+            Lancer
+          </button>
+        </form>
+
+        <!-- MULTI‑IA PANEL -->
+        <section class="section">
+          <div class="container" style="max-width:900px;">
+
+            <div class="section-header" style="text-align:center;">
+              <div class="section-eyebrow">Multi‑IA</div>
+              <h1 class="section-title">Vos intelligences unifiées</h1>
               <p class="section-subtitle">
-                Comparez, combinez et orchestrez GPT‑4, Claude, Gemini et Mistral dans une interface minimaliste
-                pensée pour la productivité.
+                Comparez, combinez et orchestrez plusieurs modèles IA dans un seul espace.
               </p>
             </div>
 
-            <div class="card" style="padding: 0; overflow: hidden;">
+            <div class="card" style="padding:24px;">
 
-              <!-- Bandeau supérieur -->
-              <div
-                style="
-                  padding: 14px 18px;
-                  border-bottom: 1px solid rgba(15, 23, 42, 1);
-                  display: flex;
-                  align-items: center;
-                  justify-content: space-between;
-                "
-              >
-                <div style="display: flex; align-items: center; gap: 10px;">
-                  <div class="chip">
-                    <span class="chip-pill">Workspace</span>
-                    <span id="currentWorkspaceName">Général</span>
-                  </div>
-                  <div class="chip">
-                    <span class="chip-pill">Live</span>
-                    <span id="modelsCount">4 modèles actifs</span>
-                  </div>
-                </div>
+              <!-- Sélecteurs de modèles -->
+              <div style="display:flex;gap:14px;margin-bottom:20px;">
+                <select id="modelSelect" class="input" style="flex:1;">
+                  <option value="gpt4">GPT‑4</option>
+                  <option value="claude">Claude</option>
+                  <option value="gemini">Gemini</option>
+                  <option value="mistral">Mistral</option>
+                </select>
 
-                <div style="display: flex; gap: 8px;">
-                  <button class="btn btn-outline btn-sm">Exporter</button>
-                  <button class="btn btn-outline btn-sm">Historique</button>
-                </div>
+                <button id="clearChat" class="btn btn-outline">Effacer</button>
               </div>
 
-              <!-- Layout principal : sidebar + zone de chat -->
-              <div
-                style="
-                  display: grid;
-                  grid-template-columns: 240px minmax(0, 1fr);
-                  min-height: 520px;
-                "
-              >
-                <!-- Sidebar modèles / workspaces -->
-                <aside
-                  style="
-                    border-right: 1px solid rgba(15, 23, 42, 1);
-                    padding: 14px;
-                    background: rgba(15,23,42,0.7);
-                  "
-                >
-                  <h3 style="font-size: 13px; text-transform: uppercase; letter-spacing: 0.16em; opacity: 0.7; margin-bottom: 10px;">
-                    Modèles
-                  </h3>
-                  <div class="list">
-                    <div class="list-item">
-                      <div class="list-bullet">●</div>
-                      <div>GPT‑4</div>
-                    </div>
-                    <div class="list-item">
-                      <div class="list-bullet">●</div>
-                      <div>Claude</div>
-                    </div>
-                    <div class="list-item">
-                      <div class="list-bullet">●</div>
-                      <div>Gemini</div>
-                    </div>
-                    <div class="list-item">
-                      <div class="list-bullet">●</div>
-                      <div>Mistral</div>
-                    </div>
-                  </div>
-
-                  <hr style="border-color: rgba(30,64,175,0.6); margin: 16px 0;" />
-
-                  <h3 style="font-size: 13px; text-transform: uppercase; letter-spacing: 0.16em; opacity: 0.7; margin-bottom: 10px;">
-                    Workspaces
-                  </h3>
-                  <ul id="workspace-submenu" style="padding-left: 0; margin: 0;">
-                    <li style="padding:10px; opacity:0.5; font-size:12px; list-style:none;">Chargement...</li>
-                  </ul>
-
-                  <div style="margin-top: 16px;">
-                    <a href="workspaces.html" class="btn btn-outline btn-sm" style="width: 100%; text-align: center;">
-                      Gérer les espaces
-                    </a>
-                  </div>
-                </aside>
-
-                <!-- Zone de chat -->
-                <section
-                  style="
-                    display: flex;
-                    flex-direction: column;
-                    min-height: 100%;
-                    background: radial-gradient(circle at top, #020617 0, #020617 40%, #020617 100%);
-                  "
-                >
-                  <!-- Messages -->
-                  <div
-                    id="chatMessages"
-                    style="
-                      flex: 1;
-                      padding: 18px;
-                      overflow-y: auto;
-                      display: flex;
-                      flex-direction: column;
-                      gap: 12px;
-                    "
-                  >
-                    <!-- Exemple de message initial -->
-                    <div class="card" style="background: rgba(15,23,42,0.9);">
-                      <div class="card-title" style="font-size: 14px; margin-bottom: 6px;">Bienvenue dans M@jestiOS</div>
-                      <p class="card-subtitle" style="font-size: 13px;">
-                        Posez une question dans la barre ci‑dessous. Les modèles répondront selon votre configuration.
-                      </p>
-                    </div>
-                  </div>
-
-                  <!-- Zone de saisie -->
-                  <div
-                    style="
-                      border-top: 1px solid rgba(15, 23, 42, 1);
-                      padding: 12px 16px;
-                      background: rgba(15,23,42,0.95);
-                    "
-                  >
-                    <form id="chatForm" style="display: flex; gap: 8px; align-items: center;">
-                      <textarea
-                        id="chatInput"
-                        rows="1"
-                        placeholder="Décrivez ce que vous voulez que vos IA fassent…"
-                        style="
-                          flex: 1;
-                          resize: none;
-                          border-radius: 12px;
-                          border: 1px solid rgba(148,163,184,0.35);
-                          background: rgba(15,23,42,0.9);
-                          color: #e5e7eb;
-                          font-size: 14px;
-                          padding: 8px 10px;
-                          outline: none;
-                        "
-                      ></textarea>
-                      <button type="submit" class="btn btn-primary">Envoyer</button>
-                    </form>
-                  </div>
-                </section>
+              <!-- Zone de chat -->
+              <div id="chatBox" style="
+                height:420px;
+                overflow-y:auto;
+                padding:14px;
+                border-radius:14px;
+                background:rgba(15,23,42,0.9);
+                border:1px solid rgba(31,41,55,0.9);
+                display:flex;
+                flex-direction:column;
+                gap:12px;
+              ">
+                <div style="opacity:0.6;font-size:13px;">Démarrez une conversation…</div>
               </div>
+
+              <!-- Input -->
+              <form id="chatForm" style="
+                margin-top:16px;
+                display:flex;
+                gap:10px;
+                align-items:center;
+              ">
+                <input
+                  id="chatInput"
+                  type="text"
+                  placeholder="Votre message…"
+                  class="input"
+                  style="flex:1;"
+                  required
+                />
+                <button class="btn btn-primary">Envoyer</button>
+              </form>
+
             </div>
 
           </div>
         </section>
+
       </main>
 
       <footer class="app-footer">
@@ -271,12 +152,11 @@
           <div>© M@jestiOS – L’OS d’intelligences unifiées.</div>
         </div>
       </footer>
+
     </div>
 
+    <!-- JS -->
     <script type="module">
-      import { updateSidebarWorkspaces } from './assets/js/ui.js';
-      import { getWorkspaces } from './assets/js/workspaces-api.js';
-
       function logout() {
         localStorage.removeItem("token");
         window.location.href = "login.html";
@@ -284,56 +164,52 @@
 
       async function initApp() {
         const token = localStorage.getItem("token");
-        if (!token) {
-          window.location.href = "login.html";
-          return;
+        if (!token) return (window.location.href = "login.html");
+
+        // USER
+        const userRes = await fetch("https://majestios-backend.onrender.com/api/auth/me", {
+          headers: { Authorization: "Bearer " + token }
+        });
+        const userData = await userRes.json();
+        if (userData.user) {
+          document.getElementById("sidebarEmail").textContent = userData.user.email;
         }
 
-        // Récup user
-        try {
-          const userRes = await fetch("https://majestios-backend.onrender.com/api/auth/me", {
-            method: "GET",
-            headers: { "Authorization": "Bearer " + token }
-          });
-          const userData = await userRes.json();
-          if (userRes.ok && userData.user) {
-            document.getElementById("userEmail").textContent = userData.user.email;
-          }
-        } catch (e) {
-          console.error(e);
-        }
+        // CHAT LOGIC
+        const chatBox = document.getElementById("chatBox");
+        const chatForm = document.getElementById("chatForm");
+        const chatInput = document.getElementById("chatInput");
+        const modelSelect = document.getElementById("modelSelect");
+        const clearChat = document.getElementById("clearChat");
 
-        // Workspaces
-        try {
-          const wsData = await getWorkspaces(token);
-          if (wsData && wsData.workspaces) {
-            updateSidebarWorkspaces(wsData.workspaces);
-          }
-        } catch (e) {
-          console.error(e);
-        }
+        clearChat.onclick = () => {
+          chatBox.innerHTML = `<div style="opacity:0.6;font-size:13px;">Démarrez une conversation…</div>`;
+        };
 
-        // Pré-remplir depuis la barre IA globale (paramètre ?prompt=)
-        const params = new URLSearchParams(window.location.search);
-        const prompt = params.get("prompt");
-        if (prompt) {
-          const input = document.getElementById("chatInput");
-          const globalPrompt = document.getElementById("globalPrompt");
-          if (input) input.value = prompt;
-          if (globalPrompt) globalPrompt.value = prompt;
-        }
+        chatForm.addEventListener("submit", async e => {
+          e.preventDefault();
+
+          const prompt = chatInput.value.trim();
+          if (!prompt) return;
+
+          const model = modelSelect.value;
+
+          // Affichage du message utilisateur
+          chatBox.innerHTML += `
+            <div class="hero-msg hero-msg-user">${prompt}</div>
+          `;
+          chatInput.value = "";
+          chatBox.scrollTop = chatBox.scrollHeight;
+
+          // Appel IA (placeholder)
+          chatBox.innerHTML += `
+            <div class="hero-msg hero-msg-ai">Réponse de ${model}…</div>
+          `;
+          chatBox.scrollTop = chatBox.scrollHeight;
+        });
       }
 
       document.addEventListener("DOMContentLoaded", initApp);
-
-      // Placeholder pour la logique d’envoi (tu branches ton backend ici)
-      document.getElementById("chatForm").addEventListener("submit", e => {
-        e.preventDefault();
-        const value = document.getElementById("chatInput").value.trim();
-        if (!value) return;
-        // Ici tu appelles ton backend multi‑IA
-        console.log("Prompt envoyé :", value);
-      });
     </script>
 
     <script src="assets/js/main.js"></script>

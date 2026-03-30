@@ -3,12 +3,9 @@
   <head>
     <meta charset="utf-8" />
     <title>Dashboard – M@jestiOS</title>
-    <meta
-      name="description"
-      content="Votre tableau de bord M@jestiOS : workspaces, modèles IA, statistiques et accès rapide au chat multi‑IA."
-    />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+    <!-- TES CSS EXISTANTS -->
     <link rel="stylesheet" href="assets/css/theme.css" />
     <link rel="stylesheet" href="assets/css/main.css" />
     <link rel="stylesheet" href="assets/css/layout.css" />
@@ -19,97 +16,76 @@
   <body>
     <div class="app-shell">
 
-      <!-- HEADER UNIFIÉ + BARRE IA PREMIUM -->
-      <header class="app-header">
-        <div class="app-header-inner">
-
-          <a href="dashboard.html" class="brand">
-            <div class="brand-mark">M</div>
-            <div class="brand-text">
-              <div class="brand-name">M@jestiOS</div>
-              <div class="brand-tagline">L’OS d’intelligences unifiées</div>
-            </div>
-          </a>
-
-          <!-- BARRE IA PREMIUM -->
-          <form
-            class="ia-bar"
-            action="app.html"
-            method="GET"
-            style="
-              flex: 1;
-              max-width: 520px;
-              margin: 0 24px;
-              display: flex;
-              align-items: center;
-              gap: 8px;
-              padding: 8px 12px;
-              border-radius: 999px;
-              background: rgba(15,23,42,0.9);
-              border: 1px solid rgba(148,163,184,0.35);
-            "
-          >
-            <span
-              style="
-                width: 22px;
-                height: 22px;
-                border-radius: 999px;
-                background: radial-gradient(circle at 30% 30%, #22c55e, #4f46e5);
-                display: inline-flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 12px;
-              "
-            >
-              ✦
-            </span>
-            <input
-              type="text"
-              name="prompt"
-              placeholder="Demandez à vos IA unifiées…"
-              style="
-                flex: 1;
-                border: none;
-                background: transparent;
-                color: #e5e7eb;
-                font-size: 14px;
-                outline: none;
-              "
-            />
-            <button
-              type="submit"
-              class="btn btn-primary"
-              style="padding: 6px 14px; font-size: 13px; border-radius: 999px;"
-            >
-              Lancer
-            </button>
-          </form>
-
-          <nav class="nav">
-            <div class="nav-links">
-              <a href="dashboard.html" class="nav-link nav-link-active"><span>Dashboard</span></a>
-              <a href="workspaces.html" class="nav-link"><span>Mes espaces</span></a>
-              <a href="settings.html" class="nav-link"><span>Paramètres</span></a>
-              <a href="profile.html" class="nav-link"><span>Profil</span></a>
-            </div>
-
-            <div class="nav-cta">
-              <span id="userEmail" style="margin-right: 12px; opacity: 0.8; font-size: 14px;"></span>
-              <button onclick="logout()" class="btn btn-outline">Déconnexion</button>
-            </div>
-
-            <button class="menu-toggle btn-icon">☰</button>
-          </nav>
-
+      <!-- SIDEBAR VERTICALE (HTML SEULEMENT) -->
+      <aside style="
+        width: 240px;
+        background: #0f172a;
+        border-right: 1px solid rgba(148,163,184,0.15);
+        position: fixed;
+        inset: 0 auto 0 0;
+        padding: 24px 18px;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+      ">
+        <div class="brand">
+          <div class="brand-mark">M</div>
+          <div class="brand-text">
+            <div class="brand-name">M@jestiOS</div>
+            <div class="brand-tagline">OS d’intelligences unifiées</div>
+          </div>
         </div>
-      </header>
 
-      <!-- CONTENU DU DASHBOARD -->
-      <main class="app-main">
+        <nav class="nav-links" style="flex-direction:column;gap:14px;margin-top:20px;">
+          <a href="dashboard.html" class="nav-link nav-link-active"><span>Dashboard</span></a>
+          <a href="workspaces.html" class="nav-link"><span>Mes espaces</span></a>
+          <a href="multi-IA.html" class="nav-link"><span>Multi‑IA</span></a>
+          <a href="historique.html" class="nav-link"><span>Historique</span></a>
+          <a href="notifications.html" class="nav-link"><span>Notifications</span></a>
+          <a href="settings.html" class="nav-link"><span>Paramètres</span></a>
+          <a href="profile.html" class="nav-link"><span>Profil</span></a>
+        </nav>
+
+        <div style="margin-top:auto;">
+          <div id="sidebarEmail" style="font-size:13px;opacity:0.7;margin-bottom:8px;"></div>
+          <button onclick="logout()" class="btn btn-outline">Déconnexion</button>
+        </div>
+      </aside>
+
+      <!-- CONTENU PRINCIPAL -->
+      <main class="app-main" style="margin-left:240px;">
+
+        <!-- BARRE IA CENTRALE -->
+        <form class="ia-bar" action="app.html" method="GET" style="
+          max-width:600px;
+          margin:32px auto;
+          display:flex;
+          align-items:center;
+          gap:10px;
+          padding:10px 16px;
+          border-radius:999px;
+          background:rgba(15,23,42,0.9);
+          border:1px solid rgba(148,163,184,0.35);
+        ">
+          <span style="
+            width:22px;height:22px;border-radius:999px;
+            background:radial-gradient(circle at 30% 30%, #22c55e, #4f46e5);
+          ">✦</span>
+
+          <input type="text" name="prompt" placeholder="Demandez à vos IA unifiées…" style="
+            flex:1;border:none;background:transparent;color:#e5e7eb;font-size:14px;outline:none;
+          " />
+
+          <button type="submit" class="btn btn-primary" style="border-radius:999px;padding:6px 16px;">
+            Lancer
+          </button>
+        </form>
+
+        <!-- CONTENU DASHBOARD -->
         <section class="section">
           <div class="container">
 
-            <div class="section-header" style="text-align: center;">
+            <div class="section-header" style="text-align:center;">
               <div class="section-eyebrow">Bienvenue</div>
               <h1 class="section-title">Votre tableau de bord</h1>
               <p class="section-subtitle">
@@ -117,46 +93,43 @@
               </p>
             </div>
 
-            <!-- CARDS PRINCIPALES -->
             <div class="grid-2">
 
-              <!-- CARD WORKSPACES -->
               <div class="card">
                 <div class="card-title">Vos workspaces</div>
                 <p class="card-subtitle">Organisez vos projets, équipes et clients.</p>
 
-                <div id="workspaceList" class="list" style="margin-top: 14px;">
+                <div id="workspaceList" class="list" style="margin-top:14px;">
                   <div class="list-item">
                     <div class="list-bullet">•</div>
                     <div>Chargement…</div>
                   </div>
                 </div>
 
-                <a href="workspaces.html" class="btn btn-outline" style="margin-top: 16px;">Gérer les espaces</a>
+                <a href="workspaces.html" class="btn btn-outline" style="margin-top:16px;">Gérer les espaces</a>
               </div>
 
-              <!-- CARD MODELS -->
               <div class="card">
                 <div class="card-title">Modèles IA</div>
                 <p class="card-subtitle">GPT‑4, Claude, Gemini, Mistral.</p>
 
-                <div class="list" style="margin-top: 14px;">
+                <div class="list" style="margin-top:14px;">
                   <div class="list-item"><div class="list-bullet">●</div><div>GPT‑4</div></div>
                   <div class="list-item"><div class="list-bullet">●</div><div>Claude</div></div>
                   <div class="list-item"><div class="list-bullet">●</div><div>Gemini</div></div>
                   <div class="list-item"><div class="list-bullet">●</div><div>Mistral</div></div>
                 </div>
 
-                <a href="app.html" class="btn btn-primary" style="margin-top: 16px;">Ouvrir le chat</a>
+                <a href="app.html" class="btn btn-primary" style="margin-top:16px;">Ouvrir le chat</a>
               </div>
 
             </div>
 
           </div>
         </section>
+
       </main>
 
-      <!-- FOOTER -->
       <footer class="app-footer">
         <div class="app-footer-inner">
           <div>© M@jestiOS – L’OS d’intelligences unifiées.</div>
@@ -165,7 +138,7 @@
 
     </div>
 
-    <!-- LOGIQUE JS -->
+    <!-- JS EXISTANTS -->
     <script type="module">
       import { getWorkspaces } from './assets/js/workspaces-api.js';
 
@@ -176,49 +149,35 @@
 
       async function initDashboard() {
         const token = localStorage.getItem("token");
-        if (!token) {
-          window.location.href = "login.html";
-          return;
+        if (!token) return (window.location.href = "login.html");
+
+        const userRes = await fetch("https://majestios-backend.onrender.com/api/auth/me", {
+          headers: { Authorization: "Bearer " + token }
+        });
+        const userData = await userRes.json();
+        if (userData.user) {
+          document.getElementById("sidebarEmail").textContent = userData.user.email;
         }
 
-        // Récup user
-        try {
-          const userRes = await fetch("https://majestios-backend.onrender.com/api/auth/me", {
-            method: "GET",
-            headers: { "Authorization": "Bearer " + token }
-          });
-          const userData = await userRes.json();
-          if (userRes.ok && userData.user) {
-            document.getElementById("userEmail").textContent = userData.user.email;
-          }
-        } catch (e) {
-          console.error(e);
-        }
+        const wsData = await getWorkspaces(token);
+        const list = document.getElementById("workspaceList");
 
-        // Workspaces
-        try {
-          const wsData = await getWorkspaces(token);
-          const list = document.getElementById("workspaceList");
-
-          if (wsData && wsData.workspaces && wsData.workspaces.length > 0) {
-            list.innerHTML = wsData.workspaces
-              .map(ws => `
-                <div class="list-item">
-                  <div class="list-bullet">•</div>
-                  <div>${ws.name}</div>
-                </div>
-              `)
-              .join('');
-          } else {
-            list.innerHTML = `
+        if (wsData.workspaces?.length) {
+          list.innerHTML = wsData.workspaces
+            .map(ws => `
               <div class="list-item">
                 <div class="list-bullet">•</div>
-                <div>Aucun workspace pour le moment.</div>
+                <div>${ws.name}</div>
               </div>
-            `;
-          }
-        } catch (e) {
-          console.error(e);
+            `)
+            .join('');
+        } else {
+          list.innerHTML = `
+            <div class="list-item">
+              <div class="list-bullet">•</div>
+              <div>Aucun workspace pour le moment.</div>
+            </div>
+          `;
         }
       }
 
@@ -231,4 +190,3 @@
     <script src="assets/js/analytics.js"></script>
   </body>
 </html>
-
