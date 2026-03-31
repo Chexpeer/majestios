@@ -1,105 +1,95 @@
-/* ============================
-   AUTH.JS – M@jestiOS
-   Gestion globale de l’authentification
-============================ */
+// FRONTEND AUTH API
+const API_BASE = "https://majestios-backend.onrender.com/api";
 
-// Auto‑switch backend (Render / Localhost)
-const API_URL = window.location.hostname.includes("localhost")
-  ? "http://localhost:4000"
-  : "https://majbackend.onrender.com"; // ← Mets ton vrai backend Render ici
-
-/* ============================
-   LOGIN
-============================ */
-async function login(email, password) {
-  try {
-    const response = await fetch(`${API_URL}/auth/login`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password })
-    });
-
-    const data = await response.json();
-
-    if (!response.ok) {
-      return { error: data.error || "Identifiants incorrects." };
-    }
-
-    // Stocker le token
-    localStorage.setItem("token", data.token);
-
-    return { success: true };
-
-  } catch (err) {
-    return { error: "Impossible de contacter le serveur." };
-  }
+// Enregistre le token
+export function saveToken(token) {
+  localStorage.setItem("token", token);
 }
 
-/* ============================
-   CHECK AUTH (pages privées)
-============================ */
-async function checkAuth() {
-  const token = localStorage.getItem("token");
-
-  if (!token) {
-    window.location.href = "login.html";
-    return;
-  }
-
-  try {
-    const response = await fetch(`${API_URL}/auth/me`, {
-      method: "GET",
-      headers: { "Authorization": "Bearer " + token }
-    });
-
-    const data = await response.json();
-
-    if (!response.ok) {
-      localStorage.removeItem("token");
-      window.location.href = "login.html";
-      return;
-    }
-
-    // Injecter l'email dans le header
-    const emailSpan = document.getElementById("userEmail");
-    if (emailSpan) emailSpan.innerText = data.user.email;
-
-  } catch (err) {
-    localStorage.removeItem("token");
-    window.location.href = "login.html";
-  }
+// Récupère le token
+export function getToken() {
+  return localStorage.getItem("token");
 }
 
-/* ============================
-   LOGOUT
-============================ */
-function logout() {
+// Déconnexion
+export function logout() {
   localStorage.removeItem("token");
   window.location.href = "login.html";
 }
 
-/* ============================
-   LOGIN FORM HANDLER
-============================ */
-document.addEventListener("DOMContentLoaded", () => {
-  const form = document.getElementById("loginForm");
-  if (!form) return;
+// Récupération du token Google dans l'URL
+const urlParams = new URLSearchParams(window.location.search);
+const googleToken = urlParams.get("token");
 
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
+if (googleToken) {
+  saveToken(googleToken);
+  // Nettoie l'URL (supprime ?token=...)
+  window.history.replaceState({}, "", window.location.pathname);
+}
 
-    const email = document.getElementById("email").value.trim();
-    const password = document.getElementById("password").value.trim();
-    const errorBox = document.getElementById("errorBox");
+// Vérifie si l'utilisateur est connecté
+export async function checkAuth() {
+  const token = getToken();
+  if (!token) {
+    window.location.href = "login.html";
+    return null;
+  }
 
-    const result = await login(email, password);
+  try {
+    const res = await fetch(`${API_BASE}/user/me`, {
+      method: "GET",
+      headers: { Authorization: "Bearer " + token }
+    });
 
-    if (result.error) {
-      errorBox.style.display = "block";
-      errorBox.innerText = result.error;
-      return;
+    if (!res.ok) {
+      logout();
+      return null;
     }
 
-    window.location.href = "dashboard.html";
+    const data = await res.json();
+
+    if (!data.user) {
+      logout();
+      return null;
+    }
+
+    // Injecte l'email dans la sidebar si elle existe
+    const sidebarEmail = document.getElementById("sidebarEmail");
+    if (sidebarEmail && data.user.email) {
+      sidebarEmail.textContent = data.user.email;
+    }
+
+    return data.user;
+
+  } catch (err) {
+    console.error("AUTH CHECK ERROR:", err);
+    logout();
+    return null;
+  }
+}
+
+// REGISTER
+export async function register(email, username, password) {
+  const res = await fetch(`${API_BASE}/auth/register`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email, username, password })
   });
-});
+
+  return res.json();
+}
+
+// LOGIN
+export async function login(email, password) {
+  const res = await fetch(`${API_BASE}/auth/login`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email, password })
+  });
+
+  return res.json();
+}
+
+// Rendre logout disponible en global si besoin dans les pages
+window.logout = logout;
+

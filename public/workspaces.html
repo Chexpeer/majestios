@@ -164,25 +164,18 @@
 
     <!-- JS -->
     <script type="module">
+      import { checkAuth, getToken, logout } from './assets/js/auth.js';
       import { getWorkspaces, createWorkspace } from './assets/js/workspaces-api.js';
 
-      function logout() {
-        localStorage.removeItem("token");
-        window.location.href = "login.html";
-      }
+      // Rendre logout disponible pour le onclick du bouton
+      window.logout = logout;
 
       async function initWorkspaces() {
-        const token = localStorage.getItem("token");
-        if (!token) return (window.location.href = "login.html");
+        // Vérifie l'authentification + remplit l'email dans la sidebar
+        const user = await checkAuth();
+        if (!user) return;
 
-        // USER
-        const userRes = await fetch("https://majestios-backend.onrender.com/api/auth/me", {
-          headers: { Authorization: "Bearer " + token }
-        });
-        const userData = await userRes.json();
-        if (userData.user) {
-          document.getElementById("sidebarEmail").textContent = userData.user.email;
-        }
+        const token = getToken();
 
         // LISTE WORKSPACES
         async function loadWorkspaces() {
@@ -234,7 +227,7 @@
 
           const res = await createWorkspace(name, token);
 
-          if (res.workspace) {
+          if (res._id || res.workspace) {
             message.textContent = "Workspace créé avec succès.";
             message.style.color = "#22c55e";
             form.reset();
