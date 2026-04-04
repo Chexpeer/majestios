@@ -5,7 +5,6 @@
     <title>Profil – MajestiOS</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <!-- CSS EXISTANTS -->
     <link rel="stylesheet" href="assets/css/theme.css" />
     <link rel="stylesheet" href="assets/css/main.css" />
     <link rel="stylesheet" href="assets/css/layout.css" />
@@ -112,18 +111,16 @@
               </div>
             </div>
 
-            <!-- SUPPRESSION DU COMPTE -->
-            <div class="card" style="padding:24px;margin-top:30px;border:1px solid #7f1d1d;">
+            <!-- SUPPRESSION DU COMPTE (désactivée car backend inexistant) -->
+            <div class="card" style="padding:24px;margin-top:30px;border:1px solid #7f1d1d;opacity:0.5;">
               <h3 class="card-title" style="color:#ef4444;">Supprimer mon compte</h3>
               <p class="card-subtitle" style="margin-top:6px;">
-                Cette action est irréversible. Toutes vos données seront supprimées.
+                Fonctionnalité indisponible : aucune route backend n'existe encore.
               </p>
 
-              <button id="deleteAccount" class="btn btn-outline" style="margin-top:14px;color:#ef4444;border-color:#ef4444;">
-                Supprimer définitivement
+              <button class="btn btn-outline" disabled style="margin-top:14px;color:#ef4444;border-color:#ef4444;">
+                Indisponible
               </button>
-
-              <p id="deleteMessage" style="font-size:14px;margin-top:10px;"></p>
             </div>
 
           </div>
@@ -141,35 +138,35 @@
 
     <!-- JS -->
     <script type="module">
-      import { checkAuth } from "./assets/js/auth.js";
+      import { checkAuth, getToken, logout } from "./assets/js/auth.js";
 
       async function initProfile() {
         const user = await checkAuth();
         if (!user) return;
 
-        const token = localStorage.getItem("token");
+        const token = getToken();
 
         // Remplir les champs
         document.getElementById("email").value = user.email;
         document.getElementById("username").value = user.username;
         document.getElementById("createdAt").value = new Date(user.createdAt).toLocaleString();
 
-        // Sauvegarde du profil
+        // Sauvegarde du nom d'utilisateur
         document.getElementById("saveProfile").onclick = async () => {
           const username = document.getElementById("username").value.trim();
           const msg = document.getElementById("profileMessage");
 
-          const res = await fetch("https://majestios-backend.onrender.com/api/user/update", {
-            method: "PUT",
+          const res = await fetch("https://majestios-backend.onrender.com/api/user/username", {
+            method: "PATCH",
             headers: {
               "Content-Type": "application/json",
               Authorization: "Bearer " + token
             },
-            body: JSON.stringify({ username })
+            body: JSON.stringify({ newUsername: username })
           });
 
           const data = await res.json();
-          msg.textContent = data.message || "Profil mis à jour.";
+          msg.textContent = data.message;
           msg.style.color = res.ok ? "#10b981" : "#ef4444";
         };
 
@@ -185,7 +182,7 @@
           }
 
           const res = await fetch("https://majestios-backend.onrender.com/api/user/password", {
-            method: "PUT",
+            method: "PATCH",
             headers: {
               "Content-Type": "application/json",
               Authorization: "Bearer " + token
@@ -194,28 +191,8 @@
           });
 
           const data = await res.json();
-          msg.textContent = data.message || "Mot de passe mis à jour.";
+          msg.textContent = data.message;
           msg.style.color = res.ok ? "#10b981" : "#ef4444";
-        };
-
-        // Suppression du compte
-        document.getElementById("deleteAccount").onclick = async () => {
-          const msg = document.getElementById("deleteMessage");
-
-          const res = await fetch("https://majestios-backend.onrender.com/api/user/delete", {
-            method: "DELETE",
-            headers: { Authorization: "Bearer " + token }
-          });
-
-          const data = await res.json();
-          msg.textContent = data.message || "Compte supprimé.";
-
-          if (res.ok) {
-            localStorage.removeItem("token");
-            setTimeout(() => window.location.href = "index.html", 1500);
-          } else {
-            msg.style.color = "#ef4444";
-          }
         };
       }
 
@@ -228,3 +205,4 @@
     <script src="assets/js/analytics.js"></script>
   </body>
 </html>
+

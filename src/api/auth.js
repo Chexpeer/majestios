@@ -1,5 +1,9 @@
 // FRONTEND AUTH API
-const API_URL = "https://majestios-backend.onrender.com/api/auth";
+const API_BASE = "https://majestios-backend.onrender.com/api";
+
+/* ---------------------------------------------------------
+   TOKEN MANAGEMENT
+--------------------------------------------------------- */
 
 // Enregistre le token
 export function saveToken(token) {
@@ -17,7 +21,27 @@ export function logout() {
   window.location.href = "login.html";
 }
 
-// Vérifie si l'utilisateur est connecté
+// Rendre logout global pour les boutons onclick
+window.logout = logout;
+
+/* ---------------------------------------------------------
+   GOOGLE OAUTH TOKEN HANDLING
+--------------------------------------------------------- */
+
+// Récupération du token Google dans l'URL
+const urlParams = new URLSearchParams(window.location.search);
+const googleToken = urlParams.get("token");
+
+if (googleToken) {
+  saveToken(googleToken);
+  // Nettoie l'URL (supprime ?token=...)
+  window.history.replaceState({}, "", window.location.pathname);
+}
+
+/* ---------------------------------------------------------
+   CHECK AUTH
+--------------------------------------------------------- */
+
 export async function checkAuth() {
   const token = getToken();
   if (!token) {
@@ -26,10 +50,15 @@ export async function checkAuth() {
   }
 
   try {
-    const res = await fetch(`${API_URL}/me`, {
+    const res = await fetch(`${API_BASE}/user/me`, {
       method: "GET",
       headers: { Authorization: "Bearer " + token }
     });
+
+    if (!res.ok) {
+      logout();
+      return null;
+    }
 
     const data = await res.json();
 
@@ -40,7 +69,9 @@ export async function checkAuth() {
 
     // Injecte l'email dans la sidebar si elle existe
     const sidebarEmail = document.getElementById("sidebarEmail");
-    if (sidebarEmail) sidebarEmail.textContent = data.user.email;
+    if (sidebarEmail && data.user.email) {
+      sidebarEmail.textContent = data.user.email;
+    }
 
     return data.user;
 
@@ -51,9 +82,12 @@ export async function checkAuth() {
   }
 }
 
-// REGISTER
+/* ---------------------------------------------------------
+   REGISTER
+--------------------------------------------------------- */
+
 export async function register(email, username, password) {
-  const res = await fetch(`${API_URL}/register`, {
+  const res = await fetch(`${API_BASE}/auth/register`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email, username, password })
@@ -62,9 +96,12 @@ export async function register(email, username, password) {
   return res.json();
 }
 
-// LOGIN
+/* ---------------------------------------------------------
+   LOGIN
+--------------------------------------------------------- */
+
 export async function login(email, password) {
-  const res = await fetch(`${API_URL}/login`, {
+  const res = await fetch(`${API_BASE}/auth/login`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email, password })

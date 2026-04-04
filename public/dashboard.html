@@ -63,7 +63,7 @@
               <div class="section-eyebrow">MajestiOS Intelligence</div>
               <h1 class="section-title">Votre tableau de bord</h1>
               <p class="section-subtitle">
-                Une vue d’ensemble de votre activité, de vos économies et de vos interactions avec MajestiOS.
+                Une vue d’ensemble de votre activité et de vos espaces.
               </p>
             </div>
 
@@ -71,40 +71,23 @@
             <div class="grid-3" style="margin-top:30px;">
 
               <div class="card" style="padding:20px;text-align:center;">
-                <div class="card-title">Requêtes IA</div>
-                <div id="statRequests" style="font-size:32px;font-weight:600;margin-top:6px;">—</div>
-                <div class="card-subtitle">Total depuis votre inscription</div>
-              </div>
-
-              <div class="card" style="padding:20px;text-align:center;">
-                <div class="card-title">Économies réalisées</div>
-                <div id="statSavings" style="font-size:32px;font-weight:600;margin-top:6px;">—%</div>
-                <div class="card-subtitle">Optimisation automatique</div>
-              </div>
-
-              <div class="card" style="padding:20px;text-align:center;">
                 <div class="card-title">Workspaces</div>
                 <div id="statWorkspaces" style="font-size:32px;font-weight:600;margin-top:6px;">—</div>
                 <div class="card-subtitle">Espaces actifs</div>
               </div>
 
-            </div>
-
-            <!-- APERÇU HISTORIQUE -->
-            <div class="card" style="padding:24px;margin-top:40px;">
-              <h3 class="card-title">Dernières interactions</h3>
-              <p class="card-subtitle">Vos 5 dernières requêtes traitées par MajestiOS Intelligence.</p>
-
-              <div id="historyPreview" class="list" style="margin-top:16px;">
-                <div class="list-item">
-                  <div class="list-bullet">•</div>
-                  <div>Chargement…</div>
-                </div>
+              <div class="card" style="padding:20px;text-align:center;">
+                <div class="card-title">Compte</div>
+                <div id="statEmail" style="font-size:18px;font-weight:600;margin-top:6px;">—</div>
+                <div class="card-subtitle">Adresse email</div>
               </div>
 
-              <div style="text-align:right;margin-top:14px;">
-                <a href="historique.html" class="btn btn-outline">Voir tout l’historique</a>
+              <div class="card" style="padding:20px;text-align:center;">
+                <div class="card-title">MajestiOS Chat</div>
+                <div style="font-size:32px;font-weight:600;margin-top:6px;">∞</div>
+                <div class="card-subtitle">Accès illimité</div>
               </div>
+
             </div>
 
             <!-- CTA -->
@@ -127,52 +110,24 @@
 
     <!-- JS -->
     <script type="module">
-      import { checkAuth } from "./assets/js/auth.js";
+      import { checkAuth, getToken, logout } from "./assets/js/auth.js";
 
       async function initDashboard() {
         const user = await checkAuth();
         if (!user) return;
 
-        const token = localStorage.getItem("token");
+        const token = getToken();
 
-        // Récupération des stats
-        const statsRes = await fetch("https://majestios-backend.onrender.com/api/user/stats", {
+        // Email utilisateur
+        document.getElementById("statEmail").textContent = user.email;
+
+        // Nombre de workspaces
+        const wsRes = await fetch("https://majestios-backend.onrender.com/api/workspaces", {
           headers: { Authorization: "Bearer " + token }
         });
-        const stats = await statsRes.json();
 
-        document.getElementById("statRequests").textContent = stats.totalRequests ?? 0;
-        document.getElementById("statSavings").textContent = stats.savingsPercent ?? "0%";
-        document.getElementById("statWorkspaces").textContent = stats.workspaces ?? 1;
-
-        // Aperçu historique
-        const histRes = await fetch("https://majestios-backend.onrender.com/api/user/history?limit=5", {
-          headers: { Authorization: "Bearer " + token }
-        });
-        const history = await histRes.json();
-
-        const list = document.getElementById("historyPreview");
-
-        if (!history.items || history.items.length === 0) {
-          list.innerHTML = `
-            <div class="list-item">
-              <div class="list-bullet">•</div>
-              <div>Aucune interaction récente.</div>
-            </div>
-          `;
-        } else {
-          list.innerHTML = history.items
-            .map(h => `
-              <div class="list-item">
-                <div class="list-bullet">•</div>
-                <div>
-                  <strong>${h.prompt.slice(0, 60)}${h.prompt.length > 60 ? "…" : ""}</strong><br>
-                  <span style="font-size:12px;opacity:0.6;">${new Date(h.date).toLocaleString()}</span>
-                </div>
-              </div>
-            `)
-            .join("");
-        }
+        const wsData = await wsRes.json();
+        document.getElementById("statWorkspaces").textContent = wsData.workspaces?.length ?? 0;
       }
 
       document.addEventListener("DOMContentLoaded", initDashboard);
@@ -184,3 +139,4 @@
     <script src="assets/js/analytics.js"></script>
   </body>
 </html>
+
