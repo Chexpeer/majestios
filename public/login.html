@@ -7,17 +7,19 @@
 
   <style>
     body { margin: 0; padding: 0; background: #0d0d0d; color: white; font-family: Arial, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; }
-    .box { width: 350px; background: #1a1a1a; padding: 25px; border-radius: 12px; box-shadow: 0 0 20px rgba(0,0,0,0.4); }
-    h2 { text-align: center; margin-bottom: 10px; font-weight: 600; }
+    .box { width: 350px; background: #1a1a1a; padding: 25px; border-radius: 12px; box-shadow: 0 0 20px rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.05); }
+    h2 { text-align: center; margin-bottom: 10px; font-weight: 600; color: #fff; }
     .subtitle { text-align: center; font-size: 13px; opacity: 0.7; margin-bottom: 20px; }
-    input { width: 100%; padding: 12px; margin: 10px 0; border-radius: 6px; border: none; background: #2a2a2a; color: white; font-size: 15px; box-sizing: border-box; }
-    button { width: 100%; padding: 12px; margin-top: 10px; background: #4f46e5; border: none; border-radius: 6px; color: white; font-size: 16px; cursor: pointer; transition: 0.2s; }
-    button:hover { background: #4338ca; }
-    #message { margin-top: 15px; text-align: center; font-size: 14px; }
-    .register-link, .home-link { display: block; text-align: center; margin-top: 15px; color: #4f46e5; text-decoration: none; font-size: 14px; }
-    .separator { text-align: center; margin: 18px 0; opacity: 0.5; font-size: 13px; }
-    .google-btn { width: 100%; padding: 12px; background: #ffffff; color: #111; border-radius: 6px; border: none; font-size: 15px; cursor: pointer; margin-top: 10px; display: flex; justify-content: center; align-items: center; gap: 8px; }
-    .google-btn:hover { background: #e5e5e5; }
+    input { width: 100%; padding: 12px; margin: 10px 0; border-radius: 6px; border: 1px solid #333; background: #2a2a2a; color: white; font-size: 15px; box-sizing: border-box; outline: none; transition: border 0.3s; }
+    input:focus { border-color: #4f46e5; }
+    button { width: 100%; padding: 12px; margin-top: 10px; background: #4f46e5; border: none; border-radius: 6px; color: white; font-size: 16px; font-weight: 600; cursor: pointer; transition: 0.2s; }
+    button:hover { background: #4338ca; transform: translateY(-1px); }
+    #message { margin-top: 15px; text-align: center; font-size: 14px; min-height: 20px; }
+    .register-link, .home-link { display: block; text-align: center; margin-top: 15px; color: #4f46e5; text-decoration: none; font-size: 14px; opacity: 0.9; }
+    .register-link:hover, .home-link:hover { text-decoration: underline; opacity: 1; }
+    .separator { text-align: center; margin: 18px 0; opacity: 0.5; font-size: 13px; position: relative; }
+    .google-btn { width: 100%; padding: 12px; background: #ffffff; color: #111; border-radius: 6px; border: none; font-size: 15px; font-weight: 600; cursor: pointer; margin-top: 10px; display: flex; justify-content: center; align-items: center; gap: 10px; transition: 0.2s; }
+    .google-btn:hover { background: #f3f3f3; transform: translateY(-1px); }
   </style>
 </head>
 
@@ -27,18 +29,18 @@
     <h2>Connexion</h2>
     <div class="subtitle">MajestiOS Intelligence vous attend</div>
 
-    <!-- GOOGLE LOGIN -->
     <button class="google-btn" onclick="loginWithGoogle()">
-      <img src="https://www.svgrepo.com/show/475656/google-color.svg" width="18" />
+      <img src="https://www.svgrepo.com/show/475656/google-color.svg" width="18" alt="Google Logo" />
       Continuer avec Google
     </button>
 
     <div class="separator">ou</div>
 
-    <!-- EMAIL LOGIN -->
-    <input id="email" type="email" placeholder="Adresse email" required />
-    <input id="password" type="password" placeholder="Mot de passe" required />
-    <button onclick="loginUser()">Se connecter</button>
+    <form id="loginForm" onsubmit="event.preventDefault(); loginUser();">
+      <input id="email" type="email" placeholder="Adresse email" required autocomplete="email" />
+      <input id="password" type="password" placeholder="Mot de passe" required autocomplete="current-password" />
+      <button type="submit">Se connecter</button>
+    </form>
 
     <a href="register.html" class="register-link">Pas de compte ? S'inscrire</a>
     <a href="index.html" class="home-link">Retour à l’accueil</a>
@@ -46,32 +48,39 @@
     <p id="message"></p>
   </div>
 
-  <!-- SCRIPT : RÉCUPÉRATION TOKEN GOOGLE -->
   <script>
+    // --- GESTION DES TOKENS ET ERREURS DANS L'URL ---
     const params = new URLSearchParams(window.location.search);
     const token = params.get("token");
+    const error = params.get("error");
+    const messageDisplay = document.getElementById("message");
 
+    // Si on reçoit un token (Succès Google)
     if (token) {
       localStorage.setItem("token", token);
-      window.location.href = "dashboard.html";
+      messageDisplay.style.color = "#10b981";
+      messageDisplay.textContent = "Authentification Google réussie !";
+      setTimeout(() => { window.location.href = "dashboard.html"; }, 800);
     }
-  </script>
 
-  <!-- SCRIPT : LOGIN EMAIL + GOOGLE -->
-  <script>
+    // Si on reçoit une erreur de l'URL
+    if (error) {
+      messageDisplay.style.color = "#ef4444";
+      messageDisplay.textContent = "Erreur d'authentification Google. Réessayez.";
+    }
+
+    // --- FONCTIONS DE CONNEXION ---
+
     async function loginUser() {
       const email = document.getElementById("email").value.trim();
       const password = document.getElementById("password").value.trim();
-      const message = document.getElementById("message");
 
       if (!email || !password) {
-        message.textContent = "Veuillez remplir tous les champs.";
-        message.style.color = "#ef4444";
+        showMessage("Veuillez remplir tous les champs.", "#ef4444");
         return;
       }
 
-      message.textContent = "Connexion...";
-      message.style.color = "white";
+      showMessage("Connexion en cours...", "white");
 
       try {
         const res = await fetch("https://majestios-backend.onrender.com/api/auth/login", {
@@ -84,21 +93,25 @@
 
         if (res.ok && data.token) {
           localStorage.setItem("token", data.token);
-          message.style.color = "#10b981";
-          message.textContent = "Succès ! Redirection...";
+          showMessage("Succès ! Redirection...", "#10b981");
           setTimeout(() => { window.location.href = "dashboard.html"; }, 1000);
         } else {
-          message.style.color = "#ef4444";
-          message.textContent = data.message || "Email ou mot de passe incorrect";
+          showMessage(data.message || "Email ou mot de passe incorrect", "#ef4444");
         }
       } catch (err) {
-        message.style.color = "#ef4444";
-        message.textContent = "Erreur réseau";
+        showMessage("Erreur réseau. Vérifiez votre connexion.", "#ef4444");
+        console.error("Login error:", err);
       }
     }
 
     function loginWithGoogle() {
+      // Redirection vers le point d'entrée Google du Backend Render
       window.location.href = "https://majestios-backend.onrender.com/api/auth/google";
+    }
+
+    function showMessage(text, color) {
+      messageDisplay.textContent = text;
+      messageDisplay.style.color = color;
     }
   </script>
 

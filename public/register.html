@@ -5,7 +5,6 @@
     <title>Créer un compte – MajestiOS</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <!-- TES CSS EXISTANTS -->
     <link rel="stylesheet" href="assets/css/theme.css" />
     <link rel="stylesheet" href="assets/css/main.css" />
     <link rel="stylesheet" href="assets/css/layout.css" />
@@ -19,21 +18,24 @@
         background: #ffffff;
         color: #111;
         border-radius: 6px;
-        border: none;
+        border: 1px solid #ddd;
         font-size: 15px;
+        font-weight: 600;
         cursor: pointer;
         margin-top: 10px;
         display: flex;
         justify-content: center;
         align-items: center;
         gap: 8px;
+        transition: 0.2s;
       }
-      .google-btn:hover { background: #e5e5e5; }
+      .google-btn:hover { background: #f3f3f3; transform: translateY(-1px); }
       .separator {
         text-align: center;
         margin: 18px 0;
         opacity: 0.5;
         font-size: 13px;
+        position: relative;
       }
     </style>
   </head>
@@ -41,7 +43,6 @@
   <body>
     <div class="app-shell">
 
-      <!-- PAGE SANS SIDEBAR (REGISTER) -->
       <main class="app-main" style="
         display:flex;
         align-items:center;
@@ -54,6 +55,7 @@
           width:100%;
           max-width:380px;
           padding:28px;
+          border: 1px solid rgba(255,255,255,0.05);
         ">
           <div style="text-align:center;margin-bottom:20px;">
             <div class="brand">
@@ -73,9 +75,8 @@
             MajestiOS Intelligence vous accueille.
           </p>
 
-          <!-- GOOGLE SIGNUP -->
           <button class="google-btn" onclick="signupWithGoogle()">
-            <img src="https://www.svgrepo.com/show/475656/google-color.svg" width="18" />
+            <img src="https://www.svgrepo.com/show/475656/google-color.svg" width="18" alt="Google Logo" />
             Continuer avec Google
           </button>
 
@@ -83,22 +84,24 @@
 
           <form id="registerForm" style="display:flex;flex-direction:column;gap:14px;">
             <div>
-              <label style="font-size:14px;">Email</label>
+              <label style="font-size:14px;">Nom d'utilisateur</label>
               <input
-                type="email"
-                id="email"
+                type="text"
+                id="username"
                 class="input"
+                placeholder="Ex: JeanDupont"
                 style="margin-top:6px;width:100%;"
                 required
               />
             </div>
 
             <div>
-              <label style="font-size:14px;">Nom d'utilisateur</label>
+              <label style="font-size:14px;">Email</label>
               <input
-                type="text"
-                id="username"
+                type="email"
+                id="email"
                 class="input"
+                placeholder="votre@email.com"
                 style="margin-top:6px;width:100%;"
                 required
               />
@@ -110,19 +113,20 @@
                 type="password"
                 id="password"
                 class="input"
+                placeholder="••••••••"
                 style="margin-top:6px;width:100%;"
                 required
               />
             </div>
 
-            <button class="btn btn-primary" style="margin-top:10px;">Créer mon compte</button>
+            <button type="submit" class="btn btn-primary" style="margin-top:10px; width: 100%;">Créer mon compte</button>
 
             <p id="registerMessage" style="font-size:14px;margin-top:10px;text-align:center;"></p>
 
             <div style="text-align:center;margin-top:10px;">
               <a href="login.html" class="nav-link">Déjà un compte ? Se connecter</a>
               <br />
-              <a href="index.html" class="nav-link" style="margin-top:6px;display:inline-block;">Retour à l’accueil</a>
+              <a href="index.html" class="nav-link" style="margin-top:12px;display:inline-block;opacity:0.6;">Retour à l’accueil</a>
             </div>
           </form>
 
@@ -132,21 +136,18 @@
 
     </div>
 
-    <!-- SCRIPT : RÉCUPÉRATION TOKEN GOOGLE -->
-    <script>
-      const params = new URLSearchParams(window.location.search);
-      const token = params.get("token");
-
-      if (token) {
-        localStorage.setItem("token", token);
-        window.location.href = "dashboard.html";
-      }
-    </script>
-
-    <!-- SCRIPT : REGISTER + GOOGLE -->
     <script type="module">
       import { register, saveToken } from "./assets/js/auth.js";
 
+      // --- 1. CAPTURE DU TOKEN SI RETOUR DE GOOGLE ---
+      const params = new URLSearchParams(window.location.search);
+      const token = params.get("token");
+      if (token) {
+        saveToken(token);
+        window.location.href = "dashboard.html";
+      }
+
+      // --- 2. GESTION FORMULAIRE CLASSIQUE ---
       const form = document.getElementById("registerForm");
       const message = document.getElementById("registerMessage");
 
@@ -157,23 +158,32 @@
         const username = document.getElementById("username").value.trim();
         const password = document.getElementById("password").value.trim();
 
-        const res = await register(email, username, password);
+        message.textContent = "Création du compte...";
+        message.style.color = "white";
 
-        if (res.token) {
-          saveToken(res.token);
-          window.location.href = "dashboard.html";
-        } else {
-          message.textContent = res.message || "Erreur lors de l'inscription.";
+        try {
+          const res = await register(email, username, password);
+          if (res.token) {
+            saveToken(res.token);
+            message.style.color = "#10b981";
+            message.textContent = "Compte créé ! Redirection...";
+            setTimeout(() => { window.location.href = "dashboard.html"; }, 1000);
+          } else {
+            message.textContent = res.message || "Erreur lors de l'inscription.";
+            message.style.color = "#ef4444";
+          }
+        } catch (err) {
+          message.textContent = "Erreur réseau.";
           message.style.color = "#ef4444";
         }
       });
 
-      function signupWithGoogle() {
+      // --- 3. FONCTION GOOGLE (Exposée globalement pour le bouton) ---
+      window.signupWithGoogle = function() {
         window.location.href = "https://majestios-backend.onrender.com/api/auth/google";
-      }
+      };
     </script>
 
-    <!-- TES SCRIPTS EXISTANTS -->
     <script src="assets/js/main.js"></script>
     <script src="assets/js/ui.js"></script>
     <script src="assets/js/theme.js"></script>
@@ -181,4 +191,3 @@
 
   </body>
 </html>
-

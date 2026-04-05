@@ -5,6 +5,7 @@
     <title>Dashboard – MajestiOS</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+    <!-- CSS EXISTANTS -->
     <link rel="stylesheet" href="assets/css/theme.css" />
     <link rel="stylesheet" href="assets/css/main.css" />
     <link rel="stylesheet" href="assets/css/layout.css" />
@@ -15,6 +16,7 @@
   <body>
     <div class="app-shell">
 
+      <!-- SIDEBAR -->
       <aside style="
         width: 240px;
         background: #0f172a;
@@ -25,7 +27,6 @@
         display: flex;
         flex-direction: column;
         gap: 24px;
-        z-index: 100;
       ">
         <div class="brand">
           <div class="brand-mark">M</div>
@@ -35,7 +36,7 @@
           </div>
         </div>
 
-        <nav class="nav-links" style="flex-direction:column;gap:14px;margin-top:20px; display: flex;">
+        <nav class="nav-links" style="flex-direction:column;gap:14px;margin-top:20px;">
           <a href="dashboard.html" class="nav-link nav-link-active"><span>Dashboard</span></a>
           <a href="workspaces.html" class="nav-link"><span>Mes espaces</span></a>
           <a href="app.html" class="nav-link"><span>MajestiOS Chat</span></a>
@@ -45,14 +46,16 @@
           <a href="profile.html" class="nav-link"><span>Profil</span></a>
         </nav>
 
-        <div style="margin-top:auto; padding-bottom: 20px;">
-          <div id="sidebarEmail" style="font-size:13px; opacity:0.7; margin-bottom:12px; word-break: break-all;"></div>
-          <button id="logoutBtn" class="btn btn-outline" style="width: 100%;">Déconnexion</button>
+        <div style="margin-top:auto;">
+          <div id="sidebarEmail" style="font-size:13px;opacity:0.7;margin-bottom:8px;"></div>
+          <button onclick="logout()" class="btn btn-outline">Déconnexion</button>
         </div>
       </aside>
 
-      <main class="app-main" style="margin-left:240px; min-height: 100vh;">
+      <!-- CONTENU PRINCIPAL -->
+      <main class="app-main" style="margin-left:240px;">
 
+        <!-- HEADER DASHBOARD -->
         <section class="section" style="padding-top:40px;">
           <div class="container" style="max-width:900px;">
 
@@ -64,30 +67,32 @@
               </p>
             </div>
 
+            <!-- STATS -->
             <div class="grid-3" style="margin-top:30px;">
 
               <div class="card" style="padding:20px;text-align:center;">
-                <div class="card-title" style="color: var(--text-muted); font-size: 14px;">Workspaces</div>
+                <div class="card-title">Workspaces</div>
                 <div id="statWorkspaces" style="font-size:32px;font-weight:600;margin-top:6px;">—</div>
-                <div class="card-subtitle" style="font-size: 12px; opacity: 0.6;">Espaces actifs</div>
+                <div class="card-subtitle">Espaces actifs</div>
               </div>
 
               <div class="card" style="padding:20px;text-align:center;">
-                <div class="card-title" style="color: var(--text-muted); font-size: 14px;">Compte</div>
-                <div id="statEmail" style="font-size:14px;font-weight:600;margin-top:12px; word-break: break-all;">—</div>
-                <div class="card-subtitle" style="font-size: 12px; opacity: 0.6; margin-top: 4px;">Adresse email</div>
+                <div class="card-title">Compte</div>
+                <div id="statEmail" style="font-size:18px;font-weight:600;margin-top:6px;">—</div>
+                <div class="card-subtitle">Adresse email</div>
               </div>
 
               <div class="card" style="padding:20px;text-align:center;">
-                <div class="card-title" style="color: var(--text-muted); font-size: 14px;">MajestiOS Chat</div>
+                <div class="card-title">MajestiOS Chat</div>
                 <div style="font-size:32px;font-weight:600;margin-top:6px;">∞</div>
-                <div class="card-subtitle" style="font-size: 12px; opacity: 0.6;">Accès illimité</div>
+                <div class="card-subtitle">Accès illimité</div>
               </div>
 
             </div>
 
+            <!-- CTA -->
             <div style="text-align:center;margin-top:40px;">
-              <a href="app.html" class="btn btn-primary" style="padding: 12px 32px;">Ouvrir MajestiOS Chat</a>
+              <a href="app.html" class="btn btn-primary">Ouvrir MajestiOS Chat</a>
             </div>
 
           </div>
@@ -95,7 +100,7 @@
 
       </main>
 
-      <footer class="app-footer" style="margin-left: 240px;">
+      <footer class="app-footer">
         <div class="app-footer-inner">
           <div>© MajestiOS – Intelligence unifiée.</div>
         </div>
@@ -103,59 +108,27 @@
 
     </div>
 
+    <!-- JS -->
     <script type="module">
-      import { checkAuth, getToken, saveToken, logout } from "./assets/js/auth.js";
+      import { checkAuth, getToken, logout } from "./assets/js/auth.js";
 
       async function initDashboard() {
-        // --- 1. CAPTURE DU TOKEN GOOGLE ---
-        const urlParams = new URLSearchParams(window.location.search);
-        const googleToken = urlParams.get("token");
-
-        if (googleToken) {
-          saveToken(googleToken);
-          // Nettoie l'URL (enlève le ?token=... de la barre d'adresse)
-          window.history.replaceState({}, document.title, window.location.pathname);
-        }
-
-        // --- 2. VÉRIFICATION AUTHENTIFICATION ---
         const user = await checkAuth();
-        if (!user) return; // checkAuth redirige déjà vers login.html si pas de user
+        if (!user) return;
 
         const token = getToken();
 
-        // --- 3. AFFICHAGE DES DONNÉES ---
-        // Email utilisateur (Sidebar + Stats)
-        if (user.email) {
-            document.getElementById("statEmail").textContent = user.email;
-            document.getElementById("sidebarEmail").textContent = user.email;
-        }
+        // Email utilisateur
+        document.getElementById("statEmail").textContent = user.email;
 
-        // Récupération des workspaces depuis le backend Render
-        try {
-            const wsRes = await fetch("https://majestios-backend.onrender.com/api/workspaces", {
-              headers: { 
-                  "Authorization": "Bearer " + token,
-                  "Content-Type": "application/json"
-              }
-            });
+        // Nombre de workspaces
+        const wsRes = await fetch("https://majestios-backend.onrender.com/api/workspaces", {
+          headers: { Authorization: "Bearer " + token }
+        });
 
-            if (wsRes.ok) {
-                const wsData = await wsRes.json();
-                document.getElementById("statWorkspaces").textContent = wsData.workspaces?.length ?? 0;
-            } else {
-                document.getElementById("statWorkspaces").textContent = "0";
-            }
-        } catch (error) {
-            console.error("Erreur chargement workspaces:", error);
-            document.getElementById("statWorkspaces").textContent = "!";
-        }
+        const wsData = await wsRes.json();
+        document.getElementById("statWorkspaces").textContent = wsData.workspaces?.length ?? 0;
       }
-
-      // Gestion du clic sur déconnexion
-      document.getElementById("logoutBtn").addEventListener("click", (e) => {
-          e.preventDefault();
-          logout();
-      });
 
       document.addEventListener("DOMContentLoaded", initDashboard);
     </script>
